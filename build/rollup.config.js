@@ -70,7 +70,7 @@ if (!argv.format || argv.format === 'es') {
     ...baseConfig,
     external,
     output: {
-      file: 'dist/vuetify-form-builder.esm.js',
+      file: 'dist/vuetify-automatic-forms.esm.js',
       format: 'esm',
       exports: 'named',
     },
@@ -104,7 +104,7 @@ if (!argv.format || argv.format === 'cjs') {
     external,
     output: {
       compact: true,
-      file: 'dist/vuetify-form-builder.ssr.js',
+      file: 'dist/vuetify-automatic-forms.ssr.js',
       format: 'cjs',
       name: 'VuetifyFormBuilder',
       exports: 'named',
@@ -133,7 +133,7 @@ if (!argv.format || argv.format === 'iife') {
     external,
     output: {
       compact: true,
-      file: 'dist/vuetify-form-builder.min.js',
+      file: 'dist/vuetify-automatic-forms.min.js',
       format: 'iife',
       name: 'VuetifyFormBuilder',
       exports: 'named',

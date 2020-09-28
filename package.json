@@ -1,11 +1,11 @@
 {
-  "name": "vuetify-form-builder",
-  "version": "1.0.0",
+  "name": "vuetify-automatic-forms",
+  "version": "0.0.3",
   "description": "",
-  "main": "dist/vuetify-form-builder.ssr.js",
-  "browser": "dist/vuetify-form-builder.esm.js",
-  "module": "dist/vuetify-form-builder.esm.js",
-  "unpkg": "dist/vuetify-form-builder.min.js",
+  "main": "dist/vuetify-automatic-forms.ssr.js",
+  "browser": "dist/vuetify-automatic-forms.esm.js",
+  "module": "dist/vuetify-automatic-forms.esm.js",
+  "unpkg": "dist/vuetify-automatic-forms.min.js",
   "files": [
     "dist/*",
     "src/**/*.vue"
