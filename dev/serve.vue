@@ -1,12 +1,13 @@
 <script>
 import Vue from 'vue';
 import { VuetifyFormBuilderSample, FormBuilder } from '@/entry';
-
+import Login from './examples/login.vue'
 export default Vue.extend({
   name: 'ServeDev',
   components: {
     VuetifyFormBuilderSample,
-    FormBuilder
+    FormBuilder,
+    Login
   },
   data() {
     return {
@@ -29,11 +30,7 @@ export default Vue.extend({
 <template>
   <v-app id="app">
     <v-container>
-      <v-row>
-        <v-col cols="4" offset="4">
-          <FormBuilder :formElements="formElements" :handleSubmit="handle"/>
-        </v-col>
-      </v-row>
+      <Login/>
     </v-container>
   </v-app>
 </template>

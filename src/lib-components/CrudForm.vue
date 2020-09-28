@@ -17,9 +17,10 @@
   </div>
 </template>
 <script>
-import FormBuilder from './VDynamicForm.vue'
+import FormBuilder from './FormBuilder'
 import axios from 'axios'
 export default {
+  name: 'CrudForm',
   components: {
     FormBuilder,
   },
