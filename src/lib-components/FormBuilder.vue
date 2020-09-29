@@ -35,11 +35,11 @@
         </ValidationProvider>
       </v-col>
       <v-col cols="12">
-        <v-btn small color="success" @click="submit" class="float-right ml-3"
-          >Submit</v-btn
+        <v-btn small :color="submit.color" @click="performSubmit" class="float-right ml-3"
+          > {{ submit.text }} </v-btn
         >
-        <v-btn small color="warning" @click="reset" class="float-right"
-          >Cancel</v-btn
+        <v-btn v-if="useCancel" small :color="cancel.color" @click="reset" class="float-right"
+          >{{ cancel.text }}</v-btn
         >
       </v-col>
     </v-row>
@@ -79,7 +79,31 @@ export default {
     color: {
       type: String,
       default: 'primary'
-    }
+    },
+    submit: {
+      type: Object,
+      required: false,
+      default: function() {
+        return {
+          text: 'Submit',
+          color: 'success'
+        }
+      }
+    },
+    useCancel: {
+      type: Boolean,
+      default: true
+    },
+    cancel: {
+      type: Object,
+      required: false,
+      default: function() {
+        return {
+          text: 'Cancel',
+          color: 'warning'
+        }
+      }
+    },
   },
   data: function() {
     return {
@@ -120,7 +144,7 @@ export default {
     mColor: function(formElement) {
       return formElement.color ? formElement.color : this.color
     },
-    submit() {
+    performSubmit() {
       this.$refs.observer.validate().then((valid) => {
         if (valid) {
           let objectToSubmit = {}

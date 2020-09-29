@@ -1,7 +1,7 @@
 <template>
   <v-row>
       <v-col cols="4" offset="4">
-          <FormBuilder color="purple" :formElements="formElements" :handleSubmit="submit"/>
+          <FormBuilder color="purple" :submit="submit" :cancel="cancel" :formElements="formElements" :handleSubmit="submit"/>
       </v-col>
   </v-row>
 </template>
@@ -28,7 +28,15 @@ export default {
                     key: 'email',
                     rules: 'required|email',
                 }
-            ]
+            ],
+            cancel: {
+                text: 'Poništi',
+                color: 'red'
+            },
+            submit: {
+                text: 'Potvrdi',
+                color: 'info'
+            }
         }
     },
     methods: {
