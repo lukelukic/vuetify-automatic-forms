@@ -1,44 +1,39 @@
 <template>
   <v-row>
       <v-col cols="4" offset="4">
-          <CrudForm :formElements="formElements" type="insert" endpoint="http://ourdomain.com/register"/>
+          <FormBuilder color="purple" :formElements="formElements" :handleSubmit="submit"/>
       </v-col>
   </v-row>
 </template>
 
 <script>
-import { CrudForm } from '@/entry';
+import { FormBuilder } from '@/entry';
 export default {
     components : {
-        CrudForm
+        FormBuilder
     },
     data() {
         return {
             formElements: [
                 {
                     key: 'firstName',
-                    rules: 'required',
-                    cols: 6
+                    cols: 6,
+                    color: 'yellow'
                 },
                 {
                     key: 'lastName',
-                    rules: 'required',
                     cols: 6
                 },
                 {
                     key: 'email',
                     rules: 'required|email',
-                },
-                {
-                    key: 'password',
-                    type: 'password',
-                    rules: 'required|min:8'
-                },
-                {
-                    key: 'username',
-                    rules: 'required|min:4'
                 }
             ]
+        }
+    },
+    methods: {
+        submit(obj) {
+            console.log(obj)
         }
     }
 }

@@ -17,7 +17,7 @@
   </div>
 </template>
 <script>
-import FormBuilder from './FormBuilder'
+import FormBuilder from './FormBuilder.vue'
 import axios from 'axios'
 export default {
   name: 'CrudForm',

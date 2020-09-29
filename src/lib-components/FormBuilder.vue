@@ -8,7 +8,7 @@
       >
         <ValidationProvider
           :vid="formElement.key"
-          v-slot="{ errors, passed }"
+          v-slot="{ errors }"
           :name="formElement.key"
           :rules="rules(formElement)"
           :key="formElement.key"
@@ -17,7 +17,6 @@
           <component
             :disabled="disabled[formElement.key]"
             :placeholder="hint(formElement)"
-            :success="passed"
             v-if="!hidden[formElement.key]"
             @change="handleChange(formElement.key, $event)"
             :is="component(formElement)"
@@ -31,6 +30,7 @@
             :error-messages="errors"
             v-model="formObject[formElement.key]"
             dense
+            :color="mColor(formElement)"
           />
         </ValidationProvider>
       </v-col>
@@ -76,6 +76,10 @@ export default {
       type: Object,
       required: false,
     },
+    color: {
+      type: String,
+      default: 'primary'
+    }
   },
   data: function() {
     return {
@@ -112,6 +116,9 @@ export default {
     },
     cols: function(formElement) {
       return formElement.cols ? formElement.cols : 12
+    },
+    mColor: function(formElement) {
+      return formElement.color ? formElement.color : this.color
     },
     submit() {
       this.$refs.observer.validate().then((valid) => {

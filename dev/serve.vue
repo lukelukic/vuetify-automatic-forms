@@ -1,36 +1,21 @@
 <script>
 import Vue from 'vue';
-import { VuetifyFormBuilderSample, FormBuilder } from '@/entry';
-import Login from './examples/login.vue'
 export default Vue.extend({
-  name: 'ServeDev',
-  components: {
-    VuetifyFormBuilderSample,
-    FormBuilder,
-    Login
-  },
-  data() {
-    return {
-      formElements: [
-        { 
-          key: "firstName",
-          rules: "required"
-        }
-      ]
-    }
-  },
-  methods: {
-    handle: function(obj) {
-      console.log(obj)
-    }
-  }
+  name: 'ServeDev'
 });
 </script>
 
 <template>
   <v-app id="app">
     <v-container>
-      <Login/>
+      <p>
+    <!-- use router-link component for navigation. -->
+    <!-- specify the link by passing the `to` prop. -->
+    <!-- `<router-link>` will be rendered as an `<a>` tag by default -->
+    <router-link to="/register">Register sample</router-link>
+    <router-link to="/sample">Sample</router-link>
+  </p>
+      <router-view></router-view>
     </v-container>
   </v-app>
 </template>
