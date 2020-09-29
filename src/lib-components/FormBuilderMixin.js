@@ -21,6 +21,7 @@ export default {
         if (dataSourceBuilder.shouldContainDataSource(el)) {
           this.$set(this.dataSources, el.key, this.dataSource(el))
         }
+        this.disabled[el.key] = el.disabled
       }
     },
     incommingValue(key) {

@@ -29,7 +29,7 @@
             :hide-detals="true"
             :error-messages="errors"
             v-model="formObject[formElement.key]"
-            dense
+            :dense="true"
             :color="mColor(formElement)"
           />
         </ValidationProvider>
@@ -186,7 +186,15 @@ export default {
   },
 }
 </script>
-<style lang="css" scoped>
+<style lang="css">
+.v-text-field--outlined.v-input--dense .v-label {
+  top: 6px
+}
+
+.v-text-field--filled.v-input--dense.v-text-field--outlined.v-text-field--filled > .v-input__control > .v-input__slot, .v-text-field--filled.v-input--dense.v-text-field--outlined > .v-input__control > .v-input__slot, .v-text-field--filled.v-input--dense.v-text-field--single-line > .v-input__control > .v-input__slot, .v-text-field--full-width.v-input--dense.v-text-field--outlined.v-text-field--filled > .v-input__control > .v-input__slot, .v-text-field--full-width.v-input--dense.v-text-field--outlined > .v-input__control > .v-input__slot, .v-text-field--full-width.v-input--dense.v-text-field--single-line > .v-input__control > .v-input__slot, .v-text-field--outlined.v-input--dense.v-text-field--outlined.v-text-field--filled > .v-input__control > .v-input__slot, .v-text-field--outlined.v-input--dense.v-text-field--outlined > .v-input__control > .v-input__slot, .v-text-field--outlined.v-input--dense.v-text-field--single-line > .v-input__control > .v-input__slot {
+  min-height:30px;
+}
+
 .col,
 .col-1,
 .col-2,
