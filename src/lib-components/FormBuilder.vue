@@ -51,6 +51,7 @@ import {
   ValidationObserver,
 } from 'vee-validate/dist/vee-validate.full'
 import formBuilderMixin from './FormBuilderMixin.js'
+import propValidation from './internals/formBuilderPropValidations'
 import EventBus from './internals/event-bus'
 export default {
   name: 'FormBuilder',
@@ -63,6 +64,7 @@ export default {
     formElements: {
       type: Array,
       required: true,
+      validator: propValidation.formElements
     },
     handleSubmit: {
       type: Function,
@@ -88,7 +90,8 @@ export default {
           text: 'Submit',
           color: 'success'
         }
-      }
+      },
+      validator: propValidation.submit
     },
     useCancel: {
       type: Boolean,
@@ -102,7 +105,8 @@ export default {
           text: 'Cancel',
           color: 'warning'
         }
-      }
+      },
+      validator: propValidation.cancel
     },
   },
   data: function() {
@@ -171,6 +175,13 @@ export default {
     },
     reset() {
       this.$refs.observer.reset()
+      for(let prop in this.formObject) {
+        if(this.incommingObject[prop]) {
+          this.formObject[prop] = this.incommingObject[prop]
+        } else {
+          this.formObject[prop] = ''
+        }
+      }
       EventBus.$emit('FORM_RESET')
     },
     find(key) {

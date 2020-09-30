@@ -4,12 +4,14 @@ import vuetify from './vuetify'
 import VueRouter from 'vue-router'
 import Register from './examples/register.vue'
 import Sample from './examples/sample.vue'
+import Edit from './examples/editUser.vue'
 
 Vue.config.productionTip = false;
 
 const routes = [
   { path: '/register', component: Register },
-  { path: '/sample', component: Sample }
+  { path: '/sample', component: Sample },
+  { path: '/edit', component: Edit }
 ]
 
 const router = new VueRouter({routes})

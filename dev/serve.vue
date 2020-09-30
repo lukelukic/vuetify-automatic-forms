@@ -14,6 +14,7 @@ export default Vue.extend({
     <!-- `<router-link>` will be rendered as an `<a>` tag by default -->
     <router-link to="/register">Register sample</router-link>
     <router-link to="/sample">Sample</router-link>
+    <router-link to="/edit">Edit</router-link>
   </p>
       <router-view></router-view>
     </v-container>

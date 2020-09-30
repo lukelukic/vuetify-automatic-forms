@@ -97,7 +97,8 @@ export default {
                                 profession: 1
                             },
                             then: {
-                                value: 'Architect'
+                                value: 'Architect',
+                                disabled: true
                             }
                         }
                     ]
