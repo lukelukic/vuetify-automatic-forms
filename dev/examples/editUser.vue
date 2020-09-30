@@ -1,7 +1,7 @@
 <template>
   <v-row>
       <v-col cols="4" offset="4">
-          <FormBuilder :formElements="formElements" :submit="subBtn" :incommingObject="user" :handleSubmit="submit" />
+          <FormBuilder :formElements="formElements" :additionalValidation="validation" :errors="errors" :submit="subBtn" :incommingObject="user" :handleSubmit="submit" />
       </v-col>
   </v-row>
 </template>
@@ -24,6 +24,10 @@ export default {
               {
                 key: 'email'
               },
+              {
+                key: 'password',
+                type: 'password'
+              } 
             ],
             user: {
                 firstName: 'John',
@@ -32,14 +36,24 @@ export default {
             subBtn: {
                 color: 'blue',
                 text: 'Just do it!'
-            }
+            },
+            errors: {}
         }   
     },
     methods: {
         submit: function(obj) {
             console.log(obj)
+        },
+        validation: function(formObject) {
+            let errors = {}
+
+            if(formObject.password.indexOf(formObject.firstName) != -1) {
+                errors.password = ["First name should not be contained inside password."]
+            }
+            
+            return errors
         }
-    }
+    },
 }
 </script>
 

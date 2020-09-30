@@ -108,6 +108,10 @@ export default {
       },
       validator: propValidation.cancel
     },
+    additionalValidation: {
+      type: Function,
+      required: false
+    }
   },
   data: function() {
     return {
@@ -151,6 +155,14 @@ export default {
     performSubmit() {
       this.$refs.observer.validate().then((valid) => {
         if (valid) {
+          if(this.additionalValidation) {
+            let errors = this.additionalValidation(this.formObject)
+            
+            if(Object.keys(errors).length) {
+              this.$refs.observer.setErrors(errors)
+              return
+            }
+          }
           let objectToSubmit = {}
           for (let prop in this.formObject) {
             if (
@@ -163,7 +175,7 @@ export default {
           }
           try {
             this.handleSubmit(objectToSubmit)
-            EventBus.$emit('SUCESSFULL_INSERT')
+            EventBus.$emit('SUCESSFULL_SUBMIT')
           } catch (e) {
             throw new Error(
               'There was an error calling a provided function in FormBuilder',
@@ -176,13 +188,18 @@ export default {
     reset() {
       this.$refs.observer.reset()
       for(let prop in this.formObject) {
-        if(this.incommingObject[prop]) {
+        if(this.incommingObject && this.incommingObject[prop]) {
           this.formObject[prop] = this.incommingObject[prop]
         } else {
           this.formObject[prop] = ''
         }
       }
+      console.log(this.errors)
+      this.$refs.observer.setErrors({
+        email: ["GRESKE"]
+      })
       EventBus.$emit('FORM_RESET')
+      
     },
     find(key) {
       return this.formElements.filter((x) => x.key == key)[0]
