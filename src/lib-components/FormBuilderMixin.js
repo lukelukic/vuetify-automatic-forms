@@ -17,11 +17,12 @@ export default {
     },
     prepareFormObject() {
       for (let el of this.formElements) {
-        this.formObject[el.key] = this.incommingValue(el.key)
+        this.$set(this.formObject, el.key, this.incommingValue(el.key))
         if (dataSourceBuilder.shouldContainDataSource(el)) {
           this.$set(this.dataSources, el.key, this.dataSource(el))
         }
-        this.disabled[el.key] = el.disabled
+        this.$set(this.disabled, el.key, el.disabled)
+        this.$set(this.hidden, el.key, el.hidden)
       }
     },
     incommingValue(key) {
@@ -40,6 +41,37 @@ export default {
           this.changeFunctions[toBeAffected.change.type](toBeAffected, value)
         }
       }
+      if(this.affectsComputation(key)) {
+        let affected = this.getAffectedComputations(key)
+        for(let affectedItem of affected) {
+          let filtered = affectedItem.computation.filter(x => x.when[key])
+          for(let x of filtered) {
+              let whenMatched = true
+            for(let whenKey in x.when) {
+                if(this.formObject[whenKey] != x.when[whenKey]) {
+                  whenMatched = false
+                  break
+                }
+            } 
+
+            if(whenMatched) {
+              this.formObject[affectedItem.key] = x.then.value
+            }
+               
+            this.disabled[affectedItem.key] = whenMatched ? x.then.disabled : affectedItem.disabled  
+          }
+        }
+      }
+    },
+    affectsComputation(key) {
+      let affected = this.getAffectedComputations(key)
+      return affected.length
+    },
+    getAffectedComputations(key) {
+      let affectedComputations = this.formElements
+                                                 .filter(x => x.computation != undefined &&
+                                                         x.computation.some(x => x.when[key] != undefined))
+      return affectedComputations                                                         
     },
     handleHide(toBeAffected, value) {
       this.$set(this.hidden, toBeAffected.key, value != '')

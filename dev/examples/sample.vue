@@ -74,6 +74,33 @@ export default {
                     dataSource: [],
                     disabled: true,
                     cols: 6
+                },
+                {
+                    key: 'jobTitle',
+                    color: 'green',
+                    component: 'v-text-field',
+                    disabled: true,     
+                    computation: [
+                        {
+                            when: {
+                                job: 1,
+                                profession: 1
+                            },
+                            then: {
+                                value: 'Developer',
+                                disabled: false
+                            }
+                        },
+                        {
+                            when: {
+                                job: 2,
+                                profession: 1
+                            },
+                            then: {
+                                value: 'Architect'
+                            }
+                        }
+                    ]
                 }
             ],
             cancel: {
