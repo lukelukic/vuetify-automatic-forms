@@ -1,22 +1,29 @@
 <script>
 import Vue from 'vue';
+import Nav from './nav';
 export default Vue.extend({
-  name: 'ServeDev'
+  name: 'ServeDev',
+  components: {
+    Nav
+  }
 });
 </script>
 
+
+
 <template>
-  <v-app id="app">
-    <v-container>
-      <p>
-    <!-- use router-link component for navigation. -->
-    <!-- specify the link by passing the `to` prop. -->
-    <!-- `<router-link>` will be rendered as an `<a>` tag by default -->
-    <router-link to="/register">Register sample</router-link>
-    <router-link to="/sample">Sample</router-link>
-    <router-link to="/edit">Edit</router-link>
-  </p>
-      <router-view></router-view>
-    </v-container>
-  </v-app>
+   <v-app id="app">
+      <v-container>
+        <v-row class="mt-5">
+          <v-col cols="2">
+            <Nav/>
+          </v-col>
+          <v-col cols="10">
+            <router-view></router-view>
+          </v-col>
+        </v-row>
+      </v-container>
+   </v-app>
 </template>
+
+

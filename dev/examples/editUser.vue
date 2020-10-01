@@ -1,6 +1,6 @@
 <template>
   <v-row>
-      <v-col cols="4" offset="4">
+      <v-col cols="7" offset="2">
           <FormBuilder :formElements="formElements" :additionalValidation="validation" :errors="errors" :submit="subBtn" :incommingObject="user" :handleSubmit="submit" />
       </v-col>
   </v-row>

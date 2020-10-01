@@ -1,6 +1,6 @@
 <template>
   <v-row>
-      <v-col cols="4" offset="4">
+      <v-col cols="7" offset="2">
           <FormBuilder color="info" :submit="submit" :cancel="cancel" :formElements="formElements" :handleSubmit="handle"/>
       </v-col>
   </v-row>
