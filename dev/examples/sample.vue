@@ -8,6 +8,7 @@
 
 <script>
 import { FormBuilder } from '@/entry';
+import $ from 'jquery'
 export default {
     components : {
         FormBuilder
@@ -32,11 +33,10 @@ export default {
                 {
                     key: 'profession',
                     component: 'v-autocomplete',
-                    dataSource: [
-                        { text: 'Software Engineer', value: 1 },
-                        { text: 'Manager', value: 2 },
-                        { text: 'Economist', value: 3 },
-                    ],
+                    dataSource: {
+                        endpoint: "https://jsonplaceholder.typicode.com/posts",
+                        textProperty: "title",
+                    },
                     cols: 6,
                     affects: [
                         {
