@@ -16,7 +16,7 @@
         >
           <component
             :disabled="disabled[formElement.key]"
-            :placeholder="hint(formElement)"
+            :hint="hint(formElement)"
             v-if="!hidden[formElement.key]"
             @change="handleChange(formElement.key, $event)"
             :is="component(formElement)"
@@ -31,6 +31,12 @@
             v-model="formObject[formElement.key]"
             :dense="true"
             :color="mColor(formElement)"
+            :counter="formElement.counter"
+            :clearable="clearableInputs"
+            persistent-hint
+            :prefix="formElement.prefix"
+            :suffix="formElement.suffix"
+            :readonly="formElement.readonly"
           />
         </ValidationProvider>
       </v-col>
@@ -111,6 +117,10 @@ export default {
     additionalValidation: {
       type: Function,
       required: false
+    },
+    clearableInputs: {
+      type: Boolean,
+      default: false
     }
   },
   data: function() {
@@ -194,10 +204,6 @@ export default {
           this.formObject[prop] = ''
         }
       }
-      console.log(this.errors)
-      this.$refs.observer.setErrors({
-        email: ["GRESKE"]
-      })
       EventBus.$emit('FORM_RESET')
       
     },
@@ -221,6 +227,15 @@ export default {
 
 .v-text-field--filled.v-input--dense.v-text-field--outlined.v-text-field--filled > .v-input__control > .v-input__slot, .v-text-field--filled.v-input--dense.v-text-field--outlined > .v-input__control > .v-input__slot, .v-text-field--filled.v-input--dense.v-text-field--single-line > .v-input__control > .v-input__slot, .v-text-field--full-width.v-input--dense.v-text-field--outlined.v-text-field--filled > .v-input__control > .v-input__slot, .v-text-field--full-width.v-input--dense.v-text-field--outlined > .v-input__control > .v-input__slot, .v-text-field--full-width.v-input--dense.v-text-field--single-line > .v-input__control > .v-input__slot, .v-text-field--outlined.v-input--dense.v-text-field--outlined.v-text-field--filled > .v-input__control > .v-input__slot, .v-text-field--outlined.v-input--dense.v-text-field--outlined > .v-input__control > .v-input__slot, .v-text-field--outlined.v-input--dense.v-text-field--single-line > .v-input__control > .v-input__slot {
   min-height:30px;
+}
+
+.v-text-field--enclosed.v-input--dense:not(.v-text-field--solo).v-text-field--outlined .v-input__append-inner, .v-text-field--enclosed.v-input--dense:not(.v-text-field--solo).v-text-field--outlined .v-input__append-outer, .v-text-field--enclosed.v-input--dense:not(.v-text-field--solo).v-text-field--outlined .v-input__prepend-inner, .v-text-field--enclosed.v-input--dense:not(.v-text-field--solo).v-text-field--outlined .v-input__prepend-outer, .v-text-field--full-width.v-input--dense:not(.v-text-field--solo).v-text-field--outlined .v-input__append-inner, .v-text-field--full-width.v-input--dense:not(.v-text-field--solo).v-text-field--outlined .v-input__append-outer, .v-text-field--full-width.v-input--dense:not(.v-text-field--solo).v-text-field--outlined .v-input__prepend-inner, .v-text-field--full-width.v-input--dense:not(.v-text-field--solo).v-text-field--outlined .v-input__prepend-outer
+{
+  margin-top:5px
+}
+
+.v-icon.v-icon {
+  font-size: 18px;
 }
 
 .col,
