@@ -31,12 +31,10 @@
             v-model="formObject[formElement.key]"
             :dense="true"
             :color="mColor(formElement)"
-            :counter="formElement.counter"
             :clearable="clearableInputs"
             persistent-hint
-            :prefix="formElement.prefix"
-            :suffix="formElement.suffix"
-            :readonly="formElement.readonly"
+            v-bind="formElement.props"
+            :thumb-label="true"
           />
         </ValidationProvider>
       </v-col>

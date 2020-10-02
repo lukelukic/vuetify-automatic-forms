@@ -35,16 +35,43 @@ export default {
                 },
                 {
                     key: 'email',
-                    rules: 'required|email',
+                    rules: 'required',
+                    props: {
+                        suffix: "@ict.edu.rs",
+                    },
+                    cols: 6
+                },
+                {
+                    key: 'age',
+                    rules: 'required',
+                    min: '18',
+                    max: '80',
+                    component: 'v-slider',
+                    props: {
+                        min: 18,
+                        max: 65
+                    },
+                    cols: 6
                 },
                 {
                     key: 'password',
                     type: 'password',
-                    rules: 'required|min:8'
+                    rules: 'required|min:8',
+                    cols: 6
+                },
+                {
+                    key: 'confirmPassword',
+                    type: 'password',
+                    rules: 'required|confirmed:password',
+                    cols: 6
                 },
                 {
                     key: 'username',
-                    rules: 'required|min:4'
+                    rules: 'required|min:4',
+                    label: 'Your username',
+                    props: {
+                        prefix: "Mr."
+                    }
                 }
             ]
         }
