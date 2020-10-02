@@ -5,6 +5,9 @@
       :handleSubmit="handleInsert"
       :errors="validationErrors"
       :incommingObject="updateObject"
+      :submit="submit"
+      :cancel="cancel"
+      :useCancel="useCancel"
     />
     <v-snackbar v-model="snackbar" right :color="snackbarColor">
       {{ snackbarText }}
@@ -58,6 +61,18 @@ export default {
       type: Object,
       required: false,
     },
+    submit: {
+      type: Object,
+      required: false
+    },
+    cancel: {
+      type: Object,
+      required: false
+    },
+    useCancel: {
+      type: Boolean,
+      default: true
+    }
   },
   beforeMount() {
     if (!this.allowedTypes.includes(this.type)) {

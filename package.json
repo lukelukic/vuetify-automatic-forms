@@ -1,6 +1,6 @@
 {
   "name": "vuetify-automatic-forms",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "",
   "main": "dist/vuetify-automatic-forms.ssr.js",
   "browser": "dist/vuetify-automatic-forms.esm.js",

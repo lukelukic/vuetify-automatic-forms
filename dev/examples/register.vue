@@ -1,7 +1,7 @@
 <template>
   <v-row>
       <v-col cols="7" offset="2">
-          <CrudForm :formElements="formElements" color="orange" type="insert" endpoint="http://ourdomain.com/register"/>
+          <CrudForm :submit="submit" :cancel="cancel" :formElements="formElements" color="orange" type="insert" endpoint="http://ourdomain.com/register"/>
       </v-col>
   </v-row>
 </template>
@@ -14,6 +14,14 @@ export default {
     },
     data() {
         return {
+            submit: {
+                text: 'Register',
+                color: 'primary'
+            },
+            cancel: {
+                text: 'Quit',
+                color: 'red'
+            },
             formElements: [
                 {
                     key: 'firstName',
