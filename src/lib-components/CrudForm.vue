@@ -145,7 +145,14 @@ export default {
       let formData = new FormData()
       
       for(let prop in formObject) {
-        formData.append(prop, formObject[prop])
+        if(formObject[prop].isFormData) {
+          for(let item of formObject[prop].items) {
+            formData.append(prop, item)
+          }
+        } else {
+          formData.append(prop, formObject[prop])
+        }
+        
       }
 
       return formData

@@ -59,7 +59,7 @@ export default {
                         showSize: true,
                         chips: true,
                         multiple: true,
-                        fileRender: 'base64'
+                        conversionStrategy: 'multipart'
                     }
                 }
             ]
