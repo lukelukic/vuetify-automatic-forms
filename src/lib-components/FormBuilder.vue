@@ -31,7 +31,7 @@
             v-model="formObject[formElement.key]"
             :dense="mDense(formElement)"
             :color="mColor(formElement)"
-            :clearable="clearableInputs"
+            :clearable="mClearable(formElement)"
             persistent-hint
             v-bind="formElement.props"
           />
@@ -155,7 +155,7 @@ export default {
       return this.toSentenceCase(formElement.key)
     },
     type: function(formElement) {
-      return formElement.type ? formElement.type : ''
+      return formElement.type ? formElement.type : undefined
     },
     rules: function(formElement) {
       if (formElement.rules) {
@@ -168,6 +168,9 @@ export default {
     },
     mColor: function(formElement) {
       return formElement.color ? formElement.color : this.color
+    },
+    mClearable: function(formElement) {
+      return formElement.clearable ? formElement.clearable : this.clearableInputs
     },
     performSubmit() {
       this.$refs.observer.validate().then((valid) => {
@@ -187,7 +190,14 @@ export default {
               this.formObject[prop] &&
               this.formObject[prop] !== false
             ) {
-              objectToSubmit[prop] = this.formObject[prop]
+              
+              if(prop.includes("_upload")) {
+                let originalPropName = prop.split("_upload")[0]
+                objectToSubmit[originalPropName] = this.formObject[prop]
+              } else {
+                objectToSubmit[prop] = this.formObject[prop]
+              }
+              
             }
           }
           try {

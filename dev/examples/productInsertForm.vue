@@ -1,7 +1,7 @@
 <template>
   <v-row>
       <v-col cols="7" offset="2">
-          <CrudForm method="get" :formElements="elements" :submit="dugmence" type="insert" endpoint="http://ec2-3-120-128-154.eu-central-1.compute.amazonaws.com:5000/api/products" />
+          <CrudForm contentType="multipart/form-data" :formElements="elements" :submit="dugmence" type="insert" endpoint="http://ec2-3-120-128-154.eu-central-1.compute.amazonaws.com:5000/api/products" />
       </v-col>
   </v-row>
 </template>
@@ -34,19 +34,34 @@ export default {
                     textProperty: "name",
                     valueProperty: "id"
                 }},
-                {key: 'description', component: 'v-textarea', counter: 1000, hint: "Max 1000 characters.", props: {
-                    rounded: true
-                }},
-                {key: 'rating', component: 'v-slider', color: "pink", label: " ", props: {
-                    trackColor: "orange",
-                    thumbLabel: "always",
-                    thumbColor: "blue",
-                    prependIcon: "mdi-volume-high",
-                    min: 0,
-                    max: 50,
-                    step: 5,
-                    ticks: "always"
-                }}
+                {key: 'description', component: 'v-textarea', counter: 1000, hint: "Max 1000 characters."},
+                {
+                    key: 'rating', component: 'v-slider', color: "pink", label: " ", 
+                    props: {
+                        trackColor: "orange",
+                        thumbLabel: "always",
+                        thumbColor: "blue",
+                        prependIcon: "mdi-volume-high",
+                        min: 0,
+                        max: 50,
+                        step: 5,
+                        ticks: "always"
+                    },
+                    cols: 6
+                },
+                {
+                    key: 'image',
+                    hint: 'Click to pick image', 
+                    component: 'v-file-input',
+                    clearable: true,
+                    cols: 6,
+                    props: {
+                        showSize: true,
+                        chips: true,
+                        multiple: true,
+                        fileRender: 'base64'
+                    }
+                }
             ]
         }
     }

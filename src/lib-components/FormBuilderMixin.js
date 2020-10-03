@@ -1,4 +1,5 @@
 import dataSourceBuilder from './internals/dataSourceBuilder'
+import fileInputHandler from './internals/fileInputHandler'
 export default {
   data() {
     return {
@@ -27,42 +28,69 @@ export default {
     },
     incommingValue(key) {
       if (this.incommingObject) {
-        return this.incommingObject[key] ? this.incommingObject[key] : ''
+        return this.incommingObject[key] ? this.incommingObject[key] : undefined
       }
-      return ''
+      return undefined
     },
     dataSource: function(formElement) {
       return dataSourceBuilder.buildDataSource(formElement)
     },
     handleChange(key, value) {
-      let element = this.find(key)
-      if (element && element.affects) {
-        for (let toBeAffected of element.affects) {
-          this.changeFunctions[toBeAffected.change.type](toBeAffected, value)
-        }
-      }
-      if(this.affectsComputation(key)) {
-        let affected = this.getAffectedComputations(key)
-        for(let affectedItem of affected) {
-          let filtered = affectedItem.computation.filter(x => x.when[key])
-          for(let x of filtered) {
-              let whenMatched = true
-            for(let whenKey in x.when) {
-                if(this.formObject[whenKey] != x.when[whenKey]) {
-                  whenMatched = false
-                  break
-                }
-            } 
 
-            if(whenMatched) {
-              this.formObject[affectedItem.key] = x.then.value
-            }
-               
-            this.disabled[affectedItem.key] = whenMatched ? x.then.disabled : affectedItem.disabled  
+      let changeFunctions = this.changeFunctionChain()
+
+      changeFunctions.forEach(x => {
+        x(key, value)
+      })
+      
+    },
+    changeFunctionChain() {
+      let that = this
+      
+      function affectsChange(key, value) {
+        let element = that.find(key)
+
+        if (element && element.affects) {
+          for (let toBeAffected of element.affects) {
+            that.changeFunctions[toBeAffected.change.type](toBeAffected, value)
           }
         }
       }
+
+      function computationChange(key) {
+        if(that.affectsComputation(key)) {
+          let affected = that.getAffectedComputations(key)
+          for(let affectedItem of affected) {
+            let filtered = affectedItem.computation.filter(x => x.when[key])
+            for(let x of filtered) {
+                let whenMatched = true
+              for(let whenKey in x.when) {
+                  if(that.formObject[whenKey] != x.when[whenKey]) {
+                    whenMatched = false
+                    break
+                  }
+              } 
+  
+              if(whenMatched) {
+                that.formObject[affectedItem.key] = x.then.value
+              }
+                 
+              that.disabled[affectedItem.key] = whenMatched ? x.then.disabled : affectedItem.disabled  
+            }
+          }
+        }
+      }
+
+      function fileChoosenChange(key, value) {
+        let element = that.find(key)
+        if(element.component == 'v-file-input') {
+           fileInputHandler.handle(value, key, that, element.fileRender)
+        }
+      }
+
+      return [affectsChange, computationChange, fileChoosenChange]
     },
+
     affectsComputation(key) {
       let affected = this.getAffectedComputations(key)
       return affected.length

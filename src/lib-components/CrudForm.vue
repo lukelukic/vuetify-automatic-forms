@@ -77,6 +77,10 @@ export default {
     dense: {
       type: Boolean,
       default: true
+    },
+    contentType: {
+      type: String,
+      default: 'application/json'
     }
   },
   beforeMount() {
@@ -100,10 +104,18 @@ export default {
   },
   methods: {
     handleInsert(objectToInsert) {
+
+      if(this.contentType == "multipart/form-data") {
+        objectToInsert = this.getMultipartObject(objectToInsert)
+      }
+
       axios({
         method: this.method,
         url: this.endpoint,
         data: objectToInsert,
+        headers: {
+          'Content-Type' : this.contentType
+        }
       })
         .then(() => {
           this.snackbarColor = 'success'
@@ -129,7 +141,16 @@ export default {
         this.$set(this.validationErrors, error.propertyName, [error.error])
       }
     },
-  },
+    getMultipartObject(formObject) {
+      let formData = new FormData()
+      
+      for(let prop in formObject) {
+        formData.append(prop, formObject[prop])
+      }
+
+      return formData
+    }
+  }, 
   watch: {
     incommingObject: {
       handler() {

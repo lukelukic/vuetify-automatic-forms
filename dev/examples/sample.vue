@@ -33,10 +33,11 @@ export default {
                 {
                     key: 'profession',
                     component: 'v-autocomplete',
-                    dataSource: {
-                        endpoint: "https://jsonplaceholder.typicode.com/posts",
-                        textProperty: "title",
-                    },
+                    dataSource: [
+                                        { "text" : "Programmer", value: 1 },
+                                        { "text" : "Finance", value: 2 },
+                                        { "text" : "Economist", value: 3 },
+                    ],
                     cols: 6,
                     affects: [
                         {
