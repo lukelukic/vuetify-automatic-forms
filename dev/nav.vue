@@ -15,7 +15,7 @@
                 link
                 >
                 <router-link :to="item.route">
-                    <v-btn :color="item.route == currentRoute ? 'red' : 'white' " @click="navClick(item.route)"> {{ item.title }} </v-btn>
+                    <v-btn :color="item.route == currentRoute ? 'red' : 'white' " > {{ item.title }} </v-btn>
                 </router-link>
             </v-list-item>
         </v-list>
@@ -41,14 +41,17 @@ export default {
           title: "Edit",
           route: "/edit"
         },
-      ],
-      currentRoute: ""
+        {
+          title: "Product",
+          route: "/product"
+        }
+      ]
     }
   },
-  methods: {
-      navClick: function(route){
-          this.currentRoute = route
-      }
+  computed: {
+    currentRoute: function(){
+      return this.$route.path
+    }
   }
 }
 </script>
