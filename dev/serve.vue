@@ -1,6 +1,7 @@
 <script>
 import Vue from 'vue';
 import Nav from './nav';
+import colors from 'vuetify/lib/util/colors';
 export default Vue.extend({
   name: 'ServeDev',
   components: {

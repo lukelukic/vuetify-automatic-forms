@@ -8,6 +8,7 @@
       :submit="submit"
       :cancel="cancel"
       :useCancel="useCancel"
+      :dense="dense"
     />
     <v-snackbar v-model="snackbar" right :color="snackbarColor">
       {{ snackbarText }}
@@ -70,6 +71,10 @@ export default {
       required: false
     },
     useCancel: {
+      type: Boolean,
+      default: true
+    },
+    dense: {
       type: Boolean,
       default: true
     }

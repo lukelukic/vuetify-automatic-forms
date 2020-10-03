@@ -29,12 +29,11 @@
             :hide-detals="true"
             :error-messages="errors"
             v-model="formObject[formElement.key]"
-            :dense="true"
+            :dense="mDense(formElement)"
             :color="mColor(formElement)"
             :clearable="clearableInputs"
             persistent-hint
             v-bind="formElement.props"
-            :thumb-label="true"
           />
         </ValidationProvider>
       </v-col>
@@ -119,6 +118,10 @@ export default {
     clearableInputs: {
       type: Boolean,
       default: false
+    },
+    dense: {
+      type: Boolean,
+      default: true
     }
   },
   data: function() {
@@ -138,6 +141,12 @@ export default {
     },
     hint: function(formElement) {
       return formElement.hint ? formElement.hint : ''
+    },
+    mDense: function(formElement){
+      if(Object.keys(formElement).includes("dense")){
+        return formElement.dense
+      }
+      return this.dense
     },
     label: function(formElement) {
       if (formElement.label) {
