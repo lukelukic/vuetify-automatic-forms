@@ -84,7 +84,7 @@ export default {
       function fileChoosenChange(key, value) {
         let element = that.find(key)
         if(element.component == 'v-file-input') {
-           fileInputHandler.handle(value, key, that, element.conversionStrategy)
+           fileInputHandler.handle(value, key, that, element.conversionStrategy ? element.conversionStrategy : 'base64')
         }
       }
 

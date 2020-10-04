@@ -1,18 +1,26 @@
 async function handleInputFile(file, key,formBuilder, conversionStrategy) {
     let data = undefined
-
+    
     if(conversionStrategy == 'base64') {
         if(Array.isArray(file)) {
-            data = (await getFiles(file)).map(x => x.base64StringFile)
+            data = await getFiles(file)
+            data = data.map(x => x.base64StringFile)
         } else {
-            data = await getFile(file).base64StringFile
+            data = await getFile(file)
+            data = data.base64StringFile
         }
     } else {
         data = {
             isFormData: true,
-            items: file
+        }
+
+        if(Array.isArray(file)) {
+            data.items = file
+        } else {
+            data.items = [file]
         }
     }
+
     formBuilder.$set(formBuilder.formObject, key + "_upload", data)
 }
 
