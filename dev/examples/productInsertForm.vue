@@ -5,6 +5,7 @@
                     :extractErrorsFn="errors" 
                     :updateObject="incomming" 
                     :successFn="success" 
+                    :errorFn="error"
                     :submit="dugmence"  
                     endpoint="http://localhost:5000/api/productphoto" />
       </v-col>
@@ -65,6 +66,9 @@ export default {
             success: function(data) {
                 console.log(data)
                 alert("Bravo!")
+            },
+            error: function() {
+                alert("GRESKA")
             },
             errors: function(response) {
                 return response
