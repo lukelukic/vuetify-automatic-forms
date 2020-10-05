@@ -12,13 +12,9 @@
 </template>
 
 <script>
-import { CrudForm } from '@/entry';
 import  axios  from 'axios';
 
 export default {
-    components: {
-        CrudForm
-    },
     data() {
         return {
             dugmence: {text: "Posalji", color: "pink"},

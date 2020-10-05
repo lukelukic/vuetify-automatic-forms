@@ -7,12 +7,8 @@
 </template>
 
 <script>
-import { FormBuilder } from '@/entry';
 import $ from 'jquery'
 export default {
-    components : {
-        FormBuilder
-    },
     data() {
         return {
             formElements: [
