@@ -50,13 +50,13 @@ export default {
       type: String,
       default: 'POST',
     },
-    clientErrorResponseCode: {
+    validationErrorResponseCode: {
       type: Number,
       default: 422,
     },
     type: {
       type: String,
-      required: true,
+      default: "insert",
     },
     updateObject: {
       type: Object,
@@ -81,6 +81,18 @@ export default {
     contentType: {
       type: String,
       default: 'application/json'
+    },
+    successFn: {
+      type: Function,
+      required: false
+    },
+    errorFn: {
+      type: Function,
+      required: false
+    },
+    extractErrorsFn: {
+      type: Function,
+      required: false
     }
   },
   beforeMount() {
@@ -111,27 +123,37 @@ export default {
           'Content-Type' : this.contentType
         }
       })
-        .then(() => {
-          this.snackbarColor = 'success'
-          this.snackbar = true
-          this.snackbarText = 'Successfull insert.'
+        .then((response) => {
+          if(this.successFn) {
+              this.successFn(response.data) 
+          } else {
+              this.snackbarColor = 'success'
+              this.snackbar = true
+              this.snackbarText = 'Successfull insert.'
+          }
+          
         })
         .catch((error) => {
-          this.snackbar = true
-          if (error.response.status == this.clientErrorResponseCode) {
-            this.snackbarColor = 'warning'
-            this.snackbarText = 'There are some validation errors.'
-            this.getErrorsFromResponse(error.response)
+          if (error.response.status == this.validationErrorResponseCode) {
+            if(this.extractErrorsFn) {
+              this.setErrors(this.extractErrorsFn(error.response.data))
+            } else {
+              this.setErrors(error.response.data)
+            }
           } else {
-            this.snackbarColor = 'red'
-            this.snackbarText =
-              'An error has occured. Please contact administrator.'
+            if(this.errorFn) {
+              this.errorFn(error)
+            } else {
+              this.snackbar = true
+              this.snackbarColor = 'red'
+              this.snackbarText = 'An error has occured. Please contact administrator.'
+            }
           }
         })
     },
-    getErrorsFromResponse(response) {
+    setErrors(errors) {
       this.validationErrors = {}
-      for (let error of response.data) {
+      for (let error of errors) {
         this.$set(this.validationErrors, error.propertyName, [error.error])
       }
     },

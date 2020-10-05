@@ -1,7 +1,7 @@
 <template>
   <v-row>
       <v-col cols="7" offset="2">
-          <CrudForm :formElements="elements" :updateObject="incomming" :submit="dugmence" type="insert" endpoint="http://localhost:5000/api/productphoto" />
+          <CrudForm :formElements="elements" :extractErrorsFn="errors" :updateObject="incomming" :successFn="success" :submit="dugmence" type="insert" endpoint="http://localhost:5000/api/productphoto" />
       </v-col>
   </v-row>
 </template>
@@ -40,11 +40,8 @@ export default {
                     component: 'v-autocomplete',
                     dataSource: {
                         endpoint: "http://localhost:5000/api/categories",
-                        dataFn: function(data) {
-                            return data.data.items
-                        }
-                    },
-                    cols: 4
+                        dataProperty: "data.items"
+                    }
                 },
                 {
                     key: 'photoPreview',
@@ -55,6 +52,13 @@ export default {
             ],
             incomming: {
                 photoPreview: "https://picsum.photos/id/11/500/300"
+            },
+            success: function(data) {
+                console.log(data)
+                alert("Bravo!")
+            },
+            errors: function(response) {
+                return response
             }
         }
     }
