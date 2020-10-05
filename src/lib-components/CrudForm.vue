@@ -142,7 +142,7 @@ export default {
             }
           } else {
             if(this.errorFn) {
-              this.errorFn(error)
+              this.errorFn(error.response)
             } else {
               this.snackbar = true
               this.snackbarColor = 'red'

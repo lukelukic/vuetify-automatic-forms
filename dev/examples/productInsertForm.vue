@@ -1,7 +1,12 @@
 <template>
   <v-row>
       <v-col cols="7" offset="2">
-          <CrudForm :formElements="elements" :extractErrorsFn="errors" :updateObject="incomming" :successFn="success" :submit="dugmence" type="insert" endpoint="http://localhost:5000/api/productphoto" />
+          <CrudForm :formElements="elements" 
+                    :extractErrorsFn="errors" 
+                    :updateObject="incomming" 
+                    :successFn="success" 
+                    :submit="dugmence"  
+                    endpoint="http://localhost:5000/api/productphoto" />
       </v-col>
   </v-row>
 </template>
