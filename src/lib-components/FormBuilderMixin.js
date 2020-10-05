@@ -35,7 +35,14 @@ export default {
     dataSource: function(formElement) {
       return dataSourceBuilder.buildDataSource(formElement)
     },
-    handleChange(key, value) {
+    handleChange(key, value, isDate) {
+
+      if(isDate) {
+        if(!value) {
+          this.$set(this.formObject, key, '')
+        }
+        return
+      }
 
       let changeFunctions = this.changeFunctionChain()
 

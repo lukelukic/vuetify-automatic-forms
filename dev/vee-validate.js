@@ -18,9 +18,9 @@ localize({
 
 setInteractionMode('eager');
 
-localize('sr')
+localize('en')
 
-let LOCALE = "sr";
+let LOCALE = "en";
 
 // A simple get/set interface to manage our locale in components.
 // This is not reactive, so don't create any computed properties/watchers off it.

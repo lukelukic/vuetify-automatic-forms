@@ -48,6 +48,15 @@ export default {
                     cols: 4,
                     offset: 4,
                     component: 'v-img'
+                },
+                {
+                    key: 'createdAt',
+                    component: 'datepicker',
+                    props: {
+                        locale: 'sr'
+                    },
+                    clearable: true,
+                    cols: 3
                 }
             ],
             incomming: {

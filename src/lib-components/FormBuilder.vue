@@ -15,10 +15,35 @@
           :key="formElement.key"
           v-if="!hidden[formElement.key]"
         >
-          <component
+          <datepicker v-if="component(formElement) == 'datepicker'" 
+              :no-value-to-custom-elem="true" 
+              v-model="formObject[formElement.key]"
+              v-bind="formElement.props"
+              >
+              <v-text-field 
+                :disabled="disabled[formElement.key]"
+                :value="formObject[formElement.key]"
+                :hint="hint(formElement)"
+                v-show="!hidden[formElement.key]"
+                @change="handleChange(formElement.key, $event, true)"
+                :ref="formElement.key"
+                v-bind:key="formElement.key"
+                :label="label(formElement)"
+                outlined
+                :hide-detals="true"
+                :error-messages="errors"
+                :dense="mDense(formElement)"
+                :color="mColor(formElement)"
+                :clearable="mClearable(formElement)"
+                persistent-hint
+                v-bind="formElement.props" 
+              />
+          </datepicker>
+
+          <component v-else
             :disabled="disabled[formElement.key]"
             :hint="hint(formElement)"
-            v-if="!hidden[formElement.key]"
+            v-show="!hidden[formElement.key]"
             @change="handleChange(formElement.key, $event)"
             :is="component(formElement)"
             :ref="formElement.key"
@@ -47,6 +72,7 @@
           >{{ cancel.text }}</v-btn
         >
       </v-col>
+      
     </v-row>
   </ValidationObserver>
 </template>
@@ -55,12 +81,16 @@ import { ValidationProvider, ValidationObserver } from 'vee-validate';
 import formBuilderMixin from './FormBuilderMixin.js'
 import propValidation from './internals/formBuilderPropValidations'
 import EventBus from './internals/event-bus'
+import VueCtkDateTimePicker from 'vue-ctk-date-time-picker';
+import 'vue-ctk-date-time-picker/dist/vue-ctk-date-time-picker.css';
+import Vue from 'vue'
+Vue.component('datepicker', VueCtkDateTimePicker);
 
 export default {
   name: 'FormBuilder',
   components: {
     ValidationProvider,
-    ValidationObserver,
+    ValidationObserver
   },
   mixins: [formBuilderMixin],
   props: {
@@ -126,6 +156,7 @@ export default {
   },
   data: function() {
     return {
+      date: "",
       formObject: {},
       dataSources: {},
       hidden: {},
