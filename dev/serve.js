@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Dev from './serve.vue';
 import vuetify from './vuetify'
+import './vee-validate'
 import VueRouter from 'vue-router'
 import Register from './examples/register.vue'
 import Sample from './examples/sample.vue'

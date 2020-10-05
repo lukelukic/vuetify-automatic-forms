@@ -51,10 +51,11 @@
   </ValidationObserver>
 </template>
 <script>
-import { ValidationProvider, ValidationObserver } from 'vee-validate/dist/vee-validate.full.esm';
+import { ValidationProvider, ValidationObserver } from 'vee-validate';
 import formBuilderMixin from './FormBuilderMixin.js'
 import propValidation from './internals/formBuilderPropValidations'
 import EventBus from './internals/event-bus'
+
 export default {
   name: 'FormBuilder',
   components: {
@@ -132,6 +133,7 @@ export default {
     }
   },
   mounted: function() {
+    
     this.prepareFormObject()
   },
   methods: {

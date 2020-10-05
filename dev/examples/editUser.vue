@@ -7,11 +7,8 @@
 </template>
 
 <script>
-import { FormBuilder } from '@/entry';
+
 export default {
-    components : {
-        FormBuilder
-    },
     data() {
         return {
             formElements: [

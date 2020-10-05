@@ -7,11 +7,8 @@
 </template>
 
 <script>
-import { CrudForm } from '@/entry';
+
 export default {
-    components : {
-        CrudForm
-    },
     data() {
         return {
             submit: {
