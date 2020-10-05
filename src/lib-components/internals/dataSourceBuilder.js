@@ -16,7 +16,7 @@ function buildDataSource(formElement) {
     )
   }
 
-  let items = loadDataSourceFromApi(formElement.dataSource)
+  let items = loadDataSourceFromApi(formElement.dataSource, formElement.dataSource.dataProperty, formElement.dataSource.dataFn)
 
   return addFirstOption(items)
 }
@@ -34,15 +34,37 @@ function shouldContainDataSource(formElement) {
   return elementsWithDataSource.includes(formElement.component)
 }
 
-function loadDataSourceFromApi(api) {
+function loadDataSourceFromApi(api, dataProperty, dataExtractionFunction) {
   let items = []
-
+  
   $.ajax({
     url: api.endpoint,
     async: false,
     method: api.method ? api.method : "GET",
     success: function(data) {
-      items = data
+      
+      if(!data) {
+        throw new Error("DataSource error: server responded successfully, but returned no data. Endpoint - " + api.endpoint)
+      }
+
+      if(dataExtractionFunction && typeof dataExtractionFunction == "function") {
+        items = dataExtractionFunction(data)
+        return
+      }
+
+      if(!dataProperty) {
+        items = data
+      } else {
+
+        const properties = dataProperty.split(".")
+        let tempData = data
+        
+        properties.forEach(p => {
+          tempData = tempData[p]
+        })
+
+        items = tempData
+      }
     },
     error: function() {
       throw new Error("Failed to load the datasource from " + api.endpoint + ".")

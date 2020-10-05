@@ -36,6 +36,17 @@ export default {
                     }
                 },
                 {
+                    key: 'categoryId',
+                    component: 'v-autocomplete',
+                    dataSource: {
+                        endpoint: "http://localhost:5000/api/categories",
+                        dataFn: function(data) {
+                            return data.data.items
+                        }
+                    },
+                    cols: 4
+                },
+                {
                     key: 'photoPreview',
                     cols: 4,
                     offset: 4,
