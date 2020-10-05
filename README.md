@@ -13,7 +13,6 @@ But still, we have to write a lot of boilerplate code over and over to make use 
 5. Display validation error messages
 6. Form and execute an Ajax request
 7. React on server response (either error or success)
-8. Redirect or pop-up close
 
 These are common scenarios we encounter very often in our day to day job and although easy, occupy much of our work time. Thats the reason we developed this library. It's built on top on Vuetify form elements and is used to do all these steps automatically, based on a configuration. 
 
