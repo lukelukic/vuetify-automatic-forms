@@ -93,6 +93,10 @@ export default {
     extractErrorsFn: {
       type: Function,
       required: false
+    },
+    clientErrorProperty: {
+      type: String,
+      required: false
     }
   },
   beforeMount() {
@@ -138,7 +142,18 @@ export default {
             if(this.extractErrorsFn) {
               this.setErrors(this.extractErrorsFn(error.response.data))
             } else {
-              this.setErrors(error.response.data)
+              if(this.clientErrorProperty) {
+                const properties = clientErrorProperty.split(".")
+                let tempData = error.response.data
+                
+                  properties.forEach(p => {
+                    tempData = tempData[p]
+                  })
+                  
+                this.setErrors(tempData)
+              } else {
+                this.setErrors(error.response.data)
+              } 
             }
           } else {
             if(this.errorFn) {
