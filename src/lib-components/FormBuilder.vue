@@ -4,6 +4,7 @@
       <v-col
         v-for="formElement in formElements"
         :cols="cols(formElement)"
+        :offset="offset(formElement)"
         :key="formElement.key"
       >
         <ValidationProvider
@@ -29,6 +30,7 @@
             :hide-detals="true"
             :error-messages="errors"
             v-model="formObject[formElement.key]"
+            :src="formObject[formElement.key]"
             :dense="mDense(formElement)"
             :color="mColor(formElement)"
             :clearable="mClearable(formElement)"
@@ -165,6 +167,9 @@ export default {
     },
     cols: function(formElement) {
       return formElement.cols ? formElement.cols : 12
+    },
+    offset: function(formElement) {
+      return formElement.offset ? formElement.offset : 0
     },
     mColor: function(formElement) {
       return formElement.color ? formElement.color : this.color

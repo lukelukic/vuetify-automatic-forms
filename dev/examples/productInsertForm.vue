@@ -1,7 +1,7 @@
 <template>
   <v-row>
       <v-col cols="7" offset="2">
-          <CrudForm :formElements="elements" :submit="dugmence" type="insert" endpoint="http://localhost:5000/api/productphoto" />
+          <CrudForm :formElements="elements" :updateObject="incomming" :submit="dugmence" type="insert" endpoint="http://localhost:5000/api/productphoto" />
       </v-col>
   </v-row>
 </template>
@@ -34,8 +34,17 @@ export default {
                         showSize: true,
                         chips: true
                     }
+                },
+                {
+                    key: 'photoPreview',
+                    cols: 4,
+                    offset: 4,
+                    component: 'v-img'
                 }
-            ]
+            ],
+            incomming: {
+                photoPreview: "https://picsum.photos/id/11/500/300"
+            }
         }
     }
 }

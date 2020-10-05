@@ -95,12 +95,6 @@ export default {
         'Prop "updateObject" is required when update form is used.'
       )
     }
-
-    if (this.type == 'insert' && this.updateObject) {
-      throw new Error(
-        'Prop "updateObject" should not be used when form type is insert.'
-      )
-    }
   },
   methods: {
     handleInsert(objectToInsert) {
