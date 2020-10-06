@@ -28,6 +28,17 @@ npm install vuetify-automatic-forms
 
 This library is built on top of Vuetify Component framework. Bearing that in mind, your project should already have Vuetify fully setup. 
 
+It can be either globally installed using like this in your entry file:
+
+```js
+import Vue from 'vue'
+import VuetifyFormBuilder from 'vuetify-automatic-forms'
+
+Vue.use(VuetifyFormBuilder)
+```
+
+Or you can import the exact component you need in your component's import section.
+
 The installation process is now done! Let's write some code.
 
 ## FormBuilder component
