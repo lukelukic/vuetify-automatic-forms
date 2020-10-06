@@ -1,6 +1,6 @@
 {
   "name": "vuetify-automatic-forms",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "",
   "main": "dist/vuetify-automatic-forms.ssr.js",
   "browser": "dist/vuetify-automatic-forms.esm.js",
@@ -24,7 +24,7 @@
     "vue-ctk-date-time-picker": "^2.5.0",
     "vue-router": "^3.4.5",
     "vuetify": "^2.3.10"
-  },
+},
   "devDependencies": {
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.5",

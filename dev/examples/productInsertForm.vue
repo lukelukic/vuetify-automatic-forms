@@ -1,7 +1,7 @@
 <template>
   <v-row>
       <v-col cols="7" offset="2">
-          <CrudForm :formElements="elements" 
+          <ApiForm :formElements="elements" 
                     :extractErrorsFn="errors" 
                     :updateObject="incomming" 
                     :successFn="success" 

@@ -24,7 +24,7 @@
 import FormBuilder from './FormBuilder.vue'
 
 export default {
-  name: 'CrudForm',
+  name: 'ApiForm',
   components: {
     FormBuilder,
   },

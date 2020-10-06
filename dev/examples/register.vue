@@ -1,7 +1,7 @@
 <template>
   <v-row>
       <v-col cols="7" offset="2">
-          <CrudForm :submit="submit" :cancel="cancel" :formElements="formElements" color="orange" type="insert" endpoint="http://ourdomain.com/register"/>
+          <ApiForm :submit="submit" :cancel="cancel" :formElements="formElements" color="orange" type="insert" endpoint="http://ourdomain.com/register"/>
       </v-col>
   </v-row>
 </template>
