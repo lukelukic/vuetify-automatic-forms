@@ -163,9 +163,8 @@ export default {
       disabled: {},
     }
   },
-  mounted: function() {
-    
-    this.prepareFormObject()
+  mounted: async function() {
+    await this.prepareFormObject()
   },
   methods: {
     component: function(formElement) {

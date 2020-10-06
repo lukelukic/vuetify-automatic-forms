@@ -16,11 +16,11 @@ export default {
       var result = text.replace(/([A-Z])/g, ' $1')
       return result.charAt(0).toUpperCase() + result.slice(1)
     },
-    prepareFormObject() {
+    async prepareFormObject() {
       for (let el of this.formElements) {
         this.$set(this.formObject, el.key, this.incommingValue(el.key))
         if (dataSourceBuilder.shouldContainDataSource(el)) {
-          this.$set(this.dataSources, el.key, this.dataSource(el))
+          this.$set(this.dataSources, el.key, await this.dataSource(el))
         }
         this.$set(this.disabled, el.key, el.disabled)
         this.$set(this.hidden, el.key, el.hidden)
@@ -32,8 +32,8 @@ export default {
       }
       return undefined
     },
-    dataSource: function(formElement) {
-      return dataSourceBuilder.buildDataSource(formElement)
+    dataSource: async function(formElement) {
+      return await dataSourceBuilder.buildDataSource(formElement)
     },
     handleChange(key, value, isDate) {
 
@@ -121,7 +121,7 @@ export default {
         toBeAffected.change.when == value
       )
     },
-    handleDataSourceChange: function(toBeAffected, value) {
+    handleDataSourceChange: async function(toBeAffected, value) {
       let isChangeSpecificToSelectedElement =
         toBeAffected.change.bindings && toBeAffected.change.bindings[value]
       if (isChangeSpecificToSelectedElement) {
@@ -139,7 +139,7 @@ export default {
           this.$set(
             this.dataSources,
             toBeAffected.key,
-            dataSourceBuilder.buildDataSource(binding)
+            await dataSourceBuilder.buildDataSource(binding)
           )
           return
         }
@@ -162,7 +162,7 @@ export default {
         this.$set(
           this.dataSources,
           toBeAffected.key,
-          dataSourceBuilder.buildDataSource(dataSource)
+          await dataSourceBuilder.buildDataSource(dataSource)
         )
       }
     },

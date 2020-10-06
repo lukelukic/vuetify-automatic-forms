@@ -1,6 +1,6 @@
 import $ from 'jquery'
 
-function buildDataSource(formElement) {
+async function buildDataSource(formElement) {
   if (Array.isArray(formElement.dataSource)) {
     return addFirstOption(formElement.dataSource)
   }
@@ -16,8 +16,8 @@ function buildDataSource(formElement) {
     )
   }
 
-  let items = loadDataSourceFromApi(formElement.dataSource, formElement.dataSource.dataProperty, formElement.dataSource.dataFn)
-
+  let items = await loadDataSourceFromApi(formElement.dataSource, formElement.dataSource.dataProperty, formElement.dataSource.dataFn)
+  
   return addFirstOption(items)
 }
 
@@ -34,7 +34,7 @@ function shouldContainDataSource(formElement) {
   return elementsWithDataSource.includes(formElement.component)
 }
 
-function loadDataSourceFromApi(api, dataProperty, dataExtractionFunction) {
+async function loadDataSourceFromApi(api, dataProperty, dataExtractionFunction) {
   let items = []
   
   $.ajax({
