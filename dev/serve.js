@@ -18,7 +18,7 @@ const routes = [
   { path: '/product', component: Product}
 ]
 
-Vue.prototype.$http = api
+Vue.prototype.$formBuilderAxios = api
 
 const router = new VueRouter({routes})
 Vue.use(VueRouter)

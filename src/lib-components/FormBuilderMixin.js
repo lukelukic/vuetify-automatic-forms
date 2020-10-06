@@ -11,6 +11,9 @@ export default {
       },
     }
   },
+  beforeMount() {
+    dataSourceBuilder.setAxios(this.$formBuilderAxios)
+  },
   methods: {
     toSentenceCase(text) {
       var result = text.replace(/([A-Z])/g, ' $1')
