@@ -99,10 +99,6 @@ export default {
       required: true,
       validator: propValidation.formElements
     },
-    handleSubmit: {
-      type: Function,
-      required: true,
-    },
     errors: {
       type: Object,
       required: false,
@@ -238,8 +234,7 @@ export default {
             }
           }
           try {
-            this.handleSubmit(objectToSubmit)
-            EventBus.$emit('SUCESSFULL_SUBMIT')
+            this.$emit('formSubmit', objectToSubmit)
           } catch (e) {
             throw new Error(
               'There was an error calling a provided function in FormBuilder',
@@ -258,7 +253,7 @@ export default {
           this.formObject[prop] = ''
         }
       }
-      EventBus.$emit('FORM_RESET')
+      EventBus.$emit('formReset')
       
     },
     find(key) {

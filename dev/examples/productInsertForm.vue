@@ -3,7 +3,7 @@
       <v-col cols="7" offset="2">
           <ApiForm :formElements="elements" 
                     :extractErrorsFn="errors" 
-                    :updateObject="incomming" 
+                    :formObject="incomming" 
                     :successFn="success" 
                     :errorFn="error"
                     :submit="dugmence"  

@@ -1,7 +1,7 @@
 <template>
   <v-row>
       <v-col cols="7" offset="2">
-          <SearchForm :formElements="formElements" :resultHandler="handleSearchResult" endpoint="api/products"/>
+          <SearchForm :formElements="formElements" @success="handleSearchResult" endpoint="api/products"/>
       </v-col>
   </v-row>
 </template>

@@ -2,9 +2,9 @@
   <div>
     <FormBuilder
       :formElements="formElements"
-      :handleSubmit="handleInsert"
+      @formSubmit="handleSubmit"
       :errors="validationErrors"
-      :incommingObject="updateObject"
+      :incommingObject="formObject"
       :submit="submit"
       :cancel="cancel"
       :useCancel="useCancel"
@@ -22,20 +22,14 @@
   </div>
 </template>
 <script>
-import FormBuilder from './FormBuilder.vue'
-
 export default {
   name: 'ApiForm',
-  components: {
-    FormBuilder,
-  },
   data: function() {
     return {
       snackbar: false,
       snackbarColor: 'success',
       snackbarText: 'Successfull insert.',
-      validationErrors: {},
-      allowedTypes: ['insert', 'update'],
+      validationErrors: {}
     }
   },
   props: {
@@ -59,11 +53,7 @@ export default {
       type: Number,
       default: 422,
     },
-    type: {
-      type: String,
-      default: "insert",
-    },
-    updateObject: {
+    formObject: {
       type: Object,
       required: false,
     },
@@ -99,50 +89,53 @@ export default {
       type: Function,
       required: false
     },
-    clientErrorProperty: {
+    validationErrorsProperty: {
       type: String,
       required: false
-    }
-  },
-  beforeMount() {
-    if (!this.allowedTypes.includes(this.type)) {
-      throw new Error(
-        'Invalid value for prop "type". Use either "insert" or "update".'
-      )
-    }
-
-    if (this.type == 'update' && !this.updateObject) {
-      throw new Error(
-        'Prop "updateObject" is required when update form is used.'
-      )
+    },
+    success: {
+      type: Object,
+      default: function() {
+        return {
+            color: 'success',
+            message: 'An action executed successfully.'
+        }
+      }
+    },
+    error: {
+      type: Object,
+      default: function() {
+        return {
+          color: 'red',
+          message: 'An error has occured. Please contact administrator.'
+        }
+      }
     }
   },
   methods: {
-    handleInsert(objectToInsert) {
+    handleSubmit(formObject) {
 
       if(this.contentType == "multipart/form-data") {
-        objectToInsert = this.getMultipartObject(objectToInsert)
+        formObject = this.getMultipartObject(formObject)
       }
       let request = {
         method: this.method,
         url: this.endpoint,
-        data: objectToInsert,
+        data: formObject,
         headers: {
           'Content-Type' : this.contentType
         },
-        params: this.method == "GET" ? objectToInsert : undefined
+        params: this.method == "GET" ? formObject : undefined
       }
-
-      console.log(request)
 
       this.$formBuilderAxios(request)
         .then((response) => {
           if(this.successFn) {
               this.successFn(response.data) 
           } else {
-              this.snackbarColor = 'success'
+              this.snackbarColor = this.success.color
               this.snackbar = true
-              this.snackbarText = 'Successfull insert.'
+              this.snackbarText = this.success.message
           }
           
         })
@@ -151,8 +144,8 @@ export default {
             if(this.extractErrorsFn) {
               this.setErrors(this.extractErrorsFn(error.response.data))
             } else {
-              if(this.clientErrorProperty) {
-                const properties = clientErrorProperty.split(".")
+              if(this.validationErrorsProperty) {
+                const properties = validationErrorsProperty.split(".")
                 let tempData = error.response.data
                 
                   properties.forEach(p => {
@@ -169,8 +162,8 @@ export default {
               this.errorFn(error.response)
             } else {
               this.snackbar = true
-              this.snackbarColor = 'red'
-              this.snackbarText = 'An error has occured. Please contact administrator.'
+              this.snackbarColor = this.error.color
+              this.snackbarText = this.error.message
             }
           }
         })
@@ -197,13 +190,6 @@ export default {
 
       return formData
     }
-  }, 
-  watch: {
-    incommingObject: {
-      handler() {
-        console.log('Izmena')
-      },
-    },
-  },
+  }
 }
 </script>

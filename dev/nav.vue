@@ -44,6 +44,10 @@ export default {
         {
           title: "Product",
           route: "/product"
+        },
+        {
+          title: "Update Product",
+          route: "/uproduct"
         }
       ]
     }

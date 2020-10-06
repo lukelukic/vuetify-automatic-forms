@@ -1,5 +1,5 @@
 <template>
-  <ApiForm 
+  <ApiForm v-if="formObject" 
      :formElements="formElements" 
      :endpoint="endpoint" 
      :method="method"
@@ -10,34 +10,39 @@
      :color="color"
      :successFn="resultHandler"
      :errorFn="errorHandler"
+     :formObject="formObject"
   />
 </template>
 
 <script>
 export default {
-    name: 'SearchForm',
+    name: 'RestUpdateForm',
     props: {
         formElements: {
             type: Array,
             required: true,
         },
+        resource: {
+            type: String,
+            required: true,
+        },
+        id: {
+           type: Number,
+           required: true 
+        },
         color: {
             type: String,
             required: false,
         },
-        endpoint: {
-            type: String,
-            required: true,
-        },
         method: {
             type: String,
-            default: 'GET',
+            default: 'PUT',
         },
         submit: {
             type: Object,
             default: function() {
                 return {
-                text: 'Search',
+                text: 'Update',
                 color: 'primary'
             }
             }
@@ -54,6 +59,24 @@ export default {
         type: Boolean,
         default: true
     }
+    },
+    data() {
+        return {
+            formObject: null
+        }
+    },
+    async beforeMount() {
+        var that = this
+        
+        var response = await this.$formBuilderAxios.get(this.endpoint)
+
+        this.formObject = response.data
+        
+    },
+    computed: {
+        endpoint: function() {
+            return `${this.resource}/${this.id}`
+        }
     },
     methods: {
         resultHandler: function(apiData) {

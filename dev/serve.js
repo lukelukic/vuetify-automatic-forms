@@ -7,6 +7,7 @@ import Register from './examples/register.vue'
 import Sample from './examples/sample.vue'
 import Edit from './examples/editUser.vue'
 import Product from './examples/productInsertForm.vue'
+import UpdateProduct from './examples/UpdateProduct.vue'
 import api from './api'
 
 Vue.config.productionTip = false;
@@ -15,7 +16,8 @@ const routes = [
   { path: '/register', component: Register },
   { path: '/sample', component: Sample },
   { path: '/edit', component: Edit },
-  { path: '/product', component: Product}
+  { path: '/product', component: Product},
+  { path: '/uproduct', component: UpdateProduct }
 ]
 
 Vue.prototype.$formBuilderAxios = api
