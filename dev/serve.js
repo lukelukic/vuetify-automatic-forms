@@ -7,6 +7,7 @@ import Register from './examples/register.vue'
 import Sample from './examples/sample.vue'
 import Edit from './examples/editUser.vue'
 import Product from './examples/productInsertForm.vue'
+import api from './api'
 
 Vue.config.productionTip = false;
 
@@ -16,6 +17,8 @@ const routes = [
   { path: '/edit', component: Edit },
   { path: '/product', component: Product}
 ]
+
+Vue.prototype.$http = api
 
 const router = new VueRouter({routes})
 Vue.use(VueRouter)
