@@ -164,6 +164,9 @@ export default {
     }
   },
   mounted: async function() {
+    if(!this.$formBuilderAxios) {
+      console.warn("Axios not found on a vue instance. You will not be able to use AJAX based features.");
+    }
     await this.prepareFormObject()
   },
   methods: {

@@ -7,7 +7,7 @@
                     :successFn="success" 
                     :errorFn="error"
                     :submit="dugmence"  
-                    endpoint="http://localhost:5000/api/productphoto" />
+                    endpoint="api/productphoto" />
       </v-col>
   </v-row>
 </template>
@@ -20,7 +20,7 @@ export default {
             dugmence: {text: "Posalji", color: "pink"},
             elements: [
                 {key: 'productId', component: 'v-autocomplete', cols: 6, dataSource: {
-                    endpoint: "http://ec2-3-120-128-154.eu-central-1.compute.amazonaws.com:5000/api/products",
+                    endpoint: "api/products",
                     textProperty: "name",
                     valueProperty: "id"
                 }},
@@ -40,7 +40,7 @@ export default {
                     key: 'categoryId',
                     component: 'v-autocomplete',
                     dataSource: {
-                        endpoint: "http://localhost:5000/api/categories",
+                        endpoint: "api/categories",
                         dataProperty: "data.items"
                     }
                 },

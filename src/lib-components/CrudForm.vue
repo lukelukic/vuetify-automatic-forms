@@ -22,7 +22,6 @@
 </template>
 <script>
 import FormBuilder from './FormBuilder.vue'
-import axios from 'axios'
 
 export default {
   name: 'CrudForm',
@@ -120,7 +119,7 @@ export default {
         objectToInsert = this.getMultipartObject(objectToInsert)
       }
 
-      axios({
+      this.$formBuilderAxios({
         method: this.method,
         url: this.endpoint,
         data: objectToInsert,
