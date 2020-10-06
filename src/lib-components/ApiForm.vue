@@ -9,6 +9,7 @@
       :cancel="cancel"
       :useCancel="useCancel"
       :dense="dense"
+      :color="color"
     />
     <v-snackbar v-model="snackbar" right :color="snackbarColor">
       {{ snackbarText }}
@@ -45,6 +46,10 @@ export default {
     endpoint: {
       type: String,
       required: true,
+    },
+    color: {
+      type: String,
+      required: false,
     },
     method: {
       type: String,
@@ -118,15 +123,19 @@ export default {
       if(this.contentType == "multipart/form-data") {
         objectToInsert = this.getMultipartObject(objectToInsert)
       }
-
-      this.$formBuilderAxios({
+      let request = {
         method: this.method,
         url: this.endpoint,
         data: objectToInsert,
         headers: {
           'Content-Type' : this.contentType
-        }
-      })
+        },
+        params: this.method == "GET" ? objectToInsert : undefined
+      }
+
+      console.log(request)
+
+      this.$formBuilderAxios(request)
         .then((response) => {
           if(this.successFn) {
               this.successFn(response.data) 
