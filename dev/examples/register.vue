@@ -1,6 +1,9 @@
 <template>
   <v-row>
-      <v-col cols="7" offset="2">
+      <v-col cols="10">
+           <v-data-table class="mr-5 ml-5" :items="items" :headers="headers"></v-data-table>
+      </v-col>
+      <v-col cols="2">
           <SearchForm :formElements="formElements" @success="handleSearchResult" endpoint="api/products"/>
       </v-col>
   </v-row>
@@ -12,19 +15,29 @@ export default {
         return {
             formElements: [
                 {
-                    key: 'firstName',
-                    cols: 6
+                    key: 'name'
                 },
                 {
-                    key: 'lastName',
-                    cols: 6
+                    key: 'categoryId',
+                    component: 'v-autocomplete',
+                    dataSource: {
+                        endpoint: 'api/categories',
+                        dataProperty: "data.items"
+                    }
                 },
+            ],
+            items: [],
+            headers: [
+                {text: 'Name', value: 'name'},
+                {text: 'Price', value: 'price'},
+                {text: 'Description', value: 'description'},
+                {text: 'Category', value: 'category.name'}
             ]
         }
     },
     methods: {
         handleSearchResult: function(data) {
-            console.log(data)
+            this.items = data
         }
     }
 }

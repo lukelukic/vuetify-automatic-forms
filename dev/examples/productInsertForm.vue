@@ -1,12 +1,12 @@
 <template>
   <v-row>
-      <v-col cols="7" offset="2">
+      <v-col cols="4" offset="4">
           <ApiForm :formElements="elements" 
                     :extractErrorsFn="errors" 
                     :formObject="incomming" 
                     :successFn="success" 
                     :errorFn="error"
-                    :submit="dugmence"  
+                    :submit="btn"  
                     endpoint="api/productphoto" />
       </v-col>
   </v-row>
@@ -17,9 +17,10 @@ import  axios  from 'axios';
 export default {
     data() {
         return {
-            dugmence: {text: "Posalji", color: "pink"},
+            btn: {text: "Send", color: "pink"},
             elements: [
-                {key: 'productId', component: 'v-autocomplete', cols: 6, dataSource: {
+                {   key: 'productId', component: 'v-autocomplete', 
+                    dataSource: {
                     endpoint: "api/products",
                     textProperty: "name",
                     valueProperty: "id"
@@ -29,46 +30,19 @@ export default {
                     hint: 'Click to pick image', 
                     component: 'v-file-input',
                     clearable: true,
-                    cols: 6,
                     conversionStrategy: "base64",
                     props: {
                         showSize: true,
                         chips: true
                     }
-                },
-                {
-                    key: 'categoryId',
-                    component: 'v-autocomplete',
-                    dataSource: {
-                        endpoint: "api/categories",
-                        dataProperty: "data.items"
-                    }
-                },
-                {
-                    key: 'photoPreview',
-                    cols: 4,
-                    offset: 4,
-                    component: 'v-img'
-                },
-                {
-                    key: 'createdAt',
-                    component: 'datepicker',
-                    props: {
-                        locale: 'sr'
-                    },
-                    clearable: true,
-                    cols: 3
                 }
             ],
-            incomming: {
-                photoPreview: "https://picsum.photos/id/11/500/300"
-            },
             success: function(data) {
                 console.log(data)
-                alert("Bravo!")
+                alert("Done!")
             },
             error: function() {
-                alert("GRESKA")
+                alert("Error")
             },
             errors: function(response) {
                 return response

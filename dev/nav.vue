@@ -30,23 +30,23 @@ export default {
     return {
       items: [
         {
-          title: "Register",
+          title: "Search",
           route: "/register"
         },
         {
-          title: "Simple",
+          title: "Computation",
           route: "/sample"
         },
         {
-          title: "Edit",
+          title: "Form prefill",
           route: "/edit"
         },
         {
-          title: "Product",
+          title: "Upload",
           route: "/product"
         },
         {
-          title: "Update Product",
+          title: "Rest API Update",
           route: "/product/1"
         }
       ]
