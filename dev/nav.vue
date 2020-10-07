@@ -1,65 +1,58 @@
 <template>
-  <v-card
-    elevation="3"
-    >
-    <v-navigation-drawer
-        floating
-        permanent
-        >
-        <v-list
-            dense
-            >
-            <v-list-item
-                v-for="item in items"
-                :key="item.title"
-                link
-                >
-                <router-link :to="item.route">
-                    <v-btn :color="item.route == currentRoute ? 'red' : 'white' " > {{ item.title }} </v-btn>
-                </router-link>
-            </v-list-item>
-        </v-list>
-      </v-navigation-drawer>
-    </v-card>
+  <v-card elevation="3">
+    <v-navigation-drawer floating permanent>
+      <v-list dense>
+        <v-list-item v-for="item in items" :key="item.title" link>
+          <router-link :to="item.route">
+            <v-btn :color="item.route == currentRoute ? 'red' : 'white'">
+              {{ item.title }}
+            </v-btn>
+          </router-link>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+  </v-card>
 </template>
 
 <script>
 export default {
-    name: "Nav",
-    data: function(){
+  name: "Nav",
+  data: function() {
     return {
       items: [
         {
           title: "Search",
-          route: "/search"
+          route: "/search",
         },
         {
           title: "Computation",
-          route: "/computation"
+          route: "/computation",
         },
         {
           title: "Form prefill",
-          route: "/prefill"
+          route: "/prefill",
         },
         {
           title: "Upload",
-          route: "/upload"
+          route: "/upload",
         },
         {
           title: "Rest API Update",
-          route: "/product/1"
-        }
-      ]
-    }
+          route: "/product/1",
+        },
+        {
+          title: "Api Table",
+          route: "/apitable",
+        },
+      ],
+    };
   },
   computed: {
-    currentRoute: function(){
-      return this.$route.path
-    }
-  }
-}
+    currentRoute: function() {
+      return this.$route.path;
+    },
+  },
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

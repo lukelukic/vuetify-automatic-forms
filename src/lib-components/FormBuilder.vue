@@ -15,32 +15,34 @@
           :key="formElement.key"
           v-if="!hidden[formElement.key]"
         >
-          <datepicker v-if="component(formElement) == 'datepicker'" 
-              :no-value-to-custom-elem="true" 
-              v-model="formObject[formElement.key]"
+          <datepicker
+            v-if="component(formElement) == 'datepicker'"
+            :no-value-to-custom-elem="true"
+            v-model="formObject[formElement.key]"
+            v-bind="formElement.props"
+          >
+            <v-text-field
+              :disabled="disabled[formElement.key]"
+              :value="formObject[formElement.key]"
+              :hint="hint(formElement)"
+              v-show="!hidden[formElement.key]"
+              @change="handleChange(formElement.key, $event, true)"
+              :ref="formElement.key"
+              v-bind:key="formElement.key"
+              :label="label(formElement)"
+              outlined
+              :hide-detals="true"
+              :error-messages="errors"
+              :dense="mDense(formElement)"
+              :color="mColor(formElement)"
+              :clearable="mClearable(formElement)"
+              persistent-hint
               v-bind="formElement.props"
-              >
-              <v-text-field 
-                :disabled="disabled[formElement.key]"
-                :value="formObject[formElement.key]"
-                :hint="hint(formElement)"
-                v-show="!hidden[formElement.key]"
-                @change="handleChange(formElement.key, $event, true)"
-                :ref="formElement.key"
-                v-bind:key="formElement.key"
-                :label="label(formElement)"
-                outlined
-                :hide-detals="true"
-                :error-messages="errors"
-                :dense="mDense(formElement)"
-                :color="mColor(formElement)"
-                :clearable="mClearable(formElement)"
-                persistent-hint
-                v-bind="formElement.props" 
-              />
+            />
           </datepicker>
 
-          <component v-else
+          <component
+            v-else
             :disabled="disabled[formElement.key]"
             :hint="hint(formElement)"
             v-show="!hidden[formElement.key]"
@@ -66,26 +68,34 @@
         </ValidationProvider>
       </v-col>
       <v-col cols="12" class="mt-3">
-        <v-btn small :color="submit.color" @click="performSubmit" class="float-right ml-3"
-          > {{ submit.text }} </v-btn
+        <v-btn
+          small
+          :color="submit.color"
+          @click="performSubmit"
+          class="float-right ml-3"
         >
-        <v-btn v-if="useCancel" small :color="cancel.color" @click="reset" class="float-right"
+          {{ submit.text }}
+        </v-btn>
+        <v-btn
+          v-if="useCancel"
+          small
+          :color="cancel.color"
+          @click="reset"
+          class="float-right"
           >{{ cancel.text }}</v-btn
         >
       </v-col>
-      
     </v-row>
   </ValidationObserver>
 </template>
 <script>
-import { ValidationProvider, ValidationObserver } from 'vee-validate';
+import { ValidationProvider, ValidationObserver } from 'vee-validate'
 import formBuilderMixin from './FormBuilderMixin.js'
 import propValidation from './internals/formBuilderPropValidations'
-import EventBus from './internals/event-bus'
-import VueCtkDateTimePicker from 'vue-ctk-date-time-picker';
-import 'vue-ctk-date-time-picker/dist/vue-ctk-date-time-picker.css';
+import VueCtkDateTimePicker from 'vue-ctk-date-time-picker'
+import 'vue-ctk-date-time-picker/dist/vue-ctk-date-time-picker.css'
 import Vue from 'vue'
-Vue.component('datepicker', VueCtkDateTimePicker);
+Vue.component('datepicker', VueCtkDateTimePicker)
 export default {
   name: 'FormBuilder',
   components: {
@@ -101,11 +111,11 @@ export default {
     },
     errors: {
       type: Object,
-      required: false,
+      required: false
     },
     incommingObject: {
       type: Object,
-      required: false,
+      required: false
     },
     color: {
       type: String,
@@ -160,25 +170,27 @@ export default {
   },
   data: function() {
     return {
-      date: "",
+      date: '',
       formObject: {},
       dataSources: {},
       hidden: {},
-      disabled: {},
+      disabled: {}
     }
   },
   mounted: async function() {
-    if(!this.$formBuilderAxios) {
-      console.warn("Axios not found on a vue instance. You will not be able to use AJAX based features.");
+    if (!this.$formBuilderAxios) {
+      console.warn(
+        'Axios not found on a vue instance. You will not be able to use AJAX based features.'
+      )
     }
     await this.prepareFormObject()
-    if(this.submitOnLoad) {
+    if (this.submitOnLoad) {
       this.performSubmit()
     }
   },
   methods: {
     onEnter: function() {
-      if(this.submitOnEnter) {
+      if (this.submitOnEnter) {
         this.performSubmit()
       }
     },
@@ -188,8 +200,8 @@ export default {
     hint: function(formElement) {
       return formElement.hint ? formElement.hint : ''
     },
-    mDense: function(formElement){
-      if(Object.keys(formElement).includes("dense")){
+    mDense: function(formElement) {
+      if (Object.keys(formElement).includes('dense')) {
         return formElement.dense
       }
       return this.dense
@@ -219,15 +231,17 @@ export default {
       return formElement.color ? formElement.color : this.color
     },
     mClearable: function(formElement) {
-      return formElement.clearable ? formElement.clearable : this.clearableInputs
+      return formElement.clearable
+        ? formElement.clearable
+        : this.clearableInputs
     },
     performSubmit() {
-      this.$refs.observer.validate().then((valid) => {
+      this.$refs.observer.validate().then(valid => {
         if (valid) {
-          if(this.additionalValidation) {
+          if (this.additionalValidation) {
             let errors = this.additionalValidation(this.formObject)
-            
-            if(Object.keys(errors).length) {
+
+            if (Object.keys(errors).length) {
               this.$refs.observer.setErrors(errors)
               return
             }
@@ -239,14 +253,12 @@ export default {
               this.formObject[prop] &&
               this.formObject[prop] !== false
             ) {
-              
-              if(prop.includes("_upload")) {
-                let originalPropName = prop.split("_upload")[0]
+              if (prop.includes('_upload')) {
+                let originalPropName = prop.split('_upload')[0]
                 objectToSubmit[originalPropName] = this.formObject[prop]
               } else {
                 objectToSubmit[prop] = this.formObject[prop]
               }
-              
             }
           }
           try {
@@ -262,44 +274,83 @@ export default {
     },
     reset() {
       this.$refs.observer.reset()
-      for(let prop in this.formObject) {
-        if(this.incommingObject && this.incommingObject[prop]) {
+      for (let prop in this.formObject) {
+        if (this.incommingObject && this.incommingObject[prop]) {
           this.formObject[prop] = this.incommingObject[prop]
         } else {
           this.formObject[prop] = ''
         }
       }
-      EventBus.$emit('formReset')
-      
+      this.$emit('formReset')
     },
     find(key) {
-      return this.formElements.filter((x) => x.key == key)[0]
-    },
+      return this.formElements.filter(x => x.key == key)[0]
+    }
   },
   watch: {
     errors: {
       handler() {
         this.$refs.observer.setErrors(this.errors)
-      },
+      }
     },
     incommingObject: function() {
-        this.populateValuesBasedOnIncommingObject()
+      this.populateValuesBasedOnIncommingObject()
     }
-  },
+  }
 }
 </script>
 <style lang="css">
 .v-text-field--outlined.v-input--dense .v-label {
-  top: 6px
+  top: 6px;
 }
 
-.v-text-field--filled.v-input--dense.v-text-field--outlined.v-text-field--filled > .v-input__control > .v-input__slot, .v-text-field--filled.v-input--dense.v-text-field--outlined > .v-input__control > .v-input__slot, .v-text-field--filled.v-input--dense.v-text-field--single-line > .v-input__control > .v-input__slot, .v-text-field--full-width.v-input--dense.v-text-field--outlined.v-text-field--filled > .v-input__control > .v-input__slot, .v-text-field--full-width.v-input--dense.v-text-field--outlined > .v-input__control > .v-input__slot, .v-text-field--full-width.v-input--dense.v-text-field--single-line > .v-input__control > .v-input__slot, .v-text-field--outlined.v-input--dense.v-text-field--outlined.v-text-field--filled > .v-input__control > .v-input__slot, .v-text-field--outlined.v-input--dense.v-text-field--outlined > .v-input__control > .v-input__slot, .v-text-field--outlined.v-input--dense.v-text-field--single-line > .v-input__control > .v-input__slot {
-  min-height:30px;
+.v-text-field--filled.v-input--dense.v-text-field--outlined.v-text-field--filled
+  > .v-input__control
+  > .v-input__slot,
+.v-text-field--filled.v-input--dense.v-text-field--outlined
+  > .v-input__control
+  > .v-input__slot,
+.v-text-field--filled.v-input--dense.v-text-field--single-line
+  > .v-input__control
+  > .v-input__slot,
+.v-text-field--full-width.v-input--dense.v-text-field--outlined.v-text-field--filled
+  > .v-input__control
+  > .v-input__slot,
+.v-text-field--full-width.v-input--dense.v-text-field--outlined
+  > .v-input__control
+  > .v-input__slot,
+.v-text-field--full-width.v-input--dense.v-text-field--single-line
+  > .v-input__control
+  > .v-input__slot,
+.v-text-field--outlined.v-input--dense.v-text-field--outlined.v-text-field--filled
+  > .v-input__control
+  > .v-input__slot,
+.v-text-field--outlined.v-input--dense.v-text-field--outlined
+  > .v-input__control
+  > .v-input__slot,
+.v-text-field--outlined.v-input--dense.v-text-field--single-line
+  > .v-input__control
+  > .v-input__slot {
+  min-height: 30px;
 }
 
-.v-text-field--enclosed.v-input--dense:not(.v-text-field--solo).v-text-field--outlined .v-input__append-inner, .v-text-field--enclosed.v-input--dense:not(.v-text-field--solo).v-text-field--outlined .v-input__append-outer, .v-text-field--enclosed.v-input--dense:not(.v-text-field--solo).v-text-field--outlined .v-input__prepend-inner, .v-text-field--enclosed.v-input--dense:not(.v-text-field--solo).v-text-field--outlined .v-input__prepend-outer, .v-text-field--full-width.v-input--dense:not(.v-text-field--solo).v-text-field--outlined .v-input__append-inner, .v-text-field--full-width.v-input--dense:not(.v-text-field--solo).v-text-field--outlined .v-input__append-outer, .v-text-field--full-width.v-input--dense:not(.v-text-field--solo).v-text-field--outlined .v-input__prepend-inner, .v-text-field--full-width.v-input--dense:not(.v-text-field--solo).v-text-field--outlined .v-input__prepend-outer
-{
-  margin-top:5px
+.v-text-field--enclosed.v-input--dense:not(.v-text-field--solo).v-text-field--outlined
+  .v-input__append-inner,
+.v-text-field--enclosed.v-input--dense:not(.v-text-field--solo).v-text-field--outlined
+  .v-input__append-outer,
+.v-text-field--enclosed.v-input--dense:not(.v-text-field--solo).v-text-field--outlined
+  .v-input__prepend-inner,
+.v-text-field--enclosed.v-input--dense:not(.v-text-field--solo).v-text-field--outlined
+  .v-input__prepend-outer,
+.v-text-field--full-width.v-input--dense:not(.v-text-field--solo).v-text-field--outlined
+  .v-input__append-inner,
+.v-text-field--full-width.v-input--dense:not(.v-text-field--solo).v-text-field--outlined
+  .v-input__append-outer,
+.v-text-field--full-width.v-input--dense:not(.v-text-field--solo).v-text-field--outlined
+  .v-input__prepend-inner,
+.v-text-field--full-width.v-input--dense:not(.v-text-field--solo).v-text-field--outlined
+  .v-input__prepend-outer {
+  margin-top: 5px;
 }
 
 .v-icon.v-icon {

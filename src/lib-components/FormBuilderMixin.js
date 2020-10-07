@@ -7,8 +7,8 @@ export default {
         dataSource: this.handleDataSourceChange,
         hide: this.handleHide,
         disable: this.handleDisable,
-        clear: this.handleClear,
-      },
+        clear: this.handleClear
+      }
     }
   },
   beforeMount() {
@@ -30,7 +30,7 @@ export default {
       this.populateValuesBasedOnIncommingObject()
     },
     populateValuesBasedOnIncommingObject() {
-      for(let el of this.formElements) {
+      for (let el of this.formElements) {
         this.$set(this.formObject, el.key, this.incommingValue(el.key))
       }
     },
@@ -44,9 +44,8 @@ export default {
       return await dataSourceBuilder.buildDataSource(formElement)
     },
     handleChange(key, value, isDate) {
-
-      if(isDate) {
-        if(!value) {
+      if (isDate) {
+        if (!value) {
           this.$set(this.formObject, key, '')
         }
         return
@@ -57,11 +56,10 @@ export default {
       changeFunctions.forEach(x => {
         x(key, value)
       })
-      
     },
     changeFunctionChain() {
       let that = this
-      
+
       function affectsChange(key, value) {
         let element = that.find(key)
 
@@ -73,24 +71,26 @@ export default {
       }
 
       function computationChange(key) {
-        if(that.affectsComputation(key)) {
+        if (that.affectsComputation(key)) {
           let affected = that.getAffectedComputations(key)
-          for(let affectedItem of affected) {
+          for (let affectedItem of affected) {
             let filtered = affectedItem.computation.filter(x => x.when[key])
-            for(let x of filtered) {
-                let whenMatched = true
-              for(let whenKey in x.when) {
-                  if(that.formObject[whenKey] != x.when[whenKey]) {
-                    whenMatched = false
-                    break
-                  }
-              } 
-  
-              if(whenMatched) {
+            for (let x of filtered) {
+              let whenMatched = true
+              for (let whenKey in x.when) {
+                if (that.formObject[whenKey] != x.when[whenKey]) {
+                  whenMatched = false
+                  break
+                }
+              }
+
+              if (whenMatched) {
                 that.formObject[affectedItem.key] = x.then.value
               }
-                 
-              that.disabled[affectedItem.key] = whenMatched ? x.then.disabled : affectedItem.disabled  
+
+              that.disabled[affectedItem.key] = whenMatched
+                ? x.then.disabled
+                : affectedItem.disabled
             }
           }
         }
@@ -98,8 +98,13 @@ export default {
 
       function fileChoosenChange(key, value) {
         let element = that.find(key)
-        if(element.component == 'v-file-input') {
-           fileInputHandler.handle(value, key, that, element.conversionStrategy ? element.conversionStrategy : 'base64')
+        if (element.component == 'v-file-input') {
+          fileInputHandler.handle(
+            value,
+            key,
+            that,
+            element.conversionStrategy ? element.conversionStrategy : 'base64'
+          )
         }
       }
 
@@ -111,10 +116,12 @@ export default {
       return affected.length
     },
     getAffectedComputations(key) {
-      let affectedComputations = this.formElements
-                                                 .filter(x => x.computation != undefined &&
-                                                         x.computation.some(x => x.when[key] != undefined))
-      return affectedComputations                                                         
+      let affectedComputations = this.formElements.filter(
+        x =>
+          x.computation != undefined &&
+          x.computation.some(x => x.when[key] != undefined)
+      )
+      return affectedComputations
     },
     handleHide(toBeAffected, value) {
       this.$set(this.hidden, toBeAffected.key, value != '')
@@ -137,7 +144,7 @@ export default {
         if (Array.isArray(binding)) {
           binding = dataSourceBuilder.addFirstOption(binding)
           this.$set(this.dataSources, toBeAffected.key, binding)
-          let selected = binding.find((x) => x.selected)
+          let selected = binding.find(x => x.selected)
           if (selected) {
             this.formObject[toBeAffected.key] = selected.value
           }
@@ -160,8 +167,8 @@ export default {
       if (toBeAffected.change.api) {
         let dataSource = {
           api: {
-            endpoint: toBeAffected.change.api.endpoint,
-          },
+            endpoint: toBeAffected.change.api.endpoint
+          }
         }
         if (toBeAffected.change.api.associateValue) {
           dataSource.api.endpoint += value
@@ -173,6 +180,6 @@ export default {
           await dataSourceBuilder.buildDataSource(dataSource)
         )
       }
-    },
-  },
+    }
+  }
 }
