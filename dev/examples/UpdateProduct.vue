@@ -1,7 +1,7 @@
 <template>
   <v-row>
       <v-col cols="4" offset="4">
-          <RestUpdateForm :formElements="elements" :id="1" resource="api/products" />
+          <RestUpdateForm :formElements="elements" :id="id" resource="api/products" @success="success" @error="error" />
       </v-col>
   </v-row>
 </template>
@@ -21,9 +21,23 @@ export default {
                         endpoint: "api/categories",
                         dataProperty: "data.items"
                     }
-                },
+                }, 
                 { key: 'price', type: "number", props: { prefix: "$" }},
+                { key: 'picture', component: 'v-img', cols: 6, offset: 3 }
             ]
+        }
+    },
+    computed: {
+        id: function() {
+            return Number(this.$route.params.id)
+        }
+    },
+    methods: {
+        success: function() {
+            alert("Successfull update!")
+        },
+        error: function(error) {
+            alert("Greska.")
         }
     }
 }

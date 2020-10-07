@@ -17,7 +17,7 @@ const routes = [
   { path: '/sample', component: Sample },
   { path: '/edit', component: Edit },
   { path: '/product', component: Product},
-  { path: '/uproduct', component: UpdateProduct }
+  { path: '/product/:id', component: UpdateProduct }
 ]
 
 Vue.prototype.$formBuilderAxios = api

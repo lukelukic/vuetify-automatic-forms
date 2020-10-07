@@ -53,7 +53,7 @@ export default {
         },
         useCancel: {
             type: Boolean,
-            default: false
+            default: true
         },
         dense: {
         type: Boolean,
@@ -84,6 +84,15 @@ export default {
         },
         errorHandler: function(apiError) {
             this.$emit('error', apiError)
+        }
+    },
+    watch: {
+        id: async function() {
+            var that = this
+        
+            var response = await this.$formBuilderAxios.get(this.endpoint)
+            
+            this.formObject = response.data
         }
     }
 }

@@ -64,7 +64,7 @@
           />
         </ValidationProvider>
       </v-col>
-      <v-col cols="12">
+      <v-col cols="12" class="mt-3">
         <v-btn small :color="submit.color" @click="performSubmit" class="float-right ml-3"
           > {{ submit.text }} </v-btn
         >
@@ -266,6 +266,9 @@ export default {
         this.$refs.observer.setErrors(this.errors)
       },
     },
+    incommingObject: function() {
+        this.populateValuesBasedOnIncommingObject()
+    }
   },
 }
 </script>

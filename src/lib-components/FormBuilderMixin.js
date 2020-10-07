@@ -21,12 +21,17 @@ export default {
     },
     async prepareFormObject() {
       for (let el of this.formElements) {
-        this.$set(this.formObject, el.key, this.incommingValue(el.key))
         if (dataSourceBuilder.shouldContainDataSource(el)) {
           this.$set(this.dataSources, el.key, await this.dataSource(el))
         }
         this.$set(this.disabled, el.key, el.disabled)
         this.$set(this.hidden, el.key, el.hidden)
+      }
+      this.populateValuesBasedOnIncommingObject()
+    },
+    populateValuesBasedOnIncommingObject() {
+      for(let el of this.formElements) {
+        this.$set(this.formObject, el.key, this.incommingValue(el.key))
       }
     },
     incommingValue(key) {
