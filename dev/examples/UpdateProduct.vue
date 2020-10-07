@@ -12,7 +12,7 @@ export default {
     data() {
         return {
             elements: [
-                { key: 'name', rules: "required|email" },
+                { key: 'name', rules: "required" },
                 { key: 'description', component: 'v-textarea'},
                 {
                     key: 'categoryId',

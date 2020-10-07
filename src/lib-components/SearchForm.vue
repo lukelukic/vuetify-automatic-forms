@@ -10,6 +10,7 @@
      :color="color"
      :successFn="resultHandler"
      :errorFn="errorHandler"
+     :submitOnEnter="submitOnEnter"
   />
 </template>
 
@@ -52,7 +53,11 @@ export default {
         },
         dense: {
         type: Boolean,
-        default: true
+        default: true,
+    },
+    submitOnEnter: {
+      type: Boolean,
+      default: true
     }
     },
     methods: {

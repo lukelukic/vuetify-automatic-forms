@@ -10,6 +10,7 @@
       :useCancel="useCancel"
       :dense="dense"
       :color="color"
+      :submitOnEnter="submitOnEnter"
     />
     <v-snackbar v-model="snackbar" right :color="snackbarColor">
       {{ snackbarText }}
@@ -110,6 +111,10 @@ export default {
           message: 'An error has occured. Please contact administrator.'
         }
       }
+    },
+    submitOnEnter: {
+      type: Boolean,
+      default: true
     }
   },
   methods: {

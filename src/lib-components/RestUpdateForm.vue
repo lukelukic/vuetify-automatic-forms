@@ -11,6 +11,7 @@
      :successFn="resultHandler"
      :errorFn="errorHandler"
      :formObject="formObject"
+     :submitOnEnter="submitOnEnter"
   />
 </template>
 
@@ -57,7 +58,11 @@ export default {
         },
         dense: {
         type: Boolean,
-        default: true
+        default: true,
+    },
+    submitOnEnter: {
+      type: Boolean,
+      default: true
     }
     },
     data() {

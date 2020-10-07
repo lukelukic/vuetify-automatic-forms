@@ -61,6 +61,7 @@
             :clearable="mClearable(formElement)"
             persistent-hint
             v-bind="formElement.props"
+            v-on:keyup.enter="onEnter"
           />
         </ValidationProvider>
       </v-col>
@@ -148,6 +149,10 @@ export default {
     dense: {
       type: Boolean,
       default: true
+    },
+    submitOnEnter: {
+      type: Boolean,
+      default: true
     }
   },
   data: function() {
@@ -166,6 +171,11 @@ export default {
     await this.prepareFormObject()
   },
   methods: {
+    onEnter: function() {
+      if(this.submitOnEnter) {
+        this.performSubmit()
+      }
+    },
     component: function(formElement) {
       return formElement.component ? formElement.component : 'v-text-field'
     },
