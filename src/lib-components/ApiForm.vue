@@ -11,6 +11,7 @@
       :dense="dense"
       :color="color"
       :submitOnEnter="submitOnEnter"
+      :submitOnLoad="submitOnLoad"
     />
     <v-snackbar v-model="snackbar" right :color="snackbarColor">
       {{ snackbarText }}
@@ -115,6 +116,10 @@ export default {
     submitOnEnter: {
       type: Boolean,
       default: true
+    },
+        submitOnLoad: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {

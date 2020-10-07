@@ -11,6 +11,7 @@
      :successFn="resultHandler"
      :errorFn="errorHandler"
      :submitOnEnter="submitOnEnter"
+     :submitOnLoad="searchOnLoad"
   />
 </template>
 
@@ -58,6 +59,10 @@ export default {
     submitOnEnter: {
       type: Boolean,
       default: true
+    },
+    searchOnLoad: {
+        type: Boolean,
+        default: false
     }
     },
     methods: {

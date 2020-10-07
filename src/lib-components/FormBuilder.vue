@@ -86,7 +86,6 @@ import VueCtkDateTimePicker from 'vue-ctk-date-time-picker';
 import 'vue-ctk-date-time-picker/dist/vue-ctk-date-time-picker.css';
 import Vue from 'vue'
 Vue.component('datepicker', VueCtkDateTimePicker);
-
 export default {
   name: 'FormBuilder',
   components: {
@@ -153,6 +152,10 @@ export default {
     submitOnEnter: {
       type: Boolean,
       default: true
+    },
+    submitOnLoad: {
+      type: Boolean,
+      default: false
     }
   },
   data: function() {
@@ -169,6 +172,9 @@ export default {
       console.warn("Axios not found on a vue instance. You will not be able to use AJAX based features.");
     }
     await this.prepareFormObject()
+    if(this.submitOnLoad) {
+      this.performSubmit()
+    }
   },
   methods: {
     onEnter: function() {
