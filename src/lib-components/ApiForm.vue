@@ -12,6 +12,7 @@
       :color="color"
       :submitOnEnter="submitOnEnter"
       :submitOnLoad="submitOnLoad"
+      ref="formBuilder"
     />
     <v-snackbar v-model="snackbar" right :color="snackbarColor">
       {{ snackbarText }}
@@ -123,6 +124,9 @@ export default {
     }
   },
   methods: {
+    callApi() {
+      this.$refs.formBuilder.performSubmit()
+    },
     handleSubmit(formObject) {
 
       if(this.contentType == "multipart/form-data") {

@@ -12,6 +12,7 @@
     :errorFn="errorHandler"
     :submitOnEnter="submitOnEnter"
     :submitOnLoad="searchOnLoad"
+    ref="apiForm"
   />
 </template>
 
@@ -71,6 +72,9 @@ export default {
     },
     errorHandler: function(apiError) {
       this.$emit('error', apiError)
+    },
+    executeSearch: function() {
+      this.$refs.apiForm.callApi()
     }
   }
 }
