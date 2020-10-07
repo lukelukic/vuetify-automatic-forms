@@ -31,19 +31,19 @@ export default {
       items: [
         {
           title: "Search",
-          route: "/register"
+          route: "/search"
         },
         {
           title: "Computation",
-          route: "/sample"
+          route: "/computation"
         },
         {
           title: "Form prefill",
-          route: "/edit"
+          route: "/prefill"
         },
         {
           title: "Upload",
-          route: "/product"
+          route: "/upload"
         },
         {
           title: "Rest API Update",

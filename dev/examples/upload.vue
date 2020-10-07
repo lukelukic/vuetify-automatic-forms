@@ -1,9 +1,8 @@
 <template>
   <v-row>
-      <v-col cols="4" offset="4">
+      <v-col cols="4" offset="3">
           <ApiForm :formElements="elements" 
                     :extractErrorsFn="errors" 
-                    :formObject="incomming" 
                     :successFn="success" 
                     :errorFn="error"
                     :submit="btn"  

@@ -3,20 +3,20 @@ import Dev from './serve.vue';
 import vuetify from './vuetify'
 import './vee-validate'
 import VueRouter from 'vue-router'
-import Register from './examples/register.vue'
-import Sample from './examples/sample.vue'
-import Edit from './examples/editUser.vue'
-import Product from './examples/productInsertForm.vue'
+import Search from './examples/search.vue'
+import Computation from './examples/computation.vue'
+import Prefill from './examples/prefill.vue'
+import Upload from './examples/upload.vue'
 import UpdateProduct from './examples/UpdateProduct.vue'
 import api from './api'
 
 Vue.config.productionTip = false;
 
 const routes = [
-  { path: '/register', component: Register },
-  { path: '/sample', component: Sample },
-  { path: '/edit', component: Edit },
-  { path: '/product', component: Product},
+  { path: '/search', component: Search },
+  { path: '/computation', component: Computation },
+  { path: '/prefill', component: Prefill },
+  { path: '/upload', component: Upload },
   { path: '/product/:id', component: UpdateProduct }
 ]
 
