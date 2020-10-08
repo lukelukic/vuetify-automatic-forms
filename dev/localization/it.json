@@ -1,0 +1,9 @@
+{
+    "firstName": "Nome",
+    "lastName": "Cognome",
+    "email": "Email",
+    "profession": "Professione",
+    "sentences": {
+        "email": "Email da domain edu."
+    }
+}

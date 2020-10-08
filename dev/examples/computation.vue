@@ -20,18 +20,23 @@ export default {
         {
           key: 'firstName',
           cols: 6,
-          color: 'yellow'
+          color: 'yellow',
+          label: '$firstName',
+          disabled: true
         },
         {
           key: 'lastName',
-          cols: 6
+          cols: 6,
+          label: '$lastName'
         },
         {
           key: 'email',
           rules: 'required|email',
-          hint: 'Mail sa domena edu'
+          hint: '$sentences.email',
+          label: '$email'
         },
         {
+          label: '$profession',
           key: 'profession',
           component: 'v-autocomplete',
           dataSource: [

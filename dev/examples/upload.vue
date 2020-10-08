@@ -10,6 +10,7 @@
         endpoint="api/productphoto"
       />
     </v-col>
+    <p>{{ $t('coka') }}</p>
   </v-row>
 </template>
 

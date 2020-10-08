@@ -18,7 +18,7 @@ export default {
       filters: [{ key: 'name', cols: 3 }],
       get: { endpoint: '/api/products' },
       exclude: ['category', 'id', 'description'],
-      imageColumn: '',
+      imageColumn: 'picture',
       tableProps: {
         dense: true,
         multiSort: true

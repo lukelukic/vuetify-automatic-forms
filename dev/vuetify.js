@@ -9,7 +9,7 @@ Vue.use(VuetifyFormBuilder)
 
 export default new Vuetify({
   icons: {
-    iconFont: 'mdi',
+    iconFont: 'mdi'
   },
   theme: {
     dark: false

@@ -43,6 +43,10 @@ export default {
         {
           title: 'Api Table',
           route: '/apitable'
+        },
+        {
+          title: 'Rest Table',
+          route: '/resttable'
         }
       ]
     }

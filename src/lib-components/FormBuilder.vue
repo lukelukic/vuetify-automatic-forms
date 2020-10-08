@@ -204,7 +204,15 @@ export default {
       return formElement.component ? formElement.component : 'v-text-field'
     },
     hint: function(formElement) {
-      return formElement.hint ? formElement.hint : ''
+      if (!formElement.hint) {
+        return undefined
+      }
+
+      if (this.shouldBeTranslated(formElement.hint)) {
+        return this.translate(formElement.hint)
+      }
+
+      return formElement.hint
     },
     mDense: function(formElement) {
       if (Object.keys(formElement).includes('dense')) {
@@ -214,9 +222,18 @@ export default {
     },
     label: function(formElement) {
       if (formElement.label) {
+        if (this.shouldBeTranslated(formElement.label)) {
+          return this.translate(formElement.label)
+        }
         return formElement.label
       }
       return this.toSentenceCase(formElement.key)
+    },
+    shouldBeTranslated(label) {
+      return label.indexOf('$') == 0
+    },
+    translate(translatable) {
+      return this.$t(translatable.substring(1))
     },
     type: function(formElement) {
       return formElement.type ? formElement.type : undefined
