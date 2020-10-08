@@ -1,6 +1,6 @@
 <template>
   <v-row>
-    <v-col :cols="filterCols" :order="filtersColOrder">
+    <v-col :cols="filterPosition == 'top' ? 12 : 2" :order="filtersColOrder" style="padding-bottom:0px">
       <SearchForm
         v-show="showSearchForm"
         ref="search"
@@ -9,17 +9,28 @@
         :endpoint="get.endpoint"
         @success="handleSearchResponse"
         :queryParams="initialQueryParamsLocal"
+        :inline="filterPosition == 'top'"
       />
     </v-col>
-    <v-col :cols="!isClientSide ? 10 : 12" :order="tableColOrder">
+    <v-col
+    style="padding-top:0px"
+      :cols="isClientSide || filterPosition == 'top' ? 12 : 10"
+      :order="tableColOrder"
+    >
       <v-card-title v-if="isClientSide">
-        Nutrition
+        Data Table
+        <v-spacer></v-spacer>
+        <v-spacer></v-spacer>
+        <v-spacer></v-spacer>
+        <v-spacer></v-spacer>
+        <v-spacer></v-spacer>
         <v-spacer></v-spacer>
         <v-text-field
+          outlined
+          dense
           v-model="search"
           append-icon="mdi-magnify"
           label="Search"
-          single-line
           hide-details
         ></v-text-field>
       </v-card-title>

@@ -1,6 +1,6 @@
 <template>
   <ValidationObserver ref="observer">
-    <v-row>
+    <v-row :class="inline ? 'justify-end' : 'justify-start'">
       <v-col
         v-for="formElement in formElements"
         :cols="cols(formElement)"
@@ -68,23 +68,15 @@
           />
         </ValidationProvider>
       </v-col>
-      <v-col cols="12">
-        <v-btn
-          small
-          :color="submit.color"
-          @click="performSubmit"
-          class="float-right ml-3"
-        >
-          {{ submit.text }}
-        </v-btn>
-        <v-btn
-          v-if="useCancel"
-          small
-          :color="cancel.color"
-          @click="reset"
-          class="float-right"
-          >{{ cancel.text }}</v-btn
-        >
+      <v-col :cols="inline? 1 : 12" class="form-builder-input" style="margin-top:2px">
+        <span :class="inline ? '' : 'float-right'">
+          <v-btn v-if="useCancel" small :color="cancel.color" @click="reset">{{
+            cancel.text
+          }}</v-btn>
+          <v-btn small :color="submit.color" @click="performSubmit" class="ml-2">
+            {{ submit.text }}
+          </v-btn>
+        </span>
       </v-col>
     </v-row>
   </ValidationObserver>
@@ -165,6 +157,10 @@ export default {
       default: true
     },
     submitOnLoad: {
+      type: Boolean,
+      default: false
+    },
+    inline: {
       type: Boolean,
       default: false
     }
@@ -367,5 +363,4 @@ export default {
   margin-top: 0px;
   padding-top: 0px;
 }
-
 </style>

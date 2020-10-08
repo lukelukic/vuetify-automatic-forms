@@ -13,6 +13,7 @@
     :submitOnEnter="submitOnEnter"
     :submitOnLoad="searchOnLoad"
     :queryParams="queryParams"
+    :inline="inline"
     ref="apiForm"
   />
 </template>
@@ -69,6 +70,10 @@ export default {
     queryParams: {
       type: Object,
       required: false
+    },
+    inline: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {

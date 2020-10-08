@@ -13,6 +13,7 @@
       :submitOnEnter="submitOnEnter"
       :submitOnLoad="submitOnLoad"
       ref="formBuilder"
+      :inline="inline"
     />
     <v-snackbar v-model="snackbar" right :color="snackbarColor">
       {{ snackbarText }}
@@ -38,11 +39,11 @@ export default {
   props: {
     formElements: {
       type: Array,
-      required: true,
+      required: true
     },
     endpoint: {
       type: String,
-      required: true,
+      required: true
     },
     queryParams: {
       type: Object,
@@ -50,19 +51,19 @@ export default {
     },
     color: {
       type: String,
-      required: false,
+      required: false
     },
     method: {
       type: String,
-      default: 'POST',
+      default: 'POST'
     },
     validationErrorResponseCode: {
       type: Number,
-      default: 422,
+      default: 422
     },
     formObject: {
       type: Object,
-      required: false,
+      required: false
     },
     submit: {
       type: Object,
@@ -104,8 +105,8 @@ export default {
       type: Object,
       default: function() {
         return {
-            color: 'success',
-            message: 'An action executed successfully.'
+          color: 'success',
+          message: 'An action executed successfully.'
         }
       }
     },
@@ -122,7 +123,11 @@ export default {
       type: Boolean,
       default: true
     },
-        submitOnLoad: {
+    submitOnLoad: {
+      type: Boolean,
+      default: false
+    },
+    inline: {
       type: Boolean,
       default: false
     }
@@ -132,52 +137,53 @@ export default {
       this.$refs.formBuilder.performSubmit()
     },
     handleSubmit(formObject) {
-
-      if(this.contentType == "multipart/form-data") {
+      if (this.contentType == 'multipart/form-data') {
         formObject = this.getMultipartObject(formObject)
       }
-      
+
       let request = {
         method: this.method,
         url: this.endpoint,
         data: formObject,
         headers: {
-          'Content-Type' : this.contentType
+          'Content-Type': this.contentType
         },
-        params: this.method == "GET" ? {...formObject, ...this.queryParams} : this.queryParams
+        params:
+          this.method == 'GET'
+            ? { ...formObject, ...this.queryParams }
+            : this.queryParams
       }
 
       this.$formBuilderAxios(request)
-        .then((response) => {
-          if(this.successFn) {
-              this.successFn(response.data) 
+        .then(response => {
+          if (this.successFn) {
+            this.successFn(response.data)
           } else {
-              this.snackbarColor = this.success.color
-              this.snackbar = true
-              this.snackbarText = this.success.message
+            this.snackbarColor = this.success.color
+            this.snackbar = true
+            this.snackbarText = this.success.message
           }
-          
         })
-        .catch((error) => {
+        .catch(error => {
           if (error.response.status == this.validationErrorResponseCode) {
-            if(this.extractErrorsFn) {
+            if (this.extractErrorsFn) {
               this.setErrors(this.extractErrorsFn(error.response.data))
             } else {
-              if(this.validationErrorsProperty) {
-                const properties = validationErrorsProperty.split(".")
+              if (this.validationErrorsProperty) {
+                const properties = validationErrorsProperty.split('.')
                 let tempData = error.response.data
-                
-                  properties.forEach(p => {
-                    tempData = tempData[p]
-                  })
-                  
+
+                properties.forEach(p => {
+                  tempData = tempData[p]
+                })
+
                 this.setErrors(tempData)
               } else {
                 this.setErrors(error.response.data)
-              } 
+              }
             }
           } else {
-            if(this.errorFn) {
+            if (this.errorFn) {
               this.errorFn(error.response)
             } else {
               this.snackbar = true
@@ -195,16 +201,15 @@ export default {
     },
     getMultipartObject(formObject) {
       let formData = new FormData()
-      
-      for(let prop in formObject) {
-        if(formObject[prop].isFormData) {
-          for(let item of formObject[prop].items) {
+
+      for (let prop in formObject) {
+        if (formObject[prop].isFormData) {
+          for (let item of formObject[prop].items) {
             formData.append(prop, item)
           }
         } else {
           formData.append(prop, formObject[prop])
         }
-        
       }
 
       return formData

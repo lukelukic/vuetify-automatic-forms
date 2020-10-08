@@ -13,7 +13,7 @@ let props = {
     type: String,
     default: 'right',
     validator: function(value) {
-      return ['left', 'right'].includes(value)
+      return ['left', 'right', 'top'].includes(value)
     }
   },
   get: {
@@ -90,6 +90,10 @@ let props = {
     validator: function(value) {
       return ['client', 'server', 'mixed'].includes(value)
     }
+  },
+  inlineSearch: {
+    type: Boolean,
+    default: false
   }
 }
 

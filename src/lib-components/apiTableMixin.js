@@ -51,7 +51,7 @@ export default {
     }
     this.initialQueryParamsLocal = this.initialQueryParams
 
-    if(this.callApiOnLoad) {
+    if (this.callApiOnLoad) {
       this.$refs.search.executeSearch()
     }
   },
@@ -74,9 +74,9 @@ export default {
         } else {
           this.tableItems = data
         }
-        this.totalItems = this.isClientSide ? undefined : data[this.dataExtraction.totalItemsProperty]
-
-        console.log(this.tableItems)
+        this.totalItems = this.isClientSide
+          ? undefined
+          : data[this.dataExtraction.totalItemsProperty]
       }
     },
     handleSearchResponse(data) {
