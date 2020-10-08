@@ -1,5 +1,5 @@
-export { default as FormBuilder } from './FormBuilder.vue';
-export { default as ApiForm } from './ApiForm.vue';
-export { default as SearchForm } from './SearchForm.vue';
-export { default as RestUpdateForm } from './RestUpdateForm.vue';
-export { default as ApiTable } from './ApiTable.vue';
+export { default as FormBuilder } from './FormBuilder.vue'
+export { default as ApiForm } from './ApiForm.vue'
+export { default as SearchForm } from './SearchForm.vue'
+export { default as RestUpdateForm } from './RestUpdateForm.vue'
+export { default as ApiTable } from './ApiTable.vue'

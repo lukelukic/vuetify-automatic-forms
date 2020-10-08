@@ -1,6 +1,10 @@
 <template>
   <v-row>
-    <v-col :cols="filterPosition == 'top' ? 12 : 2" :order="filtersColOrder" style="padding-bottom:0px">
+    <v-col
+      :cols="filterPosition == 'top' ? 12 : 2"
+      :order="filtersColOrder"
+      style="padding-bottom:0px"
+    >
       <SearchForm
         v-show="showSearchForm"
         ref="search"
@@ -13,7 +17,7 @@
       />
     </v-col>
     <v-col
-    style="padding-top:0px"
+      style="padding-top:0px"
       :cols="isClientSide || filterPosition == 'top' ? 12 : 10"
       :order="tableColOrder"
     >

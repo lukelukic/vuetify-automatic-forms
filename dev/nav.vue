@@ -16,43 +16,43 @@
 
 <script>
 export default {
-  name: "Nav",
+  name: 'Nav',
   data: function() {
     return {
       items: [
         {
-          title: "Search",
-          route: "/search",
+          title: 'Search',
+          route: '/search'
         },
         {
-          title: "Computation",
-          route: "/computation",
+          title: 'Computation',
+          route: '/computation'
         },
         {
-          title: "Form prefill",
-          route: "/prefill",
+          title: 'Form prefill',
+          route: '/prefill'
         },
         {
-          title: "Upload",
-          route: "/upload",
+          title: 'Upload',
+          route: '/upload'
         },
         {
-          title: "Rest API Update",
-          route: "/product/1",
+          title: 'Rest API Update',
+          route: '/product/1'
         },
         {
-          title: "Api Table",
-          route: "/apitable",
-        },
-      ],
-    };
+          title: 'Api Table',
+          route: '/apitable'
+        }
+      ]
+    }
   },
   computed: {
     currentRoute: function() {
-      return this.$route.path;
-    },
-  },
-};
+      return this.$route.path
+    }
+  }
+}
 </script>
 
 <style></style>

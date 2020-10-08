@@ -170,7 +170,7 @@ export default {
               this.setErrors(this.extractErrorsFn(error.response.data))
             } else {
               if (this.validationErrorsProperty) {
-                const properties = validationErrorsProperty.split('.')
+                const properties = this.validationErrorsProperty.split('.')
                 let tempData = error.response.data
 
                 properties.forEach(p => {

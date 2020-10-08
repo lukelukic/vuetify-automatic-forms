@@ -68,12 +68,21 @@
           />
         </ValidationProvider>
       </v-col>
-      <v-col :cols="inline? 1 : 12" class="form-builder-input" style="margin-top:2px">
+      <v-col
+        :cols="inline ? 1 : 12"
+        class="form-builder-input"
+        style="margin-top:2px"
+      >
         <span :class="inline ? '' : 'float-right'">
           <v-btn v-if="useCancel" small :color="cancel.color" @click="reset">{{
             cancel.text
           }}</v-btn>
-          <v-btn small :color="submit.color" @click="performSubmit" class="ml-2">
+          <v-btn
+            small
+            :color="submit.color"
+            @click="performSubmit"
+            class="ml-2"
+          >
             {{ submit.text }}
           </v-btn>
         </span>

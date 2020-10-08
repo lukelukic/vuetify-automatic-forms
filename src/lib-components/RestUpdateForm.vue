@@ -72,8 +72,6 @@ export default {
     }
   },
   async beforeMount() {
-    var that = this
-
     var response = await this.$formBuilderAxios.get(this.endpoint)
 
     this.formObject = response.data
@@ -93,8 +91,6 @@ export default {
   },
   watch: {
     id: async function() {
-      var that = this
-
       var response = await this.$formBuilderAxios.get(this.endpoint)
 
       this.formObject = response.data
