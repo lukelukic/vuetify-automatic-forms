@@ -44,6 +44,10 @@ export default {
       type: String,
       required: true,
     },
+    queryParams: {
+      type: Object,
+      required: false
+    },
     color: {
       type: String,
       required: false,
@@ -132,6 +136,7 @@ export default {
       if(this.contentType == "multipart/form-data") {
         formObject = this.getMultipartObject(formObject)
       }
+      
       let request = {
         method: this.method,
         url: this.endpoint,
@@ -139,7 +144,7 @@ export default {
         headers: {
           'Content-Type' : this.contentType
         },
-        params: this.method == "GET" ? formObject : undefined
+        params: this.method == "GET" ? {...formObject, ...this.queryParams} : this.queryParams
       }
 
       this.$formBuilderAxios(request)

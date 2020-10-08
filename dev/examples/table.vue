@@ -19,10 +19,12 @@ export default {
       exclude: ['category', 'id', 'description'],
       imageColumn: 'picture',
       tableProps: {
-        dense: true
+        dense: true,
+        multiSort: true
       },
       serverSide: {
-        itemsLengthProperty: 'totalCount'
+        totalItemsProperty: 'totalCount',
+        dataProperty: 'items'
       }
     }
   }

@@ -1,22 +1,38 @@
 <template>
   <v-row>
-    <v-col cols="2" :order="filtersColOrder">
+    <v-col :cols="serverSide? 2 : 0" :order="filtersColOrder">
       <SearchForm
+        v-show="serverSide"
         ref="search"
         class="ml-4"
         :formElements="filters"
         :endpoint="get.endpoint"
         @success="handleSearchResponse"
+        :queryParams="initialQueryParams"
       />
     </v-col>
-    <v-col cols="10" :order="tableColOrder">
+    <v-col :cols="serverSide ? 10 : 12" :order="tableColOrder">
+      <v-card-title v-if="!serverSide">
+      Nutrition
+      <v-spacer></v-spacer>
+      <v-text-field
+        v-model="search"
+        append-icon="mdi-magnify"
+        label="Search"
+        single-line
+        hide-details
+      ></v-text-field>
+    </v-card-title>
       <v-data-table
         :options.sync="options"
+        :search="search"
         class="mr-4 ml-4"
-        v-if="tableItems.length"
         :headers="tableHeaders"
         v-bind="tableProps"
         :items="tableItems"
+        :loading="!tableItems.length"
+        :loading-text="loadingMessage"
+        :server-items-length="totalItems"
       >
         <template v-slot:item.image="{ item }">
           <div class="p-2">
@@ -24,11 +40,6 @@
           </div>
         </template>
       </v-data-table>
-      <v-skeleton-loader
-        v-else
-        class="mx-auto"
-        type="table"
-      ></v-skeleton-loader>
     </v-col>
   </v-row>
 </template>
@@ -42,10 +53,11 @@ export default {
   mixins: [apiTableMixin],
   data() {
     return {
+      search: "",
       tableItems: [],
       options: {},
-      initialQueryString: '',
-      isInitialOptionsChange: true
+      isInitialOptionsChange: true,
+      totalItems: null
     }
   },
   watch: {
@@ -65,7 +77,7 @@ export default {
           }
         }
 
-        this.initialQueryString = this.pagingSortingQsBuilder({
+        this.initialQueryParams = this.pagingSortingQsBuilder({
           perPage: this.options.itemsPerPage,
           currentPage: this.options.page,
           sorts: sorts

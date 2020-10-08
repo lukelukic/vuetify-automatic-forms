@@ -12,6 +12,7 @@
     :errorFn="errorHandler"
     :submitOnEnter="submitOnEnter"
     :submitOnLoad="searchOnLoad"
+    :queryParams="queryParams"
     ref="apiForm"
   />
 </template>
@@ -64,6 +65,10 @@ export default {
     searchOnLoad: {
       type: Boolean,
       default: false
+    },
+    queryParams: {
+      type: Object,
+      required: false
     }
   },
   methods: {

@@ -70,10 +70,17 @@ let props = {
     }
   },
   serverSide: {
-      type: Object,
-      default: function() {
-          return null
+    type: Object,
+    default: function() {
+      return null
+    }
+  },
+  initialQueryParams: {
+    required: false,
+    default: function() {
+      return {
       }
+    }
   }
 }
 
@@ -93,22 +100,17 @@ function makeHeadersFromFirstItem(item, headersToExclude) {
 }
 
 function defaultQueryStringBuilder(options) {
-  let qs = '?paginate=true'
-  qs += '&perPage=' + options.perPage
-  qs += '&page=' + options.currentPage
+  let qs = {
+    paginate: true
+  }
+  qs.perPage = options.perPage
+  qs.page = options.currentPage
 
   if (options.sorts.length) {
-    qs +=
-      '&sortBy=' +
-      options.sorts[0].sortBy +
-      '.' +
-      options.sorts[0].direction
+    qs.sortBy = options.sorts[0].sortBy + '.' + options.sorts[0].direction
     for (let i = 1; i < options.sorts.length; i++) {
-      qs +=
-        ',' +
-        options.sorts[i].sortBy +
-        '.' +
-        options.sorts[i].direction
+      qs.sortBy +=
+        ',' + options.sorts[i].sortBy + '.' + options.sorts[i].direction
     }
   }
 

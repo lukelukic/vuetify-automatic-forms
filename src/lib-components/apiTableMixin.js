@@ -23,24 +23,29 @@ export default {
       headers.forEach(x => this.setHeaderWidth(x))
 
       return headers
-    }
+    },
   },
   mounted: function() {
     this.$refs.search.executeSearch()
   },
   methods: {
     handleSearchResponse(data) {
+      if (this.serverSide) {
+        this.tableItems = data[this.serverSide.dataProperty]
+        this.totalItems = data[this.serverSide.totalItemsProperty]
+      } else {
         this.tableItems = data
+      }
 
-        if(this.imageColumn) {
-            this.prepareImageProperties()
-        }
+      if (this.imageColumn) {
+        this.prepareImageProperties()
+      }
     },
     prepareImageProperties() {
-        this.tableItems.forEach(x => {
-            x.image = x[this.imageColumn]
-            delete x[this.imageColumn]
-        })
+      this.tableItems.forEach(x => {
+        x.image = x[this.imageColumn]
+        delete x[this.imageColumn]
+      })
     },
     setHeaderWidth: function(header) {
       if (!isNaN(this.columnWidth)) {
