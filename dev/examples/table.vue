@@ -2,12 +2,12 @@
   <ApiTable
     :filters="filters"
     :get="get"
-    filterPosition="top"
     columnWidth="auto"
     :imageColumn="imageColumn"
     :excludedHeaders="exclude"
     :tableProps="tableProps"
-    processDataOn="mixed"
+    processDataOn="client"
+    filterPosition="top"
   />
 </template>
 
@@ -24,7 +24,7 @@ export default {
         multiSort: true
       },
       dataExtraction: {
-        dataProperty: "items",
+        dataProperty: 'items',
         totalItemsProperty: 'totalCount'
       }
     }
