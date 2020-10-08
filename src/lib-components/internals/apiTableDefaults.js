@@ -69,17 +69,26 @@ let props = {
       return defaultQueryStringBuilder(options)
     }
   },
-  serverSide: {
-    type: Object,
+  dataExtraction: {
+    type: Object | Function,
     default: function() {
-      return null
+      return {
+        dataProperty: undefined,
+        totalItemsProperty: undefined
+      }
     }
   },
   initialQueryParams: {
     required: false,
     default: function() {
-      return {
-      }
+      return {}
+    }
+  },
+  processDataOn: {
+    type: String,
+    default: 'client',
+    validator: function(value) {
+      return ['client', 'server', 'mixed'].includes(value)
     }
   }
 }

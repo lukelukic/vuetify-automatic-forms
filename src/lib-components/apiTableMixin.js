@@ -2,13 +2,13 @@ import defaults from './internals/apiTableDefaults'
 import pixelWidth from 'string-pixel-width'
 export default {
   computed: {
-    filtersColOrder: function() {
+    filtersColOrder() {
       return Number(this.filterPosition == 'right') + 1
     },
-    tableColOrder: function() {
+    tableColOrder() {
       return Number(this.filterPosition == 'left') + 1
     },
-    tableHeaders: function() {
+    tableHeaders() {
       let headers = []
 
       if (this.headers) {
@@ -24,18 +24,63 @@ export default {
 
       return headers
     },
+    isClientSide() {
+      return this.processDataOn == 'client'
+    },
+    isMixed() {
+      return this.processDataOn == 'mixed'
+    },
+    callApiOnLoad() {
+      return this.isMixed || this.isClientSide
+    },
+    showSearchForm() {
+      return !this.isClientSide
+    },
+    filterCols() {
+      return this.isClientSide ? 0 : 2
+    },
+    tableCols() {
+      return !this.isClientSide ? 10 : 12
+    }
   },
   mounted: function() {
-    this.$refs.search.executeSearch()
+    if (this.processDataOn == 'server' && !this.dataExtraction) {
+      throw new Error(
+        "dataExtraction prop is required when processDataOn is set to 'server'"
+      )
+    }
+    this.initialQueryParamsLocal = this.initialQueryParams
+
+    if(this.callApiOnLoad) {
+      this.$refs.search.executeSearch()
+    }
   },
   methods: {
-    handleSearchResponse(data) {
-      if (this.serverSide) {
-        this.tableItems = data[this.serverSide.dataProperty]
-        this.totalItems = data[this.serverSide.totalItemsProperty]
+    processData(data) {
+      if (typeof this.dataExtraction == 'function') {
+        const converted = this.dataExtraction(data)
+        this.totalItems = converted.totalItems
+        this.tableItems = converted.items
       } else {
-        this.tableItems = data
+        if (this.dataExtraction.dataProperty) {
+          const properties = this.dataExtraction.dataProperty.split('.')
+          let tempData = data
+
+          properties.forEach(p => {
+            tempData = tempData[p]
+          })
+
+          this.tableItems = tempData
+        } else {
+          this.tableItems = data
+        }
+        this.totalItems = this.isClientSide ? undefined : data[this.dataExtraction.totalItemsProperty]
+
+        console.log(this.tableItems)
       }
+    },
+    handleSearchResponse(data) {
+      this.processData(data)
 
       if (this.imageColumn) {
         this.prepareImageProperties()

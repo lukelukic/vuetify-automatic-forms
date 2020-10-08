@@ -2,11 +2,12 @@
   <ApiTable
     :filters="filters"
     :get="get"
-    filterPosition="left"
+    filterPosition="right"
     columnWidth="auto"
+    :imageColumn="imageColumn"
     :excludedHeaders="exclude"
     :tableProps="tableProps"
-    :serverSide="serverSide"
+    processDataOn="mixed"
   />
 </template>
 
@@ -22,11 +23,8 @@ export default {
         dense: true,
         multiSort: true
       },
-      serverSide: {
-        totalItemsProperty: 'totalCount',
-        dataProperty: 'items'
-      }
-    }
+
+    } 
   }
 }
 </script>

@@ -1,32 +1,32 @@
 <template>
   <v-row>
-    <v-col :cols="serverSide? 2 : 0" :order="filtersColOrder">
+    <v-col :cols="filterCols" :order="filtersColOrder">
       <SearchForm
-        v-show="serverSide"
+        v-show="showSearchForm"
         ref="search"
         class="ml-4"
         :formElements="filters"
         :endpoint="get.endpoint"
         @success="handleSearchResponse"
-        :queryParams="initialQueryParams"
+        :queryParams="initialQueryParamsLocal"
       />
     </v-col>
-    <v-col :cols="serverSide ? 10 : 12" :order="tableColOrder">
-      <v-card-title v-if="!serverSide">
-      Nutrition
-      <v-spacer></v-spacer>
-      <v-text-field
-        v-model="search"
-        append-icon="mdi-magnify"
-        label="Search"
-        single-line
-        hide-details
-      ></v-text-field>
-    </v-card-title>
+    <v-col :cols="!isClientSide ? 10 : 12" :order="tableColOrder">
+      <v-card-title v-if="isClientSide">
+        Nutrition
+        <v-spacer></v-spacer>
+        <v-text-field
+          v-model="search"
+          append-icon="mdi-magnify"
+          label="Search"
+          single-line
+          hide-details
+        ></v-text-field>
+      </v-card-title>
       <v-data-table
         :options.sync="options"
         :search="search"
-        class="mr-4 ml-4"
+        class="mr-4 ml-4 elevation-1"
         :headers="tableHeaders"
         v-bind="tableProps"
         :items="tableItems"
@@ -53,17 +53,21 @@ export default {
   mixins: [apiTableMixin],
   data() {
     return {
-      search: "",
+      search: '',
       tableItems: [],
       options: {},
-      isInitialOptionsChange: true,
-      totalItems: null
+      totalItems: undefined,
+      initialQueryParamsLocal: {}
     }
   },
   watch: {
+    /**
+     * On table load, options will change to set the initial page and per page properties
+     * That will trigger options watch handler which will in turn trugger the first API call
+     */
     options: {
       handler() {
-        if(!this.serverSide) {
+        if (this.isClientSide || this.isMixed) {
           return
         }
 
@@ -77,17 +81,18 @@ export default {
           }
         }
 
-        this.initialQueryParams = this.pagingSortingQsBuilder({
+        this.initialQueryParamsLocal = this.pagingSortingQsBuilder({
           perPage: this.options.itemsPerPage,
           currentPage: this.options.page,
           sorts: sorts
         })
 
-        if(!this.isInitialOptionsChange) {
-          this.$refs.search.executeSearch()
-        }
-
-        this.isInitialOptionsChange = false
+        this.$refs.search.executeSearch()
+      }
+    },
+    initialQueryParams: {
+      handler() {
+        this.initialQueryParamsLocal = this.initialQueryParams
       }
     }
   }
