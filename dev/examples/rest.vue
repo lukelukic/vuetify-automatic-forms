@@ -7,6 +7,8 @@
     itemsPerPageText="$perPage"
     :editFormElements="elements"
     :insertFormElements="elements"
+    :addBtn="{ text: '$addNew', color: 'red' }"
+    :messages="messages"
   />
 </template>
 
@@ -15,6 +17,11 @@ export default {
   name: 'Rest',
   data() {
     return {
+      messages: {
+        deleteConfirmMessage: '$confirmDelete',
+        deleteYes: '$yes',
+        deleteNo: '$no'
+      },
       filters: [{ key: 'name' }],
       excludedHeaders: ['id', 'category', 'categoryId'],
       elements: [
@@ -22,6 +29,7 @@ export default {
         { key: 'description', component: 'v-textarea', label: '$description' },
         {
           key: 'categoryId',
+          cols: 6,
           label: '$categoryName',
           component: 'v-autocomplete',
           dataSource: {
@@ -31,6 +39,7 @@ export default {
         },
         {
           key: 'price',
+          cols: 6,
           label: '$price',
           type: 'number',
           props: { prefix: '$' }

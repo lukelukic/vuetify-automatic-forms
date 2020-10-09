@@ -6,36 +6,49 @@
       :api="{ endpoint: resource }"
       :excludedHeaders="excludedHeaders"
     >
-      <template v-slot:header>
-        <v-btn color="primary" small @click="createItem">Create new</v-btn>
+      <template v-if="useInsert" v-slot:header>
+        <v-btn :color="addBtn.color" small @click="createItem">{{
+          translate(addBtn.text)
+        }}</v-btn>
       </template>
-      <template v-slot:action="item">
-        <v-icon class="mr-2" @click="editItem(item.id)">
+      <template v-if="useEdit || useDelete" v-slot:action="item">
+        <v-icon v-if="useEdit" class="mr-2" @click="editItem(item.id)">
           mdi-pencil
         </v-icon>
-        <v-icon @click="deleteItem(item.id)">
+        <v-icon v-if="useDelete" @click="deleteItem(item.id)">
           mdi-delete
         </v-icon>
       </template>
     </ApiTable>
     <v-dialog v-model="dialogDelete" max-width="500px">
       <v-card>
-        <v-card-title class="headline" v-if="!deleteLoading"
-          >Are you sure you want to delete this item?</v-card-title
-        >
+        <v-card-title class="headline">{{
+          translate(messages.deleteConfirmMessage)
+        }}</v-card-title>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="closeDelete">Cancel</v-btn>
-          <v-btn color="blue darken-1" text @click="deleteItemConfirm"
-            >OK</v-btn
-          >
+          <v-btn color="blue darken-1" text @click="closeDelete">{{
+            translate(messages.deleteNo)
+          }}</v-btn>
+          <v-btn color="blue darken-1" text @click="deleteItemConfirm">{{
+            translate(messages.deleteYes)
+          }}</v-btn>
           <v-spacer></v-spacer>
         </v-card-actions>
       </v-card>
     </v-dialog>
     <v-dialog v-model="dialogEdit" max-width="500px">
       <v-card>
-        <v-card-text class="pt-6">
+        <v-toolbar color="primary" dark>
+          <v-toolbar-title>Edit</v-toolbar-title>
+
+          <v-spacer></v-spacer>
+
+          <v-btn icon>
+            <v-icon @click="dialogEdit = false">mdi-close</v-icon>
+          </v-btn>
+        </v-toolbar>
+        <v-card-text class="pt-8">
           <RestUpdateForm
             :formElements="editFormElements"
             :resource="resource"
@@ -48,6 +61,15 @@
     </v-dialog>
     <v-dialog v-model="dialogCreate" max-width="500px">
       <v-card>
+        <v-toolbar color="primary" dark>
+          <v-toolbar-title>Create</v-toolbar-title>
+
+          <v-spacer></v-spacer>
+
+          <v-btn icon>
+            <v-icon @click="dialogCreate = false">mdi-close</v-icon>
+          </v-btn>
+        </v-toolbar>
         <v-card-text class="pt-6">
           <ApiForm
             :formElements="editFormElements"
@@ -60,7 +82,6 @@
     </v-dialog>
     <v-snackbar v-model="snackbar">
       There was an error executing your request.
-
       <template v-slot:action="{ attrs }">
         <v-btn color="pink" text v-bind="attrs" @click="snackbar = false">
           Close
@@ -72,9 +93,11 @@
 
 <script>
 import restTableDefaults from './internals/restTableDefaults'
+import localizationMixin from './internals/localizationMixin'
 export default {
   name: 'RestTable',
   props: restTableDefaults.props,
+  mixins: [localizationMixin],
   data() {
     return {
       dialogDelete: false,

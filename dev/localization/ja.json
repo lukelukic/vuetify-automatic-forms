@@ -13,5 +13,9 @@
     "picture": "画像",
     "perPage": "1ページあたりの行数",
     "update": "更新",
-    "description": "説明"
+    "description": "説明",
+    "addNew": "新しいアイテムを作成する",
+    "confirmDelete": "このアイテムを削除してもよろしいですか？",
+    "yes": "与える",
+    "no": "生まれ"
 }

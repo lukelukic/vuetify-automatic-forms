@@ -5,6 +5,57 @@ let props = {
       return {}
     }
   },
+  addBtn: {
+    type: Object,
+    default() {
+      return {
+        text: 'Add new',
+        color: 'primary'
+      }
+    }
+  },
+  useEdit: {
+    type: Boolean,
+    default: true
+  },
+  useInsert: {
+    type: Boolean,
+    default: true
+  },
+  useDelete: {
+    type: Boolean,
+    default: true
+  },
+  messages: {
+    type: Object,
+    default() {
+      return {
+        deleteConfirmMessage: 'Are you sure you want to delete this item?',
+        deleteYes: '$yes',
+        deleteNo: '$no'
+      }
+    },
+    validator(value) {
+      let errors = []
+      if (!value.deleteConfirmMessage) {
+        errors.push("missing property 'deleteConfirmMessage.'")
+      }
+
+      if (!value.deleteYes) {
+        errors.push("missing property 'deleteYes.'")
+      }
+
+      if (!value.deleteNo) {
+        errors.push("missing property 'deleteNo.'")
+      }
+
+      errors.forEach(x => {
+        throw new Error("Prop 'messages' - " + x)
+      })
+
+      return !errors.length
+    }
+  },
   resource: {
     type: String,
     required: true
