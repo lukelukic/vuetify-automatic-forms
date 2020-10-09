@@ -15,9 +15,9 @@
 export default {
   data() {
     return {
-      filters: [{ key: 'name', cols: 3 }],
+      filters: [{ key: 'name', cols: 3, label: '$name' }],
       get: { endpoint: '/api/products' },
-      exclude: ['category', 'id', 'description'],
+      exclude: ['category', 'id', 'description', 'categoryId', 'image'],
       imageColumn: 'picture',
       tableProps: {
         dense: true,

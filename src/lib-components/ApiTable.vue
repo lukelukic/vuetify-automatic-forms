@@ -22,7 +22,6 @@
       :order="tableColOrder"
     >
       <v-card-title v-if="isClientSide">
-        Data Table
         <v-spacer></v-spacer>
         <v-spacer></v-spacer>
         <v-spacer></v-spacer>
@@ -34,7 +33,7 @@
           dense
           v-model="search"
           append-icon="mdi-magnify"
-          label="Search"
+          :label="translate('$search', true)"
           hide-details
         ></v-text-field>
       </v-card-title>
@@ -62,10 +61,11 @@
 <script>
 import defaults from './internals/apiTableDefaults'
 import apiTableMixin from './apiTableMixin'
+import localizationMixin from './internals/localizationMixin'
 export default {
   name: 'ApiTable',
   props: defaults.props,
-  mixins: [apiTableMixin],
+  mixins: [apiTableMixin, localizationMixin],
   data() {
     return {
       search: '',

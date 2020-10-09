@@ -13,10 +13,14 @@ export default {
 
       if (this.headers) {
         headers = this.headers
+        headers.forEach(x => {
+          x.text = this.translate(x.text)
+        })
       } else if (this.tableItems.length) {
         headers = defaults.makeHeadersFromFirstItem(
           this.tableItems[0],
-          this.excludedHeaders
+          this.excludedHeaders,
+          this
         )
       }
 

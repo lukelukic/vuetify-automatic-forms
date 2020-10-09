@@ -5,5 +5,12 @@
     "profession": "Professione",
     "sentences": {
         "email": "Email da domain edu."
-    }
+    },
+    "submit": "Invia",
+    "cancel": "Annulla",
+    "search": "ricerca",
+    "name": "Nome",
+    "categoryName": "Nome della categoria",
+    "price": "Prezzo",
+    "image": "Immagine"
 }

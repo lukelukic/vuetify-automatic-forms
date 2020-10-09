@@ -4,5 +4,10 @@
     "email": "Eメール",
     "profession": "職業",
     "submit": "参加する",
-    "cancel": "キャンセル"
+    "cancel": "キャンセル",
+    "search": "探す",
+    "name": "名前",
+    "categoryName": "種別名",
+    "price": "価格",
+    "image": "画像"
 }

@@ -101,12 +101,14 @@ function toSentenceCase(text) {
   var result = text.replace(/([A-Z])/g, ' $1')
   return result.charAt(0).toUpperCase() + result.slice(1)
 }
-function makeHeadersFromFirstItem(item, headersToExclude) {
+function makeHeadersFromFirstItem(item, headersToExclude, table) {
   return Object.keys(item)
     .filter(x => !headersToExclude.includes(x))
     .map(key => {
       return {
-        text: toSentenceCase(key),
+        text: table.canTranslate(key)
+          ? table.translate('$' + key)
+          : toSentenceCase(key),
         value: key
       }
     })

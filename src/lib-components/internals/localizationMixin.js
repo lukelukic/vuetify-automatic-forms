@@ -3,9 +3,9 @@ export default {
     shouldBeTranslated(keyword) {
       return keyword.indexOf('$') == 0
     },
-    translate(translatable) {
+    translate(translatable, upperFirst) {
       if (!this.shouldBeTranslated(translatable)) {
-        return translatable
+        return upperFirst ? this.capitalize(translatable) : translatable
       }
       const keyToTranslate = translatable.substring(1)
       if (!this.$t) {
@@ -14,7 +14,16 @@ export default {
         )
         return keyToTranslate
       }
-      return this.$t(keyToTranslate)
+      return upperFirst
+        ? this.capitalize(this.$t(keyToTranslate))
+        : this.$t(keyToTranslate)
+    },
+    capitalize(s) {
+      if (typeof s !== 'string') return ''
+      return s.charAt(0).toUpperCase() + s.slice(1)
+    },
+    canTranslate(keyword) {
+      return this.$te(keyword)
     }
   }
 }
