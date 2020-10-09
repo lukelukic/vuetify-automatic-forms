@@ -47,6 +47,9 @@
         :loading="!tableItems.length"
         :loading-text="loadingMessage"
         :server-items-length="totalItems"
+        :footer-props="{
+          itemsPerPageText: translate(itemsPerPageText)
+        }"
       >
         <template v-slot:item.image="{ item }">
           <div class="p-2">

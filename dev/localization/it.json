@@ -12,5 +12,6 @@
     "name": "Nome",
     "categoryName": "Nome della categoria",
     "price": "Prezzo",
-    "image": "Immagine"
+    "image": "Immagine",
+    "perPage": "Righe per pagina"
 }

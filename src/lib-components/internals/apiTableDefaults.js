@@ -94,6 +94,10 @@ let props = {
   inlineSearch: {
     type: Boolean,
     default: false
+  },
+  itemsPerPageText: {
+    type: String,
+    default: 'Rows per page'
   }
 }
 

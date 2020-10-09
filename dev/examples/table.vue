@@ -8,6 +8,7 @@
     :tableProps="tableProps"
     processDataOn="client"
     filterPosition="top"
+    itemsPerPageText="$perPage"
   />
 </template>
 

@@ -9,5 +9,6 @@
     "name": "名前",
     "categoryName": "種別名",
     "price": "価格",
-    "image": "画像"
+    "image": "画像",
+    "perPage": "1ページあたりの行数"
 }
