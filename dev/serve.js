@@ -29,7 +29,7 @@ const routes = [
 Vue.use(VueI18n)
 // Create VueI18n instance with options
 const i18n = new VueI18n({
-  locale: 'it', // set locale
+  locale: 'ja', // set locale
   messages: languages.all() // set locale messages
 })
 

@@ -2,5 +2,7 @@
     "firstName": "名前",
     "lastName": "苗字",
     "email": "Eメール",
-    "profession": "職業"
+    "profession": "職業",
+    "submit": "参加する",
+    "cancel": "キャンセル"
 }

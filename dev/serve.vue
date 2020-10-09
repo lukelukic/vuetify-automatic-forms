@@ -5,6 +5,16 @@ export default Vue.extend({
   name: 'ServeDev',
   components: {
     Nav
+  },
+  data() {
+    return {
+      langs: ['ja', 'en', 'it']
+    }
+  },
+  methods: {
+    changeLanguage(val) {
+      Vue.prototype.locale = val
+    }
   }
 })
 </script>
@@ -15,6 +25,11 @@ export default Vue.extend({
       <v-row class="mt-5">
         <v-col cols="2">
           <Nav />
+          <v-autocomplete
+            v-model="$i18n.locale"
+            :items="langs"
+            @change="changeLanguage"
+          />
         </v-col>
         <v-col cols="10">
           <router-view></router-view>

@@ -21,8 +21,7 @@ export default {
           key: 'firstName',
           cols: 6,
           color: 'yellow',
-          label: '$firstName',
-          disabled: true
+          label: '$firstName'
         },
         {
           key: 'lastName',

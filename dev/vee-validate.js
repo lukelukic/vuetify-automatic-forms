@@ -2,6 +2,7 @@ import Vue from 'vue'
 import { localize } from 'vee-validate'
 import sr from 'vee-validate/dist/locale/sr_Latin.json'
 import en from 'vee-validate/dist/locale/en.json'
+import ja from 'vee-validate/dist/locale/ja.json'
 import * as rules from 'vee-validate/dist/rules'
 import { extend } from 'vee-validate'
 import { setInteractionMode } from 'vee-validate'
@@ -13,7 +14,8 @@ Object.keys(rules).forEach(rule => {
 // Install English and Arabic localizations.
 localize({
   en,
-  sr
+  sr,
+  ja
 })
 
 setInteractionMode('eager')

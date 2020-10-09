@@ -4,7 +4,6 @@
       <FormBuilder
         :formElements="formElements"
         :additionalValidation="validation"
-        :submit="subBtn"
         :incommingObject="user"
         @formSubmit="submit"
       />
@@ -38,10 +37,6 @@ export default {
       user: {
         firstName: 'John',
         lastName: 'Doe'
-      },
-      subBtn: {
-        color: 'blue',
-        text: 'Just do it!'
       },
       errors: {}
     }

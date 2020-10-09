@@ -75,7 +75,7 @@
       >
         <span :class="inline ? '' : 'float-right'">
           <v-btn v-if="useCancel" small :color="cancel.color" @click="reset">{{
-            cancel.text
+            translate(cancel.text)
           }}</v-btn>
           <v-btn
             small
@@ -83,7 +83,7 @@
             @click="performSubmit"
             class="ml-2"
           >
-            {{ submit.text }}
+            {{ translate(submit.text) }}
           </v-btn>
         </span>
       </v-col>
@@ -93,6 +93,7 @@
 <script>
 import { ValidationProvider, ValidationObserver } from 'vee-validate'
 import formBuilderMixin from './FormBuilderMixin.js'
+import localizationMixin from './internals/localizationMixin'
 import propValidation from './internals/formBuilderPropValidations'
 import VueCtkDateTimePicker from 'vue-ctk-date-time-picker'
 import 'vue-ctk-date-time-picker/dist/vue-ctk-date-time-picker.css'
@@ -104,7 +105,7 @@ export default {
     ValidationProvider,
     ValidationObserver
   },
-  mixins: [formBuilderMixin],
+  mixins: [formBuilderMixin, localizationMixin],
   props: {
     formElements: {
       type: Array,
@@ -128,7 +129,7 @@ export default {
       required: false,
       default: function() {
         return {
-          text: 'Submit',
+          text: '$submit',
           color: 'success'
         }
       },
@@ -143,7 +144,7 @@ export default {
       required: false,
       default: function() {
         return {
-          text: 'Cancel',
+          text: '$cancel',
           color: 'warning'
         }
       },
@@ -228,12 +229,6 @@ export default {
         return formElement.label
       }
       return this.toSentenceCase(formElement.key)
-    },
-    shouldBeTranslated(label) {
-      return label.indexOf('$') == 0
-    },
-    translate(translatable) {
-      return this.$t(translatable.substring(1))
     },
     type: function(formElement) {
       return formElement.type ? formElement.type : undefined
