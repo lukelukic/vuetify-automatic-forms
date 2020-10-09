@@ -31,8 +31,8 @@ let props = {
     default() {
       return {
         deleteConfirmMessage: 'Are you sure you want to delete this item?',
-        deleteYes: '$yes',
-        deleteNo: '$no'
+        deleteYes: 'Yes',
+        deleteNo: 'No'
       }
     },
     validator(value) {
