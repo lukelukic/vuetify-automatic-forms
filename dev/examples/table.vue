@@ -1,7 +1,7 @@
 <template>
   <ApiTable
     :filters="filters"
-    :get="get"
+    :api="api"
     columnWidth="auto"
     :imageColumn="imageColumn"
     :excludedHeaders="exclude"
@@ -17,7 +17,7 @@ export default {
   data() {
     return {
       filters: [{ key: 'name', cols: 3, label: '$name' }],
-      get: { endpoint: '/api/products' },
+      api: { endpoint: '/api/products' },
       exclude: ['category', 'id', 'description', 'categoryId', 'image'],
       imageColumn: 'picture',
       tableProps: {

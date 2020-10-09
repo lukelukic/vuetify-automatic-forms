@@ -24,6 +24,14 @@ export default {
         )
       }
 
+      if (this.rowActions) {
+        headers.push({
+          text: 'Action',
+          value: 'action',
+          width: '80',
+          sortable: false
+        })
+      }
       headers.forEach(x => this.setHeaderWidth(x))
 
       return headers
@@ -60,6 +68,9 @@ export default {
     }
   },
   methods: {
+    refreshTable() {
+      this.$refs.search.executeSearch()
+    },
     processData(data) {
       if (typeof this.dataExtraction == 'function') {
         const converted = this.dataExtraction(data)

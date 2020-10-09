@@ -10,5 +10,8 @@
     "categoryName": "種別名",
     "price": "価格",
     "image": "画像",
-    "perPage": "1ページあたりの行数"
+    "picture": "画像",
+    "perPage": "1ページあたりの行数",
+    "update": "更新",
+    "description": "説明"
 }

@@ -44,7 +44,7 @@ export default {
       type: Object,
       default: function() {
         return {
-          text: 'Update',
+          text: '$update',
           color: 'primary'
         }
       }

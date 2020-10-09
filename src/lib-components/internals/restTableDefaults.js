@@ -5,6 +5,10 @@ let props = {
       return {}
     }
   },
+  resource: {
+    type: String,
+    required: true
+  },
   filters: {
     type: Array,
     required: true
@@ -14,20 +18,6 @@ let props = {
     default: 'right',
     validator: function(value) {
       return ['left', 'right', 'top'].includes(value)
-    }
-  },
-  api: {
-    type: Object,
-    required: true,
-    validator: function(value) {
-      let errors = []
-      if (!value.endpoint) {
-        errors.push('endpoint is required property.')
-      }
-
-      errors.forEach(e => console.warn(e))
-
-      return !errors.length
     }
   },
   headers: {
@@ -101,7 +91,11 @@ let props = {
   },
   rowActions: {
     type: Boolean,
-    default: false
+    default: true
+  },
+  editFormElements: {
+    type: Array,
+    required: false
   }
 }
 

@@ -224,7 +224,7 @@ export default {
     label: function(formElement) {
       if (formElement.label) {
         if (this.shouldBeTranslated(formElement.label)) {
-          return this.translate(formElement.label)
+          return this.translate(formElement.label, true)
         }
         return formElement.label
       }

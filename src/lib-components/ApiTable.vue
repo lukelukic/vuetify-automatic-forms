@@ -10,7 +10,7 @@
         ref="search"
         class="ml-4"
         :formElements="filters"
-        :endpoint="get.endpoint"
+        :endpoint="api.endpoint"
         @success="handleSearchResponse"
         :queryParams="initialQueryParamsLocal"
         :inline="filterPosition == 'top'"
@@ -22,6 +22,7 @@
       :order="tableColOrder"
     >
       <v-card-title v-if="isClientSide">
+        <slot name="header" v-bind="{ firstName: 'Jovan' }"></slot>
         <v-spacer></v-spacer>
         <v-spacer></v-spacer>
         <v-spacer></v-spacer>
@@ -55,6 +56,10 @@
           <div class="p-2">
             <v-img :src="item.image" :alt="item.name" width="100"></v-img>
           </div>
+        </template>
+
+        <template v-slot:item.action="{ item }">
+          <slot name="action" v-bind="item"></slot>
         </template>
       </v-data-table>
     </v-col>
