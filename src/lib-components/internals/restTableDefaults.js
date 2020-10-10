@@ -14,6 +14,10 @@ let props = {
       }
     }
   },
+  formatters: {
+    type: Object,
+    required: false
+  },
   useEdit: {
     type: Boolean,
     default: true

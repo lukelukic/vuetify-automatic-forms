@@ -72,10 +72,11 @@ export default {
       this.$refs.search.executeSearch()
     },
     processData(data) {
+      let tableData = []
       if (typeof this.dataExtraction == 'function') {
         const converted = this.dataExtraction(data)
         this.totalItems = converted.totalItems
-        this.tableItems = converted.items
+        tableData = converted.items
       } else {
         if (this.dataExtraction.dataProperty) {
           const properties = this.dataExtraction.dataProperty.split('.')
@@ -85,14 +86,20 @@ export default {
             tempData = tempData[p]
           })
 
-          this.tableItems = tempData
+          tableData = tempData
         } else {
-          this.tableItems = data
+          tableData = data
         }
         this.totalItems = this.isClientSide
           ? undefined
           : data[this.dataExtraction.totalItemsProperty]
       }
+      for (let key in this.formatters) {
+        tableData.forEach(x => {
+          x[key] = this.formatters[key](x[key])
+        })
+      }
+      this.tableItems = tableData
     },
     handleSearchResponse(data) {
       this.processData(data)

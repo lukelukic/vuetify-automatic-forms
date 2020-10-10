@@ -9,6 +9,7 @@
     :insertFormElements="elements"
     :addBtn="{ text: '$addNew', color: 'red' }"
     :messages="messages"
+    :formatters="formatters"
   />
 </template>
 
@@ -23,7 +24,7 @@ export default {
         deleteNo: '$no'
       },
       filters: [{ key: 'name' }],
-      excludedHeaders: ['id', 'category', 'categoryId'],
+      excludedHeaders: ['category', 'categoryId'],
       elements: [
         { key: 'name', rules: '', label: '$name' },
         { key: 'description', component: 'v-textarea', label: '$description' },
@@ -51,6 +52,21 @@ export default {
           offset: 3
         }
       ]
+    }
+  },
+  computed: {
+    formatters: function() {
+      return {
+        price: this.formatPrice,
+        id: function(id) {
+          return id + 100
+        }
+      }
+    }
+  },
+  methods: {
+    formatPrice(price) {
+      return price.toString().split('.')[0]
     }
   }
 }

@@ -9,6 +9,10 @@ let props = {
     type: Array,
     required: true
   },
+  formatters: {
+    type: Object,
+    required: false
+  },
   filterPosition: {
     type: String,
     default: 'right',
