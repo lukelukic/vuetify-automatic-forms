@@ -3,6 +3,7 @@
     <FormBuilder
       :formElements="formElements"
       @formSubmit="handleSubmit"
+      @formReset="handleFormReset"
       :errors="validationErrors"
       :incommingObject="formObject"
       :submit="submit"
@@ -135,6 +136,9 @@ export default {
   methods: {
     callApi() {
       this.$refs.formBuilder.performSubmit()
+    },
+    handleFormReset() {
+      this.$emit('formReset')
     },
     handleSubmit(formObject) {
       if (this.contentType == 'multipart/form-data') {

@@ -26,6 +26,28 @@ let props = {
     type: Boolean,
     default: true
   },
+  insertOpts: {
+    type: Object,
+    default() {
+      return {
+        submitText: '$insert',
+        submitColor: 'success',
+        cancelColor: 'warning',
+        cancelText: '$cancel'
+      }
+    }
+  },
+  updateOpts: {
+    type: Object,
+    default() {
+      return {
+        submitText: '$update',
+        submitColor: 'success',
+        cancelColor: 'warning',
+        cancelText: '$cancel'
+      }
+    }
+  },
   useDelete: {
     type: Boolean,
     default: true
@@ -150,6 +172,14 @@ let props = {
   },
   editFormElements: {
     type: Array,
+    required: false
+  },
+  extractInsertErrors: {
+    type: Function,
+    required: false
+  },
+  extractUpdateErrors: {
+    type: Function,
     required: false
   }
 }

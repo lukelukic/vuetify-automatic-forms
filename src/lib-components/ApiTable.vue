@@ -6,16 +6,21 @@
       :order="filtersColOrder"
       style="padding-bottom:0px"
     >
-      <SearchForm
-        v-show="showSearchForm"
-        ref="search"
-        class="mt-14"
-        :formElements="filters"
-        :endpoint="api.endpoint"
-        @success="handleSearchResponse"
-        :queryParams="initialQueryParamsLocal"
-        :inline="filterPosition == 'top'"
-      />
+      <v-card class="mt-13">
+        <v-card-title class="caption font-weight-bold">Search:</v-card-title>
+        <v-card-text>
+          <SearchForm
+            class="mt-2"
+            v-show="showSearchForm"
+            ref="search"
+            :formElements="filters"
+            :endpoint="api.endpoint"
+            @success="handleSearchResponse"
+            :queryParams="initialQueryParamsLocal"
+            :inline="filterPosition == 'top'"
+          />
+        </v-card-text>
+      </v-card>
     </v-col>
     <v-col
       style="padding-top:0px"
@@ -61,7 +66,7 @@
       <v-data-table
         :options.sync="options"
         :search="search"
-        class="mr-4 ml-4 elevation-1"
+        class="elevation-1"
         :headers="tableHeaders"
         v-bind="tableProps"
         :items="tableItems"

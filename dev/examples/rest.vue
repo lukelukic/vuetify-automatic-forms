@@ -10,8 +10,12 @@
     :addBtn="{ text: '$addNew', color: 'red' }"
     :messages="messages"
     :formatters="formatters"
-    filterPosition="left"
+    filterPosition="right"
     :dataExtraction="dataExtraction"
+    :insertOpts="insertOpts"
+    :updateOpts="editOpts"
+    :tableProps="tableProps"
+    :extractInsertErrors="extr"
   />
 </template>
 
@@ -20,6 +24,21 @@ export default {
   name: 'Rest',
   data() {
     return {
+      tableProps: {
+        dense: true
+      },
+      insertOpts: {
+        submitText: '$submit',
+        cancelText: '$cancel',
+        submitColor: 'primary',
+        cancelColor: 'red'
+      },
+      editOpts: {
+        submitText: 'Dodaj',
+        cancelText: 'Nemoj',
+        submitColor: 'pink',
+        cancelColor: 'black'
+      },
       dataExtraction: {
         dataProperty: 'items',
         totalItemsProperty: 'totalCount'
@@ -30,7 +49,7 @@ export default {
         deleteNo: '$no'
       },
       filters: [{ key: 'name' }],
-      excludedHeaders: ['category', 'categoryId'],
+      excludedHeaders: ['category', 'categoryId', 'description'],
       elements: [
         { key: 'name', rules: '', label: '$name' },
         { key: 'description', component: 'v-textarea', label: '$description' },
@@ -63,16 +82,17 @@ export default {
   computed: {
     formatters: function() {
       return {
-        price: this.formatPrice,
-        id: function(id) {
-          return id + 100
-        }
+        price: this.formatPrice
       }
     }
   },
   methods: {
     formatPrice(price) {
       return price.toString().split('.')[0]
+    },
+    extr(response) {
+      console.log(response)
+      return [{ propertyName: 'name', error: 'Greska' }]
     }
   }
 }

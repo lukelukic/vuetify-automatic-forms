@@ -55,6 +55,10 @@
             :id="toUpdate"
             @success="updateSuccess"
             @error="updateError"
+            :submit="updateSubmit"
+            :cancel="updateCancel"
+            @formReset="dialogEdit = false"
+            :extractErrorsFn="extractUpdateErrors"
           />
         </v-card-text>
       </v-card>
@@ -76,6 +80,10 @@
             :endpoint="resource"
             :successFn="createSuccess"
             :errorFn="updateError"
+            :submit="insertSubmit"
+            :cancel="insertCancel"
+            @formReset="dialogCreate = false"
+            :extractErrorsFn="extractInsertErrors"
           />
         </v-card-text>
       </v-card>
@@ -109,7 +117,32 @@ export default {
       dialogCreate: false
     }
   },
-  mounted() {},
+  computed: {
+    insertSubmit() {
+      return {
+        text: this.insertOpts.submitText,
+        color: this.insertOpts.submitColor
+      }
+    },
+    insertCancel() {
+      return {
+        text: this.insertOpts.cancelText,
+        color: this.insertOpts.cancelColor
+      }
+    },
+    updateSubmit() {
+      return {
+        text: this.updateOpts.submitText,
+        color: this.updateOpts.submitColor
+      }
+    },
+    updateCancel() {
+      return {
+        text: this.updateOpts.cancelText,
+        color: this.updateOpts.cancelColor
+      }
+    }
+  },
   methods: {
     createItem() {
       this.dialogCreate = true

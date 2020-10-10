@@ -13,6 +13,9 @@
     :errorFn="errorHandler"
     :formObject="formObject"
     :submitOnEnter="submitOnEnter"
+    @formReset="handleFormReset"
+    :extractErrorsFn="extractErrorsFn"
+    :validationErrorsProperty="validationErrorsProperty"
   />
 </template>
 
@@ -64,6 +67,14 @@ export default {
     submitOnEnter: {
       type: Boolean,
       default: true
+    },
+    extractErrorsFn: {
+      type: Function,
+      required: false
+    },
+    validationErrorsProperty: {
+      type: String,
+      required: false
     }
   },
   data() {
@@ -87,6 +98,9 @@ export default {
     },
     errorHandler: function(apiError) {
       this.$emit('error', apiError)
+    },
+    handleFormReset() {
+      this.$emit('formReset')
     }
   },
   watch: {

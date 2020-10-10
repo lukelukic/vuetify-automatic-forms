@@ -71,7 +71,7 @@
       <v-col :cols="inline ? 1 : 12" class="form-builder-input">
         <span :class="inline ? '' : 'float-right'">
           <v-btn v-if="useCancel" small :color="cancel.color" @click="reset">{{
-            translate(cancel.text)
+            translate(cancel.text, true)
           }}</v-btn>
           <v-btn
             small
@@ -79,7 +79,7 @@
             @click="performSubmit"
             class="ml-2"
           >
-            {{ translate(submit.text) }}
+            {{ translate(submit.text, true) }}
           </v-btn>
         </span>
       </v-col>
@@ -374,7 +374,7 @@ export default {
 }
 
 .form-builder-input {
-  padding: 0 5px 7px 5px !important;
+  padding: 0 5px 12px 5px !important;
 }
 .v-input--selection-controls {
   margin-top: 0px;
