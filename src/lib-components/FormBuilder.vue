@@ -68,11 +68,7 @@
           />
         </ValidationProvider>
       </v-col>
-      <v-col
-        :cols="inline ? 1 : 12"
-        class="form-builder-input"
-        style="margin-top:2px"
-      >
+      <v-col :cols="inline ? 1 : 12" class="form-builder-input">
         <span :class="inline ? '' : 'float-right'">
           <v-btn v-if="useCancel" small :color="cancel.color" @click="reset">{{
             translate(cancel.text)
@@ -378,7 +374,7 @@ export default {
 }
 
 .form-builder-input {
-  padding: 0 5px 10px 5px !important;
+  padding: 0 5px 7px 5px !important;
 }
 .v-input--selection-controls {
   margin-top: 0px;

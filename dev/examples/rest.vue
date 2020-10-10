@@ -3,13 +3,15 @@
     :filters="filters"
     :excludedHeaders="excludedHeaders"
     resource="/api/products"
-    processDataOn="client"
+    processDataOn="server"
     itemsPerPageText="$perPage"
     :editFormElements="elements"
     :insertFormElements="elements"
     :addBtn="{ text: '$addNew', color: 'red' }"
     :messages="messages"
     :formatters="formatters"
+    filterPosition="left"
+    :dataExtraction="dataExtraction"
   />
 </template>
 
@@ -18,6 +20,10 @@ export default {
   name: 'Rest',
   data() {
     return {
+      dataExtraction: {
+        dataProperty: 'items',
+        totalItemsProperty: 'totalCount'
+      },
       messages: {
         deleteConfirmMessage: '$confirmDelete',
         deleteYes: '$yes',

@@ -1,6 +1,7 @@
 <template>
   <v-row>
     <v-col
+      v-show="!isClientSide && filterPosition != 'top'"
       :cols="filterPosition == 'top' ? 12 : 2"
       :order="filtersColOrder"
       style="padding-bottom:0px"
@@ -8,7 +9,7 @@
       <SearchForm
         v-show="showSearchForm"
         ref="search"
-        class="ml-4"
+        class="mt-14"
         :formElements="filters"
         :endpoint="api.endpoint"
         @success="handleSearchResponse"
@@ -21,22 +22,41 @@
       :cols="isClientSide || filterPosition == 'top' ? 12 : 10"
       :order="tableColOrder"
     >
-      <v-card-title v-if="isClientSide">
-        <slot name="header" v-bind="{ firstName: 'Jovan' }"></slot>
-        <v-spacer></v-spacer>
-        <v-spacer></v-spacer>
-        <v-spacer></v-spacer>
-        <v-spacer></v-spacer>
-        <v-spacer></v-spacer>
-        <v-spacer></v-spacer>
-        <v-text-field
-          outlined
-          dense
-          v-model="search"
-          append-icon="mdi-magnify"
-          :label="translate('$search', true)"
-          hide-details
-        ></v-text-field>
+      <v-card-title>
+        <v-row no-gutters>
+          <v-col cols="3">
+            <slot name="header"></slot>
+          </v-col>
+          <v-col cols="9">
+            <template v-if="isClientSide">
+              <v-row no-gutters>
+                <v-col cols="4" offset="8">
+                  <v-text-field
+                    class="shrink"
+                    outlined
+                    dense
+                    v-model="search"
+                    append-icon="mdi-magnify"
+                    :label="translate('$search', true)"
+                    hide-details
+                  ></v-text-field>
+                </v-col>
+              </v-row>
+            </template>
+
+            <SearchForm
+              v-if="!isClientSide && filterPosition == 'top'"
+              v-show="showSearchForm"
+              ref="search"
+              class="mr-4"
+              :formElements="filters"
+              :endpoint="api.endpoint"
+              @success="handleSearchResponse"
+              :queryParams="initialQueryParamsLocal"
+              :inline="filterPosition == 'top'"
+            />
+          </v-col>
+        </v-row>
       </v-card-title>
       <v-data-table
         :options.sync="options"
