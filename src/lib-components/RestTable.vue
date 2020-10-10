@@ -20,6 +20,7 @@
         </v-icon>
       </template>
     </ApiTable>
+    <slot name="page-bottom"></slot>
     <v-dialog v-model="dialogDelete" max-width="500px">
       <v-card>
         <v-card-title class="headline">{{

@@ -20,6 +20,7 @@ export default {
       return result.charAt(0).toUpperCase() + result.slice(1)
     },
     async prepareFormObject() {
+      this.formObject = {}
       for (let el of this.formElements) {
         if (dataSourceBuilder.shouldContainDataSource(el)) {
           this.$set(this.dataSources, el.key, await this.dataSource(el))
@@ -27,6 +28,7 @@ export default {
         this.$set(this.disabled, el.key, el.disabled)
         this.$set(this.hidden, el.key, el.hidden)
       }
+
       this.populateValuesBasedOnIncommingObject()
     },
     populateValuesBasedOnIncommingObject() {
@@ -36,7 +38,7 @@ export default {
     },
     incommingValue(key) {
       if (this.incommingObject) {
-        return this.incommingObject[key] ? this.incommingObject[key] : undefined
+        return this.incommingObject[key] ? this.incommingObject[key] : ''
       }
       return undefined
     },
