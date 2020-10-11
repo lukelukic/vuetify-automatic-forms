@@ -6,7 +6,7 @@
       :order="filtersColOrder"
       style="padding-bottom:0px"
     >
-      <v-card class="mt-13">
+      <v-card class="mt-7">
         <v-card-title class="caption font-weight-bold">Search:</v-card-title>
         <v-card-text>
           <SearchForm
@@ -27,42 +27,40 @@
       :cols="isClientSide || filterPosition == 'top' ? 12 : 10"
       :order="tableColOrder"
     >
-      <v-card-title>
-        <v-row no-gutters>
-          <v-col cols="3">
-            <slot name="header"></slot>
-          </v-col>
-          <v-col cols="9">
-            <template v-if="isClientSide">
-              <v-row no-gutters>
-                <v-col cols="4" offset="8">
-                  <v-text-field
-                    class="shrink"
-                    outlined
-                    dense
-                    v-model="search"
-                    append-icon="mdi-magnify"
-                    :label="translate('$search', true)"
-                    hide-details
-                  ></v-text-field>
-                </v-col>
-              </v-row>
-            </template>
+      <v-row no-gutters>
+        <v-col cols="3" class="mb-3">
+          <slot name="header"></slot>
+        </v-col>
+        <v-col cols="9">
+          <template v-if="isClientSide">
+            <v-row no-gutters>
+              <v-col cols="4" offset="8">
+                <v-text-field
+                  class="shrink"
+                  outlined
+                  dense
+                  v-model="search"
+                  append-icon="mdi-magnify"
+                  :label="translate('$search', true)"
+                  hide-details
+                ></v-text-field>
+              </v-col>
+            </v-row>
+          </template>
 
-            <SearchForm
-              v-if="!isClientSide && filterPosition == 'top'"
-              v-show="showSearchForm"
-              ref="search"
-              class="mr-4"
-              :formElements="filters"
-              :endpoint="api.endpoint"
-              @success="handleSearchResponse"
-              :queryParams="initialQueryParamsLocal"
-              :inline="filterPosition == 'top'"
-            />
-          </v-col>
-        </v-row>
-      </v-card-title>
+          <SearchForm
+            v-if="!isClientSide && filterPosition == 'top'"
+            v-show="showSearchForm"
+            ref="search"
+            class="mr-4"
+            :formElements="filters"
+            :endpoint="api.endpoint"
+            @success="handleSearchResponse"
+            :queryParams="initialQueryParamsLocal"
+            :inline="filterPosition == 'top'"
+          />
+        </v-col>
+      </v-row>
       <v-data-table
         :options.sync="options"
         :search="search"
