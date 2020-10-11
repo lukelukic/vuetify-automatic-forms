@@ -50,7 +50,7 @@ export default {
       filters: [{ key: 'name', cols: 3 }],
       excludedHeaders: ['category', 'categoryId', 'description'],
       elements: [
-        { key: 'name', rules: '', label: '$name' },
+        { key: 'name', rules: 'required', label: '$name' },
         { key: 'description', component: 'v-textarea', label: '$description' },
         {
           key: 'categoryId',

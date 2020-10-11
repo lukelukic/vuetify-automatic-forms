@@ -87,7 +87,6 @@
   </ValidationObserver>
 </template>
 <script>
-import { ValidationProvider, ValidationObserver } from 'vee-validate'
 import formBuilderMixin from './FormBuilderMixin.js'
 import localizationMixin from './internals/localizationMixin'
 import propValidation from './internals/formBuilderPropValidations'
@@ -97,10 +96,6 @@ import Vue from 'vue'
 Vue.component('datepicker', VueCtkDateTimePicker)
 export default {
   name: 'FormBuilder',
-  components: {
-    ValidationProvider,
-    ValidationObserver
-  },
   mixins: [formBuilderMixin, localizationMixin],
   props: {
     formElements: {
