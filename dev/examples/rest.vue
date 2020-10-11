@@ -11,7 +11,6 @@
     :messages="messages"
     :formatters="formatters"
     filterPosition="top"
-    :dataExtraction="dataExtraction"
     :insertOpts="insertOpts"
     :updateOpts="editOpts"
     :tableProps="tableProps"

@@ -38,7 +38,7 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <v-dialog v-model="dialogEdit" max-width="500px">
+    <v-dialog v-model="dialogEdit" max-width="500px" :fullscreen="fullscreen">
       <v-card>
         <v-toolbar color="primary" dark>
           <v-toolbar-title>Edit</v-toolbar-title>
@@ -64,7 +64,7 @@
         </v-card-text>
       </v-card>
     </v-dialog>
-    <v-dialog v-model="dialogCreate" max-width="500px">
+    <v-dialog v-model="dialogCreate" max-width="500px" :fullscreen="fullscreen">
       <v-card>
         <v-toolbar color="primary" dark>
           <v-toolbar-title>Create</v-toolbar-title>
@@ -119,6 +119,9 @@ export default {
     }
   },
   computed: {
+    fullscreen() {
+      return !['lg', 'xl'].includes(this.$vuetify.breakpoint.name)
+    },
     insertSubmit() {
       return {
         text: this.insertOpts.submitText,

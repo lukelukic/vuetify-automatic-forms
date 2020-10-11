@@ -28,7 +28,7 @@
       :order="tableColOrder"
     >
       <v-row no-gutters class="pb-3">
-        <v-col cols="3">
+        <v-col cols="3" id="headerSlot">
           <slot name="header"></slot>
         </v-col>
         <v-col cols="9">
