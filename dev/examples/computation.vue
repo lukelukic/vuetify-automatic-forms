@@ -69,7 +69,9 @@ export default {
               key: 'job',
               change: {
                 type: 'disable',
-                when: false
+                whenNot: function(val) {
+                  return val == 3
+                }
               }
             }
           ]

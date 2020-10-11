@@ -126,7 +126,35 @@ export default {
       return affectedComputations
     },
     handleHide(toBeAffected, value) {
-      this.$set(this.hidden, toBeAffected.key, value != '')
+      this.$set(
+        this.hidden,
+        toBeAffected.key,
+        this.shouldChange(toBeAffected.change, value)
+      )
+    },
+    shouldChange(change, value) {
+      console.log(value)
+      if (Object.keys(change).includes('when')) {
+        if (Array.isArray(change.when)) {
+          return change.when.includes(value)
+        }
+        if (typeof change.when == 'function') {
+          return change.when(value)
+        }
+        return change.when == value
+      }
+
+      if (Object.keys(change).includes('whenNot')) {
+        if (Array.isArray(change.whenNot)) {
+          return !change.whenNot.includes(value)
+        }
+        if (typeof change.whenNot == 'function') {
+          return change.whenNot(value)
+        }
+        return change.whenNot != value
+      }
+
+      return false
     },
     handleClear(toBeAffected) {
       this.$set(this.formObject, toBeAffected.key, '')
@@ -135,7 +163,7 @@ export default {
       this.$set(
         this.disabled,
         toBeAffected.key,
-        toBeAffected.change.when == value
+        this.shouldChange(toBeAffected.change, value)
       )
     },
     handleDataSourceChange: async function(toBeAffected, value) {
