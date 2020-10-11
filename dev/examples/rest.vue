@@ -3,7 +3,7 @@
     :filters="filters"
     :excludedHeaders="excludedHeaders"
     resource="/api/products"
-    processDataOn="server"
+    processDataOn="client"
     itemsPerPageText="$perPage"
     :editFormElements="elements"
     :insertFormElements="elements"

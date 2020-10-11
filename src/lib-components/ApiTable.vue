@@ -27,8 +27,8 @@
       :cols="isClientSide || filterPosition == 'top' ? 12 : 10"
       :order="tableColOrder"
     >
-      <v-row no-gutters>
-        <v-col cols="3" class="mb-3">
+      <v-row no-gutters class="pb-3">
+        <v-col cols="3">
           <slot name="header"></slot>
         </v-col>
         <v-col cols="9">

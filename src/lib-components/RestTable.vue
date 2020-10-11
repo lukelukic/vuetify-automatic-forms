@@ -49,7 +49,7 @@
             <v-icon @click="dialogEdit = false">mdi-close</v-icon>
           </v-btn>
         </v-toolbar>
-        <v-card-text class="pt-8">
+        <v-card-text class="pt-3">
           <RestUpdateForm
             :formElements="editFormElements"
             :resource="resource"
@@ -75,7 +75,7 @@
             <v-icon @click="dialogCreate = false">mdi-close</v-icon>
           </v-btn>
         </v-toolbar>
-        <v-card-text class="pt-6">
+        <v-card-text class="pt-3">
           <ApiForm
             :formElements="editFormElements"
             :endpoint="resource"
