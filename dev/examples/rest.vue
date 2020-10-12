@@ -3,7 +3,7 @@
     :filters="filters"
     :excludedHeaders="excludedHeaders"
     resource="/api/products"
-    processDataOn="client"
+    processDataOn="mixed"
     itemsPerPageText="$perPage"
     :editFormElements="elements"
     :insertFormElements="elements"
@@ -54,7 +54,9 @@ export default {
         { key: 'description', component: 'v-textarea', label: '$description' },
         {
           key: 'categoryId',
-          cols: 6,
+          cols: {
+            xs: 12
+          },
           label: '$categoryName',
           component: 'v-autocomplete',
           dataSource: {
@@ -64,7 +66,11 @@ export default {
         },
         {
           key: 'price',
-          cols: 6,
+          cols: {
+            xs: 12,
+            lg: 6,
+            xl: 6
+          },
           label: '$price',
           type: 'number',
           props: { prefix: '$' }
@@ -72,7 +78,10 @@ export default {
         {
           key: 'picture',
           component: 'v-img',
-          cols: 6,
+          cols: {
+            xs: 6,
+            md: 12
+          },
           offset: 3
         }
       ]

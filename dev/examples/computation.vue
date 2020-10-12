@@ -21,18 +21,32 @@ export default {
           key: 'firstName',
           cols: 6,
           color: 'yellow',
-          label: '$firstName'
+          label: '$firstName',
+          order: 2,
+          affects: [
+            {
+              key: 'job',
+              change: {
+                type: 'order',
+                bindings: {
+                  1: 4
+                }
+              }
+            }
+          ]
         },
         {
           key: 'lastName',
           cols: 6,
-          label: '$lastName'
+          label: '$lastName',
+          order: 5
         },
         {
           key: 'email',
           rules: 'required|email',
           hint: '$sentences.email',
-          label: '$email'
+          label: '$email',
+          order: 4
         },
         {
           label: '$profession',

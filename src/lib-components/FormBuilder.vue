@@ -2,7 +2,7 @@
   <ValidationObserver ref="observer">
     <v-row :class="inline ? 'justify-end' : 'justify-start'">
       <v-col
-        v-for="formElement in formElements"
+        v-for="formElement in formElementsOrdered"
         :cols="cols(formElement)"
         :offset="offset(formElement)"
         :key="formElement.key"
@@ -166,13 +166,25 @@ export default {
       default: false
     }
   },
+  computed: {
+    formElementsOrdered() {
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      return this.localFormElements.sort((x, y) => {
+        if (x.order > y.order) return 1
+
+        return x.order < y.order ? -1 : 0
+      })
+    }
+  },
   data: function() {
     return {
       date: '',
       formObject: {},
       dataSources: {},
       hidden: {},
-      disabled: {}
+      disabled: {},
+      localFormElements: [],
+      initialOrderings: {}
     }
   },
   mounted: async function() {
@@ -181,6 +193,17 @@ export default {
         'Axios not found on a vue instance. You will not be able to use AJAX based features.'
       )
     }
+    this.formElements.forEach(x => {
+      if (!x.order) {
+        x.order = 999
+      }
+      this.localFormElements.push(x)
+    })
+
+    this.localFormElements.forEach(x => {
+      this.$set(this.initialOrderings, x.key, x.order)
+    })
+
     await this.prepareFormObject()
     if (this.submitOnLoad) {
       this.performSubmit()
@@ -231,7 +254,32 @@ export default {
       return ''
     },
     cols: function(formElement) {
-      return formElement.cols ? formElement.cols : 12
+      if (!Object.keys(formElement).includes('cols')) {
+        return 12
+      }
+      if (typeof formElement.cols == 'object') {
+        let currentScreen = this.$vuetify.breakpoint.name
+
+        let exactColMatch = formElement.cols[currentScreen]
+
+        if (exactColMatch) {
+          return exactColMatch
+        }
+
+        let sizes = ['xs', 'sm', 'md', 'lg', 'xl']
+        let currentScreenIndex = sizes.findIndex(x => x == currentScreen)
+
+        for (let i = currentScreenIndex - 1; i >= 0; i--) {
+          let lowerSizeDefinition = formElement.cols[sizes[i]]
+
+          if (lowerSizeDefinition) {
+            return lowerSizeDefinition
+          }
+        }
+
+        return 12
+      }
+      return formElement.cols
     },
     offset: function(formElement) {
       return formElement.offset ? formElement.offset : 0

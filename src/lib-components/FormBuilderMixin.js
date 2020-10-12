@@ -7,7 +7,8 @@ export default {
         dataSource: this.handleDataSourceChange,
         hide: this.handleHide,
         disable: this.handleDisable,
-        clear: this.handleClear
+        clear: this.handleClear,
+        order: this.handleOrder
       }
     }
   },
@@ -133,7 +134,6 @@ export default {
       )
     },
     shouldChange(change, value) {
-      console.log(value)
       if (Object.keys(change).includes('when')) {
         if (Array.isArray(change.when)) {
           return change.when.includes(value)
@@ -158,6 +158,21 @@ export default {
     },
     handleClear(toBeAffected) {
       this.$set(this.formObject, toBeAffected.key, '')
+    },
+    handleOrder(toBeAffected, value) {
+      let affectedValue = toBeAffected.change.bindings[value]
+      let elementToChangeOrderTo = this.localFormElements.find(
+        x => x.key == toBeAffected.key
+      )
+      let index = this.localFormElements.findIndex(
+        x => x.key == toBeAffected.key
+      )
+      if (affectedValue) {
+        elementToChangeOrderTo.order = affectedValue
+      } else {
+        elementToChangeOrderTo.order = this.initialOrderings[toBeAffected.key]
+      }
+      this.$set(this.localFormElements, index, elementToChangeOrderTo)
     },
     handleDisable(toBeAffected, value) {
       this.$set(
