@@ -415,10 +415,6 @@ export default {
 .v-icon.v-icon {
   font-size: 18px;
 }
-
-.form-builder-input {
-  padding: 0 5px 12px 5px !important;
-}
 .v-input--selection-controls {
   margin-top: 0px;
   padding-top: 0px;

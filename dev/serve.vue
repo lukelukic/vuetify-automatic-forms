@@ -38,3 +38,8 @@ export default Vue.extend({
     </v-container>
   </v-app>
 </template>
+<style>
+.form-builder-input {
+  padding: 0 5px 12px 5px !important;
+}
+</style>
