@@ -62,7 +62,20 @@ export default {
           dataSource: {
             endpoint: 'api/categories',
             dataProperty: 'data.items'
-          }
+          },
+          affects: [
+            {
+              key: 'price',
+              change: {
+                type: 'cols',
+                bindings: {
+                  1: 12,
+                  2: 6,
+                  3: 8
+                }
+              }
+            }
+          ]
         },
         {
           key: 'price',

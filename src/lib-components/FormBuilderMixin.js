@@ -8,7 +8,8 @@ export default {
         hide: this.handleHide,
         disable: this.handleDisable,
         clear: this.handleClear,
-        order: this.handleOrder
+        order: this.handleOrder,
+        cols: this.handleCols
       }
     }
   },
@@ -160,19 +161,7 @@ export default {
       this.$set(this.formObject, toBeAffected.key, '')
     },
     handleOrder(toBeAffected, value) {
-      let affectedValue = toBeAffected.change.bindings[value]
-      let elementToChangeOrderTo = this.localFormElements.find(
-        x => x.key == toBeAffected.key
-      )
-      let index = this.localFormElements.findIndex(
-        x => x.key == toBeAffected.key
-      )
-      if (affectedValue) {
-        elementToChangeOrderTo.order = affectedValue
-      } else {
-        elementToChangeOrderTo.order = this.initialOrderings[toBeAffected.key]
-      }
-      this.$set(this.localFormElements, index, elementToChangeOrderTo)
+      this.reactivePropertyChange(toBeAffected, value, 'order')
     },
     handleDisable(toBeAffected, value) {
       this.$set(
@@ -180,6 +169,27 @@ export default {
         toBeAffected.key,
         this.shouldChange(toBeAffected.change, value)
       )
+    },
+    handleCols(toBeAffected, value) {
+      this.reactivePropertyChange(toBeAffected, value, 'cols')
+    },
+    reactivePropertyChange(toBeAffected, value, property) {
+      let elementToChangeOrderTo = this.localFormElements.find(
+        x => x.key == toBeAffected.key
+      )
+      let index = this.localFormElements.findIndex(
+        x => x.key == toBeAffected.key
+      )
+
+      let affectedValue = toBeAffected.change.bindings[value]
+      if (affectedValue) {
+        elementToChangeOrderTo[property] = affectedValue
+      } else {
+        elementToChangeOrderTo[property] = this.initialOrderings[
+          toBeAffected.key
+        ]
+      }
+      this.$set(this.localFormElements, index, elementToChangeOrderTo)
     },
     handleDataSourceChange: async function(toBeAffected, value) {
       let isChangeSpecificToSelectedElement =
