@@ -75,10 +75,34 @@
           itemsPerPageText: translate(itemsPerPageText)
         }"
       >
-        <template v-slot:item.image="{ item }">
-          <div class="p-2">
-            <v-img :src="item.image" :alt="item.name" width="100"></v-img>
+        <template
+          v-for="column in specializedColumns"
+          v-slot:[`item.${column.property}`]="{ item }"
+        >
+          <div v-if="column.type == 'image'" class="p-2" :key="column.property">
+            <v-img :src="item[column.property]" width="100"></v-img>
           </div>
+
+          <template v-if="column.type == 'check'">
+            <v-btn
+              :key="column.property"
+              v-if="item[column.property]"
+              text
+              icon
+              color="blue lighten-2"
+            >
+              <v-icon>mdi-check</v-icon>
+            </v-btn>
+            <v-btn
+              :key="column.property"
+              v-else
+              text
+              icon
+              color="red lighten-2"
+            >
+              <v-icon>mdi-close</v-icon>
+            </v-btn>
+          </template>
         </template>
 
         <template v-slot:item.action="{ item }">
@@ -103,7 +127,9 @@ export default {
       tableItems: [],
       options: {},
       totalItems: undefined,
-      initialQueryParamsLocal: {}
+      initialQueryParamsLocal: {},
+      imageColumns: [],
+      checkColumns: []
     }
   },
   watch: {

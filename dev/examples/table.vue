@@ -3,12 +3,13 @@
     :filters="filters"
     :api="api"
     columnWidth="auto"
-    :imageColumn="imageColumn"
     :excludedHeaders="exclude"
     :tableProps="tableProps"
     processDataOn="client"
     filterPosition="top"
     itemsPerPageText="$perPage"
+    :specializedColumns="specializedColumns"
+    :formatters="formatters"
   />
 </template>
 
@@ -16,9 +17,13 @@
 export default {
   data() {
     return {
+      specializedColumns: [
+        { property: 'picture', type: 'image' },
+        { property: 'price', type: 'check' }
+      ],
       filters: [{ key: 'name', cols: 3, label: '$name' }],
       api: { endpoint: '/api/products' },
-      exclude: ['category', 'id', 'description', 'categoryId', 'image'],
+      exclude: ['category', 'id', 'description', 'categoryId'],
       imageColumn: 'picture',
       tableProps: {
         dense: true,
@@ -27,6 +32,11 @@ export default {
       dataExtraction: {
         dataProperty: 'items',
         totalItemsProperty: 'totalCount'
+      },
+      formatters: {
+        price: function(price) {
+          return price > 300
+        }
       }
     }
   }

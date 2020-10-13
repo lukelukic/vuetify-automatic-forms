@@ -66,6 +66,16 @@ export default {
     if (this.callApiOnLoad) {
       this.$refs.search.executeSearch()
     }
+
+    if (this.specializedColumns) {
+      this.imageColumns = this.specializedColumns
+        .filter(x => x.type == 'image')
+        .map(x => x.property)
+
+      this.checkColumns = this.specializedColumns
+        .filter(x => x.type == 'check')
+        .map(x => x.property)
+    }
   },
   methods: {
     refreshTable() {
@@ -103,16 +113,6 @@ export default {
     },
     handleSearchResponse(data) {
       this.processData(data)
-
-      if (this.imageColumn) {
-        this.prepareImageProperties()
-      }
-    },
-    prepareImageProperties() {
-      this.tableItems.forEach(x => {
-        x.image = x[this.imageColumn]
-        delete x[this.imageColumn]
-      })
     },
     setHeaderWidth: function(header) {
       if (!isNaN(this.columnWidth)) {

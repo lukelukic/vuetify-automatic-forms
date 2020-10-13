@@ -9,6 +9,10 @@ let props = {
     type: Array,
     required: true
   },
+  specializedColumns: {
+    type: Array,
+    required: false
+  },
   formatters: {
     type: Object,
     required: false
@@ -62,10 +66,6 @@ let props = {
   loadingMessage: {
     type: String,
     default: 'Loading data...'
-  },
-  imageColumn: {
-    type: String,
-    required: false
   },
   pagingSortingQsBuilder: {
     type: Function,
