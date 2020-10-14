@@ -26,18 +26,20 @@ Install the package:
 npm install vuetify-automatic-forms
 ````
 
-This library is built on top of Vuetify Component framework. Bearing that in mind, your project should already have Vuetify fully setup. 
-
-It can be either globally installed using like this in your entry file:
+This library is built on top of Vuetify Component framework. Bearing that in mind, your project should already have Vuetify fully setup and registered before registering the form builder.
 
 ```js
 import Vue from 'vue'
-import VuetifyFormBuilder from 'vuetify-automatic-forms'
+import Vuetify from 'vuetify'
+import VuetifyFormBuilder from '../src/entry'
 
+Vue.use(Vuetify)
 Vue.use(VuetifyFormBuilder)
-```
 
-Or you can import the exact component you need in your component's import section.
+export default new Vuetify({
+})
+
+```
 
 The installation process is now done! Let's write some code.
 
@@ -51,17 +53,13 @@ Here is a quick example:
 <template>
   <v-row>
     <v-col cols="4" offset="4">
-      <FormBuilder :formElements="formElements" :handleSubmit="handle" />
+      <FormBuilder :formElements="formElements" @formSubmit="handle" />
     </v-col>
   </v-row>
 </template>
 <script>
-import { FormBuilder } from 'vuetify-automatic-forms'
 export default {
   name: 'App',
-  components: {
-    FormBuilder
-  },
   data() {
     return {
       formElements: [
@@ -86,11 +84,11 @@ export default {
 </script>
 ```
 
-In the above example, we're passing two props to the dynamic form:
-1. **form-elements** (Array of Objects)
-2. **handleSubmit** (Function)
+In the above example, we're using:
+1. **form-elements** (Array of Objects) as a prop
+2. **formSubmit** event
 
-Used like this, it will produce a form containing two input elements: **v-textarea** and **v-text-field** along with a **submit** and **cancel** buttons. User's click on **submit** button will first trigger a client-side validation, and then, if valid, call the function provided as a prop **handleSubmit**. In this example, console output should look something like this:
+Used like this, it will produce a form containing two input elements: **v-textarea** and **v-text-field** along with a **submit** and **cancel** buttons. User's click on **submit** button will first trigger a client-side validation, and then, if valid, **formSubmit** event will be fired. In this example, console output should look something like this:
 ```js
 {
     firstName: "John",
