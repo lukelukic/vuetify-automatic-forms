@@ -59,10 +59,6 @@ export default {
     type: Boolean,
     default: true
   },
-  submitOnLoad: {
-    type: Boolean,
-    default: false
-  },
   inline: {
     type: Boolean,
     default: false

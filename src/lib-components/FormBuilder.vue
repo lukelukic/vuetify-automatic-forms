@@ -140,9 +140,6 @@ export default {
     })
 
     await this.prepareFormObject()
-    if (this.submitOnLoad) {
-      this.performSubmit()
-    }
   },
   watch: {
     errors: {
