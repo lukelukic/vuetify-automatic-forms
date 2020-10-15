@@ -181,6 +181,10 @@ let props = {
   extractUpdateErrors: {
     type: Function,
     required: false
+  },
+  specializedColumns: {
+    type: Array,
+    required: false
   }
 }
 
