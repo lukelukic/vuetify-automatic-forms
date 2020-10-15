@@ -140,6 +140,9 @@ export default {
     handleFormReset() {
       this.$emit('formReset')
     },
+    resetForm() {
+      this.$refs.formBuilder.reset()
+    },
     handleSubmit(formObject) {
       if (this.contentType == 'multipart/form-data') {
         formObject = this.getMultipartObject(formObject)

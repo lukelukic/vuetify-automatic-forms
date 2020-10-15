@@ -15,6 +15,7 @@
     :updateOpts="editOpts"
     :tableProps="tableProps"
     :extractInsertErrors="extr"
+    :specializedColumns="specializedColumns"
   />
 </template>
 
@@ -23,6 +24,8 @@ export default {
   name: 'Rest',
   data() {
     return {
+      specializedColumns: [{ property: 'picture', type: 'image' }],
+
       tableProps: {
         dense: true
       },

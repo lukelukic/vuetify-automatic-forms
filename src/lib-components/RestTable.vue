@@ -72,11 +72,12 @@
           <v-spacer></v-spacer>
 
           <v-btn icon>
-            <v-icon @click="dialogCreate = false">mdi-close</v-icon>
+            <v-icon @click="closeCreateDialog">mdi-close</v-icon>
           </v-btn>
         </v-toolbar>
         <v-card-text class="pt-3">
           <ApiForm
+            ref="insertForm"
             :formElements="editFormElements"
             :endpoint="resource"
             :successFn="createSuccess"
@@ -148,6 +149,10 @@ export default {
     }
   },
   methods: {
+    closeCreateDialog() {
+      this.dialogCreate = false
+      this.$refs.insertForm.resetForm()
+    },
     createItem() {
       this.dialogCreate = true
     },
