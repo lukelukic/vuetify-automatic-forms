@@ -192,9 +192,9 @@ export default {
       this.$set(this.localFormElements, index, elementToChangeOrderTo)
     },
     handleDataSourceChange: async function(toBeAffected, value) {
-      let isChangeSpecificToSelectedElement =
+      let specificBindingMatched =
         toBeAffected.change.bindings && toBeAffected.change.bindings[value]
-      if (isChangeSpecificToSelectedElement) {
+      if (specificBindingMatched) {
         let binding = toBeAffected.change.bindings[value]
         if (Array.isArray(binding)) {
           binding = dataSourceBuilder.addFirstOption(binding)
@@ -221,12 +221,13 @@ export default {
 
       if (toBeAffected.change.api) {
         let dataSource = {
-          api: {
+          dataSource: {
             endpoint: toBeAffected.change.api.endpoint
           }
         }
+
         if (toBeAffected.change.api.associateValue) {
-          dataSource.api.endpoint += value
+          dataSource.dataSource.endpoint += value
         }
 
         this.$set(

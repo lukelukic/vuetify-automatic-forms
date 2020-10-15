@@ -11,7 +11,6 @@
     :successFn="resultHandler"
     :errorFn="errorHandler"
     :submitOnEnter="submitOnEnter"
-    :submitOnLoad="searchOnLoad"
     :queryParams="queryParams"
     :inline="inline"
     ref="apiForm"
@@ -74,6 +73,11 @@ export default {
     inline: {
       type: Boolean,
       default: false
+    }
+  },
+  mounted() {
+    if (this.searchOnLoad) {
+      this.executeSearch()
     }
   },
   methods: {

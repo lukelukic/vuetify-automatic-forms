@@ -26,7 +26,32 @@ export default {
           dataSource: {
             endpoint: 'api/categories',
             dataProperty: 'data.items'
-          }
+          },
+          affects: [
+            {
+              key: 'parentProductId',
+              change: {
+                type: 'disable',
+                when: ''
+              }
+            },
+            {
+              key: 'parentProductId',
+              change: {
+                type: 'dataSource',
+                api: {
+                  endpoint: '/api/products?categoryId=',
+                  associateValue: true
+                }
+              }
+            }
+          ]
+        },
+        {
+          key: 'parentProductId',
+          component: 'v-autocomplete',
+          dataSource: [],
+          disabled: true
         },
         { key: 'price', type: 'number', props: { prefix: '$' } },
         { key: 'picture', component: 'v-img', cols: 6, offset: 3 }
