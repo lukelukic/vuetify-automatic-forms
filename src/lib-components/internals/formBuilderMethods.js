@@ -95,11 +95,7 @@ export default {
           }
           let objectToSubmit = {}
           for (let prop in this.formObject) {
-            if (
-              !this.hidden[prop] &&
-              this.formObject[prop] &&
-              this.formObject[prop] !== false
-            ) {
+            if (!this.hidden[prop]) {
               if (prop.includes('_upload')) {
                 let originalPropName = prop.split('_upload')[0]
                 objectToSubmit[originalPropName] = this.formObject[prop]
