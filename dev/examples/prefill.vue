@@ -6,7 +6,9 @@
         :additionalValidation="validation"
         :incommingObject="user"
         @formSubmit="submit"
-      />
+      >
+        <v-checkbox />
+      </FormBuilder>
     </v-col>
   </v-row>
 </template>

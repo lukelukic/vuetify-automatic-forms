@@ -68,6 +68,9 @@
           />
         </ValidationProvider>
       </v-col>
+
+      <slot></slot>
+
       <v-col :cols="inline ? 1 : 12" class="form-builder-input">
         <span :class="inline ? '' : 'float-right'">
           <v-btn v-if="useCancel" small :color="cancel.color" @click="reset">{{
