@@ -7,7 +7,9 @@
       style="padding-bottom:0px"
     >
       <v-card class="mt-7" id="apiTableFilters">
-        <v-card-title class="caption font-weight-bold">Search:</v-card-title>
+        <v-card-title class="caption font-weight-bold">{{
+          translate(searchTitle)
+        }}</v-card-title>
         <v-card-text>
           <SearchForm
             class="mt-2"

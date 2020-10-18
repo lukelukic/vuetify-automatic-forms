@@ -17,6 +17,10 @@ let props = {
     type: Object,
     required: false
   },
+  searchTitle: {
+    type: String,
+    default: 'Search'
+  },
   filterPosition: {
     type: String,
     default: 'right',

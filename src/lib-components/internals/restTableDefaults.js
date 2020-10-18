@@ -14,6 +14,10 @@ let props = {
       }
     }
   },
+  searchTitle: {
+    type: String,
+    default: 'Search'
+  },
   formatters: {
     type: Object,
     required: false
