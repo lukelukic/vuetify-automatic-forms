@@ -7,7 +7,7 @@
         :incommingObject="user"
         @formSubmit="submit"
       >
-        <v-checkbox />
+        <v-checkbox label="Slot checkbox" />
       </FormBuilder>
     </v-col>
   </v-row>
@@ -34,6 +34,13 @@ export default {
         {
           key: 'password',
           type: 'password'
+        },
+        {
+          key: 'date',
+          component: 'datepicker',
+          props: {
+            onlyDate: true
+          }
         }
       ],
       user: {

@@ -10,7 +10,7 @@
     :addBtn="{ text: '$addNew', color: 'red' }"
     :messages="messages"
     :formatters="formatters"
-    filterPosition="top"
+    filterPosition="right"
     :insertOpts="insertOpts"
     :updateOpts="editOpts"
     :tableProps="tableProps"
@@ -50,7 +50,7 @@ export default {
         deleteYes: '$yes',
         deleteNo: '$no'
       },
-      filters: [{ key: 'name', cols: 3 }],
+      filters: [{ key: 'name', cols: 12 }],
       excludedHeaders: ['category', 'categoryId', 'description'],
       elements: [
         { key: 'name', rules: 'required', label: '$name' },
