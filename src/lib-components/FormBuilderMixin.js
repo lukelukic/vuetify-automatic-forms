@@ -35,7 +35,11 @@ export default {
     },
     populateValuesBasedOnIncommingObject() {
       for (let el of this.formElements) {
-        this.$set(this.formObject, el.key, this.incommingValue(el.key))
+        let incommingValue = this.incommingValue(el.key)
+        if (incommingValue) {
+          this.$set(this.formObject, el.key, incommingValue)
+          this.handleChange(el.key, incommingValue)
+        }
       }
     },
     incommingValue(key) {
