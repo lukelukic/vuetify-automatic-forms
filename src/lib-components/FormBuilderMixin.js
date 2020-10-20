@@ -37,11 +37,7 @@ export default {
       for (let el of this.formElements) {
         let incommingValue = this.incommingValue(el.key)
         if (incommingValue) {
-          if (
-            el.component == 'v-autocomplete' &&
-            el.props &&
-            el.props.multiple
-          ) {
+          if (el.props && el.props.multiple) {
             this.$set(this.formObject, el.key, [incommingValue])
           } else {
             this.$set(this.formObject, el.key, incommingValue)
