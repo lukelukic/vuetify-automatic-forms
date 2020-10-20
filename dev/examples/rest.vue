@@ -51,7 +51,20 @@ export default {
         deleteYes: '$yes',
         deleteNo: '$no'
       },
-      filters: [{ key: 'name', cols: 12 }],
+      filters: [
+        { key: 'name', cols: 12 },
+        {
+          key: 'parentProductId',
+          cols: 12,
+          component: 'v-autocomplete',
+          dataSource: {
+            endpoint: '/api/products'
+          },
+          props: {
+            multiple: true
+          }
+        }
+      ],
       excludedHeaders: ['category', 'categoryId', 'description'],
       elements: [
         { key: 'name', rules: 'required', label: '$name' },

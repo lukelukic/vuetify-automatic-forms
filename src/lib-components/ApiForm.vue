@@ -158,7 +158,20 @@ export default {
         params:
           this.method == 'GET'
             ? { ...formObject, ...this.queryParams }
-            : this.queryParams
+            : this.queryParams,
+        paramsSerializer: function(params) {
+          let qs = ''
+          for (let param in params) {
+            if (Array.isArray(params[param])) {
+              for (let item in params[param]) {
+                qs += `${param}=${item}`
+              }
+            } else {
+              qs += `${param}=${params[param]}`
+            }
+          }
+          return qs
+        }
       }
 
       this.$formBuilderAxios(request)
