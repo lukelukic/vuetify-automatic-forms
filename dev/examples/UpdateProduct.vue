@@ -27,6 +27,9 @@ export default {
             endpoint: 'api/categories',
             dataProperty: 'data.items'
           },
+          props: {
+            multiple: true
+          },
           affects: [
             {
               key: 'parentProductId',
@@ -40,7 +43,7 @@ export default {
               change: {
                 type: 'dataSource',
                 api: {
-                  endpoint: '/api/products?categoryId=',
+                  endpoint: '/api/products?&categoryId=',
                   associateValue: true
                 }
               }

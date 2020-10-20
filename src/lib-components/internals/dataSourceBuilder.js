@@ -46,6 +46,30 @@ async function loadDataSourceFromApi(
   let items = []
 
   try {
+    let isMultiple = api.endpoint.split(',').length > 1
+
+    if (isMultiple) {
+      let qs = api.endpoint.split('?')[1]
+      if (qs) {
+        let qsParams = qs.split('&')
+        let lastQsParam = ''
+        if (qsParams.length) {
+          lastQsParam = qsParams[qsParams.length - 1]
+        } else {
+          lastQsParam = qsParams
+        }
+        let paramName = lastQsParam.split('=')[0]
+        let paramValues = lastQsParam.split('=')[1].split(',')
+
+        let qsAppend = ''
+
+        for (let value of paramValues) {
+          qsAppend += `${paramName}=${value}&`
+        }
+
+        api.endpoint = api.endpoint.replace(lastQsParam, qsAppend)
+      }
+    }
     let response = await axios({
       url: api.endpoint,
       method: api.method ? api.method : 'GET'
