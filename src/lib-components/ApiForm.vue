@@ -167,7 +167,7 @@ export default {
                 qs += `${param}=${item}`
               }
             } else {
-              qs += `${param}=${params[param]}`
+              qs += `${param}=${params[param]}&`
             }
           }
           return qs
