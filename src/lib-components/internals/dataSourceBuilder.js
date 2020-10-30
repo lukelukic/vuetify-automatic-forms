@@ -2,11 +2,15 @@ var axios = undefined
 
 async function buildDataSource(formElement) {
   if (Array.isArray(formElement.dataSource)) {
-    return addFirstOption(formElement.dataSource)
+    return formElement.props?.multiple
+      ? formElement.dataSource
+      : addFirstOption(formElement.dataSource)
   }
 
   if (typeof formElement.dataSource == 'function') {
-    return addFirstOption(formElement.dataSource())
+    return formElement.props?.multiple
+      ? formElement.dataSource()
+      : addFirstOption(formElement.dataSource())
   }
 
   if (!formElement.dataSource.endpoint) {
@@ -22,7 +26,7 @@ async function buildDataSource(formElement) {
     formElement.dataSource.dataFn
   )
 
-  return addFirstOption(items)
+  return formElement.props?.multiple ? items : addFirstOption(items)
 }
 
 function addFirstOption(dataSource) {
@@ -34,6 +38,9 @@ function addFirstOption(dataSource) {
 }
 
 function shouldContainDataSource(formElement) {
+  if (!formElement.component) {
+    return false
+  }
   let elementsWithDataSource = ['v-autocomplete', 'v-select']
   return (
     elementsWithDataSource.includes(formElement.component) ||
