@@ -14,7 +14,6 @@
     :insertOpts="insertOpts"
     :updateOpts="editOpts"
     :tableProps="tableProps"
-    :extractInsertErrors="extr"
     :specializedColumns="specializedColumns"
     searchTitle="Available filters"
     :dataExtraction="dataExtraction"
@@ -128,10 +127,6 @@ export default {
   methods: {
     formatPrice(price) {
       return price.toString().split('.')[0]
-    },
-    extr(response) {
-      console.log(response)
-      return [{ propertyName: 'name', error: 'Greska' }]
     }
   }
 }

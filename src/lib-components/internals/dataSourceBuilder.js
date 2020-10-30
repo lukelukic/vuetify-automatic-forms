@@ -35,7 +35,10 @@ function addFirstOption(dataSource) {
 
 function shouldContainDataSource(formElement) {
   let elementsWithDataSource = ['v-autocomplete', 'v-select']
-  return elementsWithDataSource.includes(formElement.component)
+  return (
+    elementsWithDataSource.includes(formElement.component) ||
+    formElement.component.toLowerCase().includes('select')
+  )
 }
 
 async function loadDataSourceFromApi(
