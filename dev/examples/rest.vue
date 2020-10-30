@@ -17,6 +17,7 @@
     :extractInsertErrors="extr"
     :specializedColumns="specializedColumns"
     searchTitle="Available filters"
+    :dataExtraction="dataExtraction"
   />
 </template>
 

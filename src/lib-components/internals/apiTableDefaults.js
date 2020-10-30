@@ -67,10 +67,6 @@ let props = {
       return ['fit', 'auto'].includes(value)
     }
   },
-  loadingMessage: {
-    type: String,
-    default: 'Loading data...'
-  },
   pagingSortingQsBuilder: {
     type: Function,
     default: function(options) {

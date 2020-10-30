@@ -66,12 +66,10 @@
       <v-data-table
         :options.sync="options"
         :search="search"
-        class="elevation-1"
         :headers="tableHeaders"
         v-bind="tableProps"
         :items="tableItems"
-        :loading="!tableItems.length"
-        :loading-text="loadingMessage"
+        :loading="loading"
         :server-items-length="totalItems"
         :footer-props="{
           itemsPerPageText: translate(itemsPerPageText)
@@ -131,7 +129,8 @@ export default {
       totalItems: undefined,
       initialQueryParamsLocal: {},
       imageColumns: [],
-      checkColumns: []
+      checkColumns: [],
+      loading: true
     }
   },
   watch: {

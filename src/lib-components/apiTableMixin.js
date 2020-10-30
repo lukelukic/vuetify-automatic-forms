@@ -82,6 +82,7 @@ export default {
       this.$refs.search.executeSearch()
     },
     processData(data) {
+      this.loading = true
       let tableData = []
       if (typeof this.dataExtraction == 'function') {
         const converted = this.dataExtraction(data)
@@ -110,6 +111,7 @@ export default {
         })
       }
       this.tableItems = tableData
+      this.loading = false
     },
     handleSearchResponse(data) {
       this.processData(data)
