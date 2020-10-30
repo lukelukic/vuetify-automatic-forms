@@ -162,6 +162,9 @@ export default {
         paramsSerializer: function(params) {
           let qs = ''
           for (let param in params) {
+            if (params[param] == '') {
+              continue
+            }
             if (Array.isArray(params[param])) {
               for (let item in params[param]) {
                 qs += `${param}=${item}`
