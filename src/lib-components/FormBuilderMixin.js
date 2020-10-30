@@ -37,7 +37,7 @@ export default {
       for (let el of this.formElements) {
         let incommingValue = this.incommingValue(el.key)
         if (incommingValue) {
-          if (el.props && el.props.multiple) {
+          if (el.props && el.props.multiple && !Array.isArray(incommingValue)) {
             this.$set(this.formObject, el.key, [incommingValue])
           } else {
             this.$set(this.formObject, el.key, incommingValue)

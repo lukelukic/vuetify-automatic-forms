@@ -41,11 +41,33 @@ export default {
           props: {
             onlyDate: true
           }
+        },
+        {
+          key: 'jobs',
+          component: 'v-autocomplete',
+          dataSource: [
+            {
+              text: 'Developer',
+              value: 1
+            },
+            {
+              text: 'Loyer',
+              value: 2
+            },
+            {
+              text: 'Actor',
+              value: 3
+            }
+          ],
+          props: {
+            multiple: true
+          }
         }
       ],
       user: {
         firstName: 'John',
-        lastName: 'Doe'
+        lastName: 'Doe',
+        jobs: [1, 2]
       },
       errors: {}
     }
