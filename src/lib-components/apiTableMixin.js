@@ -25,12 +25,14 @@ export default {
       }
 
       if (this.rowActions) {
-        headers.push({
-          text: 'Action',
-          value: 'action',
-          width: '80',
-          sortable: false
-        })
+        if (!headers.some(x => x.text == 'Action')) {
+          headers.push({
+            text: 'Action',
+            value: 'action',
+            width: '80',
+            sortable: false
+          })
+        }
       }
       headers.forEach(x => this.setHeaderWidth(x))
 

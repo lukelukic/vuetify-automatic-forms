@@ -48,26 +48,23 @@ export default {
           dataSource: [
             {
               text: 'Developer',
-              value: 1
+              value: 0
             },
             {
               text: 'Loyer',
-              value: 2
+              value: 1
             },
             {
               text: 'Actor',
-              value: 3
+              value: 2
             }
-          ],
-          props: {
-            multiple: true
-          }
+          ]
         }
       ],
       user: {
         firstName: 'John',
         lastName: 'Doe',
-        jobs: [1, 2]
+        jobs: 0
       },
       errors: {}
     }

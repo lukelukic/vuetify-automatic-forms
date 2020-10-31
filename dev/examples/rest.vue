@@ -1,7 +1,7 @@
 <template>
   <RestTable
     :filters="filters"
-    :excludedHeaders="excludedHeaders"
+    :headers="headers"
     resource="/api/products"
     processDataOn="server"
     itemsPerPageText="$perPage"
@@ -65,7 +65,13 @@ export default {
           }
         }
       ],
-      excludedHeaders: ['category', 'categoryId', 'description'],
+      headers: [
+        { text: '$categoryName', value: 'categoryName' },
+        {
+          text: '$name',
+          value: 'name'
+        }
+      ],
       elements: [
         { key: 'name', rules: 'required', label: '$name' },
         { key: 'description', component: 'v-textarea', label: '$description' },

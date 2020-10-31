@@ -34,24 +34,23 @@ export default {
       this.populateValuesBasedOnIncommingObject()
     },
     populateValuesBasedOnIncommingObject() {
+      if (!this.incommingObject) {
+        return
+      }
       for (let el of this.formElements) {
         let incommingValue = this.incommingValue(el.key)
-        if (incommingValue) {
+        if (incommingValue !== '' && incommingValue !== undefined) {
           if (el.props && el.props.multiple && !Array.isArray(incommingValue)) {
             this.$set(this.formObject, el.key, [incommingValue])
           } else {
             this.$set(this.formObject, el.key, incommingValue)
           }
-
           this.handleChange(el.key, incommingValue)
         }
       }
     },
     incommingValue(key) {
-      if (this.incommingObject) {
-        return this.incommingObject[key] ? this.incommingObject[key] : ''
-      }
-      return undefined
+      return this.incommingObject[key]
     },
     dataSource: async function(formElement) {
       return await dataSourceBuilder.buildDataSource(formElement)
