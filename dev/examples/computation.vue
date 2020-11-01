@@ -63,19 +63,8 @@ export default {
               key: 'job',
               change: {
                 type: 'dataSource',
-                bindings: {
-                  '1': [
-                    { text: 'PHP', value: 1 },
-                    { text: 'C#', value: 2 },
-                    { text: 'Java', value: 3 }
-                  ],
-                  '2': [],
-                  '3': [
-                    { text: 'Revision', value: 4 },
-                    { text: 'Book handling', value: 5 },
-                    { text: 'Finance', value: 6 }
-                  ],
-                  '': []
+                api: {
+                  endpoint: '/api/products'
                 }
               }
             },
@@ -95,7 +84,10 @@ export default {
           component: 'v-autocomplete',
           dataSource: [],
           disabled: true,
-          cols: 6
+          cols: 6,
+          props: {
+            multiple: true
+          }
         },
         {
           key: 'jobTitle',

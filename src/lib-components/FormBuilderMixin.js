@@ -251,6 +251,12 @@ export default {
           }
         }
 
+        if (affectee.props && affectee.props.multiple) {
+          dataSource.props = {
+            multiple: true
+          }
+        }
+
         if (toBeAffected.change.api.associateValue) {
           dataSource.dataSource.endpoint += value
         }
