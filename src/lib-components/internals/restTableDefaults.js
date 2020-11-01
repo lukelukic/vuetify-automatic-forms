@@ -14,6 +14,10 @@ let props = {
       }
     }
   },
+  customDialog: {
+    type: Object,
+    required: false
+  },
   searchTitle: {
     type: String,
     default: 'Search'

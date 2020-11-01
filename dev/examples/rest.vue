@@ -17,6 +17,7 @@
     :specializedColumns="specializedColumns"
     searchTitle="Available filters"
     :dataExtraction="dataExtraction"
+    :customDialog="dialog"
   />
 </template>
 
@@ -25,8 +26,11 @@ export default {
   name: 'Rest',
   data() {
     return {
+      dialog: {
+        icon: 'mdi-account-voice',
+        component: 'custom-dialog'
+      },
       specializedColumns: [{ property: 'picture', type: 'image' }],
-
       tableProps: {
         dense: true
       },

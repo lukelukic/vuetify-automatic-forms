@@ -13,6 +13,9 @@ import Rest from './examples/rest.vue'
 import api from './api'
 import VueI18n from 'vue-i18n'
 import languages from './localization/laguanges'
+import dialog from './examples/dialogcomponent'
+
+Vue.component('custom-dialog', dialog)
 
 Vue.config.productionTip = false
 

@@ -108,6 +108,10 @@
         <template v-slot:item.action="{ item }">
           <slot name="action" v-bind="item"></slot>
         </template>
+
+        <template v-slot:item.dialog="{ item }">
+          <slot name="dialog" v-bind="item"></slot>
+        </template>
       </v-data-table>
     </v-col>
   </v-row>

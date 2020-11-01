@@ -24,6 +24,17 @@ export default {
         )
       }
 
+      if (this.useCustomDialog) {
+        if (!headers.some(x => x.text == 'Operation')) {
+          headers.push({
+            text: 'Operation',
+            value: 'dialog',
+            width: '80',
+            sortable: false
+          })
+        }
+      }
+
       if (this.rowActions) {
         if (!headers.some(x => x.text == 'Action')) {
           headers.push({
@@ -34,6 +45,7 @@ export default {
           })
         }
       }
+
       headers.forEach(x => this.setHeaderWidth(x))
 
       return headers

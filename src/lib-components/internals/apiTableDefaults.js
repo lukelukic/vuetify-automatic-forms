@@ -106,6 +106,10 @@ let props = {
   rowActions: {
     type: Boolean,
     default: false
+  },
+  useCustomDialog: {
+    type: Boolean,
+    default: false
   }
 }
 

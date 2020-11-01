@@ -5,11 +5,17 @@
       v-bind="$props"
       :api="{ endpoint: resource }"
       :excludedHeaders="excludedHeaders"
+      :useCustomDialog="customDialog != undefined"
     >
       <template v-if="useInsert" v-slot:header>
         <v-btn :color="addBtn.color" small @click="createItem">{{
           translate(addBtn.text)
         }}</v-btn>
+      </template>
+      <template v-if="customDialog" v-slot:dialog="item">
+        <v-icon @click="openCustomDialog(item)">
+          {{ customDialog.icon }}
+        </v-icon>
       </template>
       <template v-if="useEdit || useDelete" v-slot:action="item">
         <v-icon v-if="useEdit" class="mr-2" @click="editItem(item.id)">
@@ -90,14 +96,26 @@
         </v-card-text>
       </v-card>
     </v-dialog>
-    <v-snackbar v-model="snackbar">
-      There was an error executing your request.
-      <template v-slot:action="{ attrs }">
-        <v-btn color="pink" text v-bind="attrs" @click="snackbar = false">
-          Close
-        </v-btn>
-      </template>
-    </v-snackbar>
+    <v-dialog v-model="dialogCustom" max-width="500px" :fullscreen="fullscreen">
+      <v-card>
+        <v-toolbar color="primary" dark>
+          <v-toolbar-title>Custom</v-toolbar-title>
+
+          <v-spacer></v-spacer>
+
+          <v-btn icon>
+            <v-icon @click="closeCustomDialog">mdi-close</v-icon>
+          </v-btn>
+        </v-toolbar>
+        <v-card-text class="pt-3">
+          <component
+            :is="customDialog.component"
+            :data="customDialogData"
+            @close="dialogCustom = false"
+          ></component>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -112,11 +130,13 @@ export default {
     return {
       dialogDelete: false,
       dialogEdit: false,
+      dialogCustom: false,
       toDelete: undefined,
       toUpdate: undefined,
       deleteLoading: false,
       snackbar: false,
-      dialogCreate: false
+      dialogCreate: false,
+      customDialogData: {}
     }
   },
   computed: {
@@ -152,6 +172,13 @@ export default {
     closeCreateDialog() {
       this.dialogCreate = false
       this.$refs.insertForm.resetForm()
+    },
+    closeCustomDialog() {
+      this.dialogCustom = false
+    },
+    openCustomDialog(dialogData) {
+      this.dialogCustom = true
+      this.customDialogData = dialogData
     },
     createItem() {
       this.dialogCreate = true
