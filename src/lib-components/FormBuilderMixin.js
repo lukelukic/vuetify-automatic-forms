@@ -200,12 +200,22 @@ export default {
       this.$set(this.localFormElements, index, elementToChangeOrderTo)
     },
     handleDataSourceChange: async function(toBeAffected, value) {
+      var affectee = this.formElements.filter(x => x.key == toBeAffected.key)[0]
+
+      if (!affectee) {
+        throw new Error(
+          `There was an error affecting the DataSource. Used key ${toBeAffected.key} did not resolve to any input element.`
+        )
+      }
+
       let specificBindingMatched =
         toBeAffected.change.bindings && toBeAffected.change.bindings[value]
       if (specificBindingMatched) {
         let binding = toBeAffected.change.bindings[value]
         if (Array.isArray(binding)) {
-          binding = dataSourceBuilder.addFirstOption(binding)
+          binding = affectee.props?.multiple
+            ? binding
+            : dataSourceBuilder.addFirstOption(binding)
           this.$set(this.dataSources, toBeAffected.key, binding)
           let selected = binding.find(x => x.selected)
           if (selected) {
@@ -213,6 +223,13 @@ export default {
           }
           return
         }
+
+        if (affectee.props && affectee.props.multiple) {
+          binding.props = {
+            multiple: true
+          }
+        }
+
         if (binding.api) {
           this.$set(
             this.dataSources,

@@ -96,7 +96,12 @@
         </v-card-text>
       </v-card>
     </v-dialog>
-    <v-dialog v-model="dialogCustom" max-width="500px" :fullscreen="fullscreen">
+    <v-dialog
+      v-if="customDialog"
+      v-model="dialogCustom"
+      max-width="500px"
+      :fullscreen="fullscreen"
+    >
       <v-card>
         <v-toolbar color="primary" dark>
           <v-toolbar-title>Custom</v-toolbar-title>
