@@ -23,6 +23,7 @@ export default {
           color: 'yellow',
           label: '$firstName',
           order: 2,
+          hidden: true,
           affects: [
             {
               key: 'job',

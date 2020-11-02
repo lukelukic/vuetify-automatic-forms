@@ -17,7 +17,9 @@
           v-if="!hidden[formElement.key]"
         >
           <datepicker
-            v-if="component(formElement) == 'datepicker'"
+            v-if="
+              component(formElement) == 'datepicker' && !hidden[formElement.key]
+            "
             :no-value-to-custom-elem="true"
             v-model="formObject[formElement.key]"
             v-bind="formElement.props"
@@ -26,7 +28,6 @@
               :disabled="disabled[formElement.key]"
               :value="formObject[formElement.key]"
               :hint="hint(formElement)"
-              v-show="!hidden[formElement.key]"
               @change="handleChange(formElement.key, $event, true)"
               :ref="formElement.key"
               v-bind:key="formElement.key"
@@ -43,10 +44,11 @@
           </datepicker>
 
           <component
-            v-else
+            v-if="
+              component(formElement) != 'datepicker' && !hidden[formElement.key]
+            "
             :disabled="disabled[formElement.key]"
             :hint="hint(formElement)"
-            v-show="!hidden[formElement.key]"
             @change="handleChange(formElement.key, $event)"
             :is="component(formElement)"
             :ref="formElement.key"
