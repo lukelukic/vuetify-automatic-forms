@@ -119,10 +119,14 @@ export default {
           ? undefined
           : data[this.dataExtraction.totalItemsProperty]
       }
-      for (let key in this.formatters) {
-        tableData.forEach(x => {
-          x[key] = this.formatters[key](x[key])
-        })
+      if (tableData.length) {
+        for (let key in this.formatters) {
+          if (Object.keys(tableData[0]).includes(key)) {
+            tableData.forEach(x => {
+              x[key] = this.formatters[key](x[key])
+            })
+          }
+        }
       }
       this.tableItems = tableData
       this.loading = false

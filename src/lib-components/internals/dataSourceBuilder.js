@@ -145,7 +145,6 @@ async function loadDataSourceFromApi(
       }
     })
   } catch (error) {
-    console.log(error.response)
     throw new Error('Failed to load the datasource from ' + api.endpoint + '.')
   }
 }

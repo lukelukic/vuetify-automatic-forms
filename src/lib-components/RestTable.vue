@@ -84,7 +84,7 @@
         <v-card-text class="pt-3">
           <ApiForm
             ref="insertForm"
-            :formElements="editFormElements"
+            :formElements="insertFormElements"
             :endpoint="resource"
             :successFn="createSuccess"
             :errorFn="updateError"

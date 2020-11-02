@@ -182,6 +182,10 @@ let props = {
     type: Array,
     required: false
   },
+  insertFormElements: {
+    type: Array,
+    required: false
+  },
   extractInsertErrors: {
     type: Function,
     required: false
