@@ -1,75 +1,73 @@
 <template>
   <ValidationObserver ref="observer">
     <v-row :class="inline ? 'justify-end' : 'justify-start'">
-      <v-col
-        v-for="formElement in formElementsOrdered"
-        :cols="cols(formElement)"
-        :offset="offset(formElement)"
-        :key="formElement.key"
-        class="form-builder-input"
-      >
-        <ValidationProvider
-          :vid="formElement.key"
-          v-slot="{ errors }"
-          :name="formElement.key"
-          :rules="rules(formElement)"
-          :key="formElement.key"
+      <template v-for="formElement in formElementsOrdered">
+        <v-col
           v-if="!hidden[formElement.key]"
+          :cols="cols(formElement)"
+          :offset="offset(formElement)"
+          :key="formElement.key"
+          class="form-builder-input"
         >
-          <datepicker
-            v-if="
-              component(formElement) == 'datepicker' && !hidden[formElement.key]
-            "
-            :no-value-to-custom-elem="true"
-            v-model="formObject[formElement.key]"
-            v-bind="formElement.props"
+          <ValidationProvider
+            :vid="formElement.key"
+            v-slot="{ errors }"
+            :name="formElement.key"
+            :rules="rules(formElement)"
+            :key="formElement.key"
+            v-if="!hidden[formElement.key]"
           >
-            <v-text-field
+            <datepicker
+              v-if="component(formElement) == 'datepicker'"
+              :no-value-to-custom-elem="true"
+              v-model="formObject[formElement.key]"
+              v-bind="formElement.props"
+            >
+              <v-text-field
+                :disabled="disabled[formElement.key]"
+                :value="formObject[formElement.key]"
+                :hint="hint(formElement)"
+                @change="handleChange(formElement.key, $event, true)"
+                :ref="formElement.key"
+                v-bind:key="formElement.key"
+                :label="label(formElement)"
+                outlined
+                :hide-details="true"
+                :error-messages="errors"
+                :dense="mDense(formElement)"
+                :color="mColor(formElement)"
+                :clearable="mClearable(formElement)"
+                persistent-hint
+                v-bind="formElement.props"
+              />
+            </datepicker>
+
+            <component
+              v-if="component(formElement) != 'datepicker'"
               :disabled="disabled[formElement.key]"
-              :value="formObject[formElement.key]"
               :hint="hint(formElement)"
-              @change="handleChange(formElement.key, $event, true)"
+              @change="handleChange(formElement.key, $event)"
+              :is="component(formElement)"
               :ref="formElement.key"
               v-bind:key="formElement.key"
               :label="label(formElement)"
+              :type="type(formElement)"
+              :items="dataSources[formElement.key]"
               outlined
-              :hide-details="true"
+              hide-details="auto"
               :error-messages="errors"
+              v-model="formObject[formElement.key]"
+              :src="formObject[formElement.key]"
               :dense="mDense(formElement)"
               :color="mColor(formElement)"
               :clearable="mClearable(formElement)"
               persistent-hint
               v-bind="formElement.props"
+              v-on:keyup.enter="onEnter"
             />
-          </datepicker>
-
-          <component
-            v-if="
-              component(formElement) != 'datepicker' && !hidden[formElement.key]
-            "
-            :disabled="disabled[formElement.key]"
-            :hint="hint(formElement)"
-            @change="handleChange(formElement.key, $event)"
-            :is="component(formElement)"
-            :ref="formElement.key"
-            v-bind:key="formElement.key"
-            :label="label(formElement)"
-            :type="type(formElement)"
-            :items="dataSources[formElement.key]"
-            outlined
-            hide-details="auto"
-            :error-messages="errors"
-            v-model="formObject[formElement.key]"
-            :src="formObject[formElement.key]"
-            :dense="mDense(formElement)"
-            :color="mColor(formElement)"
-            :clearable="mClearable(formElement)"
-            persistent-hint
-            v-bind="formElement.props"
-            v-on:keyup.enter="onEnter"
-          />
-        </ValidationProvider>
-      </v-col>
+          </ValidationProvider>
+        </v-col>
+      </template>
 
       <slot></slot>
 
