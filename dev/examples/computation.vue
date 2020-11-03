@@ -38,7 +38,8 @@ export default {
               change: {
                 type: 'value',
                 bindings: {
-                  luka: 'lukic'
+                  luka: 'lukic',
+                  onNonEmpty: '123'
                 }
               }
             }
