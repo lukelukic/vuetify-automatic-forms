@@ -44,7 +44,12 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <v-dialog v-model="dialogEdit" max-width="500px" :fullscreen="fullscreen">
+    <v-dialog
+      v-model="dialogEdit"
+      v-if="dialogEdit"
+      max-width="500px"
+      :fullscreen="fullscreen"
+    >
       <v-card>
         <v-toolbar color="primary" dark>
           <v-toolbar-title>Edit</v-toolbar-title>
@@ -70,7 +75,12 @@
         </v-card-text>
       </v-card>
     </v-dialog>
-    <v-dialog v-model="dialogCreate" max-width="500px" :fullscreen="fullscreen">
+    <v-dialog
+      v-if="dialogCreate"
+      v-model="dialogCreate"
+      max-width="500px"
+      :fullscreen="fullscreen"
+    >
       <v-card>
         <v-toolbar color="primary" dark>
           <v-toolbar-title>Create</v-toolbar-title>
