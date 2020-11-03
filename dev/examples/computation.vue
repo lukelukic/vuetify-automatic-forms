@@ -23,7 +23,6 @@ export default {
           color: 'yellow',
           label: '$firstName',
           order: 2,
-          hidden: true,
           affects: [
             {
               key: 'job',
@@ -31,6 +30,15 @@ export default {
                 type: 'order',
                 bindings: {
                   1: 4
+                }
+              }
+            },
+            {
+              key: 'lastName',
+              change: {
+                type: 'value',
+                bindings: {
+                  luka: 'lukic'
                 }
               }
             }
@@ -89,6 +97,24 @@ export default {
           props: {
             multiple: true
           }
+        },
+        {
+          key: 'chb',
+          component: 'v-checkbox',
+          cols: 6,
+          label: 'Chbtext',
+          affects: [
+            {
+              key: 'lastName',
+              change: {
+                type: 'value',
+                bindings: {
+                  true: 'lukic',
+                  false: 'none'
+                }
+              }
+            }
+          ]
         },
         {
           key: 'jobTitle',

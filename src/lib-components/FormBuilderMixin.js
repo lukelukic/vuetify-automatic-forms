@@ -9,7 +9,8 @@ export default {
         disable: this.handleDisable,
         clear: this.handleClear,
         order: this.handleOrder,
-        cols: this.handleCols
+        cols: this.handleCols,
+        value: this.handleValue
       }
     }
   },
@@ -198,6 +199,23 @@ export default {
         ]
       }
       this.$set(this.localFormElements, index, elementToChangeOrderTo)
+    },
+    handleValue(toBeAffected, value) {
+      const affectee = this.formElements.filter(
+        x => x.key == toBeAffected.key
+      )[0]
+
+      if (!affectee) {
+        throw new Error(
+          `There was an error affecting the value. Used key ${toBeAffected.key} did not resolve to any input element.`
+        )
+      }
+
+      const binding = toBeAffected.change.bindings[value]
+
+      if (binding) {
+        this.$set(this.formObject, toBeAffected.key, binding)
+      }
     },
     handleDataSourceChange: async function(toBeAffected, value) {
       var affectee = this.formElements.filter(x => x.key == toBeAffected.key)[0]
