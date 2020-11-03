@@ -213,7 +213,12 @@ export default {
 
       const binding = toBeAffected.change.bindings[value]
 
-      if (binding) {
+      if (
+        toBeAffected.change.bindings &&
+        Object.keys(toBeAffected.change.bindings).includes(
+          typeof value == 'string' ? value : String(value)
+        )
+      ) {
         this.$set(this.formObject, toBeAffected.key, binding)
       }
     },
