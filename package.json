@@ -1,6 +1,6 @@
 {
   "name": "vuetify-automatic-forms",
-  "version": "1.3.7",
+  "version": "1.3.8",
   "description": "",
   "scripts": {
     "serve": "vue-cli-service serve dev/serve.js",

@@ -1,7 +1,6 @@
 var axios = undefined
 
 async function buildDataSource(formElement) {
-  console.log(formElement)
   if (Array.isArray(formElement.dataSource)) {
     return formElement.props?.multiple
       ? formElement.dataSource
