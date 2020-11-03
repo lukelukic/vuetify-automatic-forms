@@ -39,7 +39,7 @@ export default {
                 type: 'value',
                 bindings: {
                   luka: 'lukic',
-                  onNonEmpty: '123'
+                  $any: '123'
                 }
               }
             }

@@ -221,16 +221,15 @@ export default {
       ) {
         this.$set(this.formObject, toBeAffected.key, binding)
       } else {
-        console.log(toBeAffected.change.bindings)
         if (
           toBeAffected.change.bindings &&
-          Object.keys(toBeAffected.change.bindings).includes('onNonEmpty')
+          Object.keys(toBeAffected.change.bindings).includes('$any')
         ) {
           if (value != undefined) {
             this.$set(
               this.formObject,
               toBeAffected.key,
-              toBeAffected.change.bindings['onNonEmpty']
+              toBeAffected.change.bindings['$any']
             )
           } else {
             this.$set(this.formObject, toBeAffected.key, undefined)
