@@ -42,6 +42,13 @@ export default {
                   $any: '123'
                 }
               }
+            },
+            {
+              change: {
+                type: 'enable',
+                when: 'luka',
+                affectees: ['jobTitle']
+              }
             }
           ]
         },

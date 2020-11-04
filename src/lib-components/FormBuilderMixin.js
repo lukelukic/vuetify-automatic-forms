@@ -7,6 +7,7 @@ export default {
         dataSource: this.handleDataSourceChange,
         hide: this.handleHide,
         disable: this.handleDisable,
+        enable: this.handleEnable,
         clear: this.handleClear,
         order: this.handleOrder,
         cols: this.handleCols,
@@ -187,6 +188,24 @@ export default {
           this.disabled,
           toBeAffected.key,
           this.shouldChange(toBeAffected.change, value)
+        )
+      }
+    },
+    handleEnable(toBeAffected, value) {
+      if (toBeAffected.change.affectees) {
+        var that = this
+        toBeAffected.change.affectees.forEach(function(key) {
+          that.$set(
+            that.disabled,
+            key,
+            !that.shouldChange(toBeAffected.change, value)
+          )
+        })
+      } else {
+        this.$set(
+          this.disabled,
+          toBeAffected.key,
+          !this.shouldChange(toBeAffected.change, value)
         )
       }
     },
