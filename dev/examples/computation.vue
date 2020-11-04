@@ -79,12 +79,12 @@ export default {
               }
             },
             {
-              key: 'job',
               change: {
                 type: 'disable',
                 whenNot: function(val) {
                   return val == 3
-                }
+                },
+                affectees: ['job', 'chb']
               }
             }
           ]

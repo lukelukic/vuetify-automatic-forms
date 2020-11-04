@@ -173,11 +173,22 @@ export default {
       this.reactivePropertyChange(toBeAffected, value, 'order')
     },
     handleDisable(toBeAffected, value) {
-      this.$set(
-        this.disabled,
-        toBeAffected.key,
-        this.shouldChange(toBeAffected.change, value)
-      )
+      if (toBeAffected.change.affectees) {
+        var that = this
+        toBeAffected.change.affectees.forEach(function(key) {
+          that.$set(
+            that.disabled,
+            key,
+            that.shouldChange(toBeAffected.change, value)
+          )
+        })
+      } else {
+        this.$set(
+          this.disabled,
+          toBeAffected.key,
+          this.shouldChange(toBeAffected.change, value)
+        )
+      }
     },
     handleCols(toBeAffected, value) {
       this.reactivePropertyChange(toBeAffected, value, 'cols')
