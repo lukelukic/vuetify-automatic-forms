@@ -244,7 +244,7 @@ export default {
 
       if (!affectee) {
         throw new Error(
-          `There was an error affecting the value. Used key ${toBeAffected.key} did not resolve to any input element.`
+          `There was an error affecting the value. Used key ${key} did not resolve to any input element.`
         )
       }
 
