@@ -34,13 +34,13 @@ export default {
               }
             },
             {
-              key: 'lastName',
               change: {
                 type: 'value',
                 bindings: {
                   luka: 'lukic',
                   $any: '123'
-                }
+                },
+                affectees: ['lastName', 'email']
               }
             },
             {

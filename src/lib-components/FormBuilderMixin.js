@@ -231,9 +231,16 @@ export default {
       this.$set(this.localFormElements, index, elementToChangeOrderTo)
     },
     handleValue(toBeAffected, value) {
-      const affectee = this.formElements.filter(
-        x => x.key == toBeAffected.key
-      )[0]
+      if (toBeAffected.change.affectees) {
+        for (let key of toBeAffected.change.affectees) {
+          this.changeValue(toBeAffected, value, key)
+        }
+      } else {
+        this.changeValue(toBeAffected, value, toBeAffected.key)
+      }
+    },
+    changeValue(toBeAffected, value, key) {
+      const affectee = this.formElements.filter(x => x.key == key)[0]
 
       if (!affectee) {
         throw new Error(
@@ -249,7 +256,7 @@ export default {
           typeof value == 'string' ? value : String(value)
         )
       ) {
-        this.$set(this.formObject, toBeAffected.key, binding)
+        this.$set(this.formObject, key, binding)
       } else {
         if (
           toBeAffected.change.bindings &&
@@ -258,11 +265,11 @@ export default {
           if (value != undefined) {
             this.$set(
               this.formObject,
-              toBeAffected.key,
+              key,
               toBeAffected.change.bindings['$any']
             )
           } else {
-            this.$set(this.formObject, toBeAffected.key, undefined)
+            this.$set(this.formObject, key, undefined)
           }
         }
       }
