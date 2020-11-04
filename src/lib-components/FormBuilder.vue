@@ -47,6 +47,7 @@
               :disabled="disabled[formElement.key]"
               :hint="hint(formElement)"
               @change="handleChange(formElement.key, $event)"
+              @input="handleChange(formElement.key, $event)"
               :is="component(formElement)"
               :ref="formElement.key"
               v-bind:key="formElement.key"
