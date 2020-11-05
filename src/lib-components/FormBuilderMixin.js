@@ -17,6 +17,7 @@ export default {
   },
   beforeMount() {
     dataSourceBuilder.setAxios(this.$formBuilderAxios)
+    dataSourceBuilder.setVue(this)
   },
   methods: {
     toSentenceCase(text) {

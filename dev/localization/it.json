@@ -13,5 +13,6 @@
     "categoryName": "Nome della categoria",
     "price": "Prezzo",
     "image": "Immagine",
-    "perPage": "Righe per pagina"
+    "perPage": "Righe per pagina",
+    "developer": "Sviluppatore"
 }

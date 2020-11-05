@@ -47,7 +47,7 @@ export default {
           component: 'v-autocomplete',
           dataSource: [
             {
-              text: 'Developer',
+              text: '$developer',
               value: 0
             },
             {
