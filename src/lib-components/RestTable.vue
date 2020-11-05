@@ -7,10 +7,15 @@
       :excludedHeaders="excludedHeaders"
       :useCustomDialog="customDialog != undefined"
     >
-      <template v-if="useInsert" v-slot:header>
-        <v-btn :color="addBtn.color" small @click="createItem">{{
-          translate(addBtn.text)
-        }}</v-btn>
+      <template v-slot:header>
+        <v-btn
+          v-if="useInsert"
+          :color="addBtn.color"
+          small
+          @click="createItem"
+          >{{ translate(addBtn.text) }}</v-btn
+        >
+        <slot></slot>
       </template>
       <template v-if="customDialog" v-slot:dialog="item">
         <v-icon @click="openCustomDialog(item)">
