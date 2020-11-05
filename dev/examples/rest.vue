@@ -18,8 +18,7 @@
     searchTitle="Available filters"
     :dataExtraction="dataExtraction"
     :customDialog="dialog"
-  >
-  </RestTable>
+  />
 </template>
 
 <script>

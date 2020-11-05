@@ -2,7 +2,8 @@
   <v-row>
     <v-col
       v-show="!isClientSide && filterPosition != 'top'"
-      :cols="filterPosition == 'top' ? 12 : 2"
+      cols="3"
+      xl="2"
       :order="filtersColOrder"
       style="padding-bottom:0px"
     >
@@ -26,7 +27,8 @@
     </v-col>
     <v-col
       style="padding-top:0px"
-      :cols="isClientSide || filterPosition == 'top' ? 12 : 10"
+      :cols="isClientSide || filterPosition == 'top' ? 12 : 9"
+      :xl="isClientSide || filterPosition == 'top' ? 12 : 10"
       :order="tableColOrder"
     >
       <v-row no-gutters class="pb-3">
@@ -36,7 +38,7 @@
         <v-col cols="9">
           <template v-if="isClientSide">
             <v-row no-gutters>
-              <v-col cols="4" offset="8">
+              <v-col cols="9" offset="3" md="4" offset-md="8">
                 <v-text-field
                   class="shrink"
                   outlined
