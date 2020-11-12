@@ -14,7 +14,7 @@ import api from './api'
 import VueI18n from 'vue-i18n'
 import languages from './localization/laguanges'
 import dialog from './examples/dialogcomponent'
-
+import '../src/assets/css/formBuilder.css'
 Vue.component('custom-dialog', dialog)
 
 Vue.config.productionTip = false

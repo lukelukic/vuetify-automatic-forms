@@ -41,8 +41,8 @@ export default {
         return
       }
       for (let el of this.formElements) {
-        let incommingValue = this.incommingValue(el.key)
-        if (incommingValue !== '' && incommingValue !== undefined) {
+        if (Object.keys(this.incommingObject).includes(el.key)) {
+          let incommingValue = this.incommingValue(el.key)
           if (el.props && el.props.multiple && !Array.isArray(incommingValue)) {
             this.$set(this.formObject, el.key, [incommingValue])
           } else {
