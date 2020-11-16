@@ -5,7 +5,7 @@ export default {
     required: true,
     validator: propValidation.formElements
   },
-  disabled: {
+  loading: {
     type: Boolean,
     default() {
       return false

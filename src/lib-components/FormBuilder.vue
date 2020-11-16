@@ -77,13 +77,14 @@
           <v-btn
             v-if="useCancel"
             small
-            :disabled="disabled"
+            :disabled="loading"
             :color="cancel.color"
             @click="reset"
             >{{ translate(cancel.text, true) }}</v-btn
           >
           <v-btn
-            :disabled="disabled"
+            :disabled="loading"
+            :loading="loading"
             small
             :color="submit.color"
             @click="performSubmit"
