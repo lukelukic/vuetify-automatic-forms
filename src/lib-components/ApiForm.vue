@@ -14,6 +14,7 @@
       :submitOnEnter="submitOnEnter"
       :submitOnLoad="submitOnLoad"
       ref="formBuilder"
+      :disabled="disabled"
       :inline="inline"
     />
     <v-snackbar v-model="snackbar" v-if="snackbar" right :color="snackbarColor">
@@ -34,7 +35,8 @@ export default {
       snackbar: false,
       snackbarColor: 'success',
       snackbarText: 'Successfull insert.',
-      validationErrors: {}
+      validationErrors: {},
+      disabled: false
     }
   },
   props: {
@@ -144,6 +146,7 @@ export default {
       this.$refs.formBuilder.reset()
     },
     handleSubmit(formObject) {
+      this.disabled = true
       if (this.contentType == 'multipart/form-data') {
         formObject = this.getMultipartObject(formObject)
       }
@@ -179,6 +182,7 @@ export default {
 
       this.$formBuilderAxios(request)
         .then(response => {
+          this.disabled = false
           if (this.successFn) {
             this.successFn(response.data)
           } else {
@@ -188,6 +192,7 @@ export default {
           }
         })
         .catch(error => {
+          this.disabled = false
           if (error.response.status == this.validationErrorResponseCode) {
             if (this.extractErrorsFn) {
               this.setErrors(this.extractErrorsFn(error.response.data))

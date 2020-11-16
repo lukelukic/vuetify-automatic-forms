@@ -5,6 +5,12 @@ export default {
     required: true,
     validator: propValidation.formElements
   },
+  disabled: {
+    type: Boolean,
+    default() {
+      return false
+    }
+  },
   errors: {
     type: Object,
     required: false

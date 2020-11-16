@@ -84,7 +84,7 @@
           v-slot:[`item.${column.property}`]="{ item }"
         >
           <div v-if="column.type == 'image'" class="p-2" :key="column.property">
-            <v-img :src="item[column.property]" width="100"></v-img>
+            <v-img :src="item[column.property]" height="50" width="50"></v-img>
           </div>
 
           <template v-if="column.type == 'check'">
