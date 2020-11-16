@@ -2,7 +2,7 @@
   <ApiTable
     :filters="filters"
     :api="api"
-    columnWidth="auto"
+    columnWidth="fit"
     :excludedHeaders="exclude"
     :tableProps="tableProps"
     processDataOn="client"

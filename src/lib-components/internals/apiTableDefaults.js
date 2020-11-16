@@ -9,6 +9,15 @@ let props = {
     type: Array,
     required: true
   },
+  searchSubmit: {
+    type: Object,
+    default: function() {
+      return {
+        text: 'Search',
+        color: 'primary'
+      }
+    }
+  },
   specializedColumns: {
     type: Array,
     required: false

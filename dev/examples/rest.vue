@@ -18,6 +18,8 @@
     searchTitle="Available filters"
     :dataExtraction="dataExtraction"
     :customDialog="dialog"
+    columnWidth="fit"
+    :searchSubmit="{ color: 'red', text: 'Search' }"
   />
 </template>
 

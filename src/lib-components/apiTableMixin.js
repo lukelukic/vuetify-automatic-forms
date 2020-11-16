@@ -46,7 +46,9 @@ export default {
         }
       }
 
-      headers.forEach(x => this.setHeaderWidth(x))
+      if (this.tableItems.length) {
+        headers.forEach(x => this.setHeaderWidth(x))
+      }
 
       return headers
     },

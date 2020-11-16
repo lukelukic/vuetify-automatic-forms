@@ -22,6 +22,15 @@ let props = {
     type: String,
     default: 'Search'
   },
+  searchSubmit: {
+    type: Object,
+    default: function() {
+      return {
+        text: 'Search',
+        color: 'primary'
+      }
+    }
+  },
   formatters: {
     type: Object,
     required: false

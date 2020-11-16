@@ -21,6 +21,7 @@
             @success="handleSearchResponse"
             :queryParams="initialQueryParamsLocal"
             :inline="filterPosition == 'top'"
+            :submit="searchSubmit"
           />
         </v-card-text>
       </v-card>
@@ -62,6 +63,7 @@
             @success="handleSearchResponse"
             :queryParams="initialQueryParamsLocal"
             :inline="filterPosition == 'top'"
+            :submit="searchSubmit"
           />
         </v-col>
       </v-row>
