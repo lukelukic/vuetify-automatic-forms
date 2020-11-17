@@ -98,7 +98,8 @@ export default {
             if (
               !this.hidden[prop] &&
               this.formObject[prop] !== undefined &&
-              this.formObject[prop] !== null
+              this.formObject[prop] !== null &&
+              this.formObject[prop].toString().trim() !== ''
             ) {
               if (prop.includes('_upload')) {
                 let originalPropName = prop.split('_upload')[0]
