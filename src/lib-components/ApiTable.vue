@@ -107,6 +107,10 @@
               <v-icon>mdi-close</v-icon>
             </v-btn>
           </template>
+
+          <template v-if="column.type == 'date'">
+            {{ localDateTime(item[column.property]) }}
+          </template>
         </template>
 
         <template v-slot:item.action="{ item }">
@@ -125,6 +129,8 @@
 import defaults from './internals/apiTableDefaults'
 import apiTableMixin from './apiTableMixin'
 import localizationMixin from './internals/localizationMixin'
+import Vue from 'vue'
+import { DateTime } from 'luxon'
 export default {
   name: 'ApiTable',
   props: defaults.props,
@@ -136,9 +142,14 @@ export default {
       options: {},
       totalItems: undefined,
       initialQueryParamsLocal: {},
-      imageColumns: [],
-      checkColumns: [],
       loading: true
+    }
+  },
+  methods: {
+    localDateTime(dateTime) {
+      var date = DateTime.fromISO(dateTime, { locale: Vue.prototype.locale })
+      date.setLocale('en-GB')
+      return date.toLocaleString(DateTime.DATETIME_MED)
     }
   },
   watch: {

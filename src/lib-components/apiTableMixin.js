@@ -36,9 +36,9 @@ export default {
       }
 
       if (this.rowActions) {
-        if (!headers.some(x => x.text == 'Action')) {
+        if (!headers.some(x => x.value == 'action')) {
           headers.push({
-            text: 'Action',
+            text: this.translate('$action'),
             value: 'action',
             width: '80',
             sortable: false
@@ -81,16 +81,6 @@ export default {
 
     if (this.callApiOnLoad) {
       this.$refs.search.executeSearch()
-    }
-
-    if (this.specializedColumns) {
-      this.imageColumns = this.specializedColumns
-        .filter(x => x.type == 'image')
-        .map(x => x.property)
-
-      this.checkColumns = this.specializedColumns
-        .filter(x => x.type == 'check')
-        .map(x => x.property)
     }
   },
   methods: {

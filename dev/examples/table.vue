@@ -19,7 +19,8 @@ export default {
     return {
       specializedColumns: [
         { property: 'picture', type: 'image' },
-        { property: 'price', type: 'check' }
+        { property: 'price', type: 'check' },
+        { property: 'createdAt', type: 'date' }
       ],
       filters: [{ key: 'name', cols: 3, label: '$name' }],
       api: { endpoint: '/api/products' },
