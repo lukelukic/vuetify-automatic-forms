@@ -222,6 +222,7 @@ export default {
     },
     updateSuccess: function() {
       this.dialogEdit = false
+      this.$emit('updateSuccess')
       this.$refs.table.refreshTable()
     },
     updateError: function() {
@@ -229,6 +230,7 @@ export default {
     },
     createSuccess: function() {
       this.dialogCreate = false
+      this.$emit('createSuccess')
       this.$refs.table.refreshTable()
     }
   }
