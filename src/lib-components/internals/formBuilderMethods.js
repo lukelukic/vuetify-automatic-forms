@@ -96,7 +96,7 @@ export default {
           let objectToSubmit = {}
           for (let prop in this.formObject) {
             if (
-              !this.hidden[prop] &&
+              (!this.hidden[prop] || this.find(prop).sendOnHidden) &&
               this.formObject[prop] !== undefined &&
               this.formObject[prop] !== null &&
               this.formObject[prop].toString().trim() !== ''
