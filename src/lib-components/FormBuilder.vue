@@ -75,6 +75,7 @@
       <v-col :cols="inline ? 1 : 12" class="form-builder-input">
         <span :class="inline ? '' : 'float-right'">
           <v-btn
+            id="formSubmitCancel"
             v-if="useCancel"
             small
             :disabled="loading"
@@ -83,6 +84,7 @@
             >{{ translate(cancel.text, true) }}</v-btn
           >
           <v-btn
+            id="formBuilderSubmit"
             :disabled="loading"
             :loading="loading"
             small
