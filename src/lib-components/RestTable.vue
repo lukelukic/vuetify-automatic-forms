@@ -57,7 +57,7 @@
     >
       <v-card>
         <v-toolbar color="primary" dark>
-          <v-toolbar-title>Edit</v-toolbar-title>
+          <v-toolbar-title>{{ translate('$restTable.edit') }}</v-toolbar-title>
 
           <v-spacer></v-spacer>
 
@@ -88,7 +88,9 @@
     >
       <v-card>
         <v-toolbar color="primary" dark>
-          <v-toolbar-title>Create</v-toolbar-title>
+          <v-toolbar-title>{{
+            translate('$restTable.create')
+          }}</v-toolbar-title>
 
           <v-spacer></v-spacer>
 

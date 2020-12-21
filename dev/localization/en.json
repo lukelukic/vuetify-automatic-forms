@@ -5,5 +5,9 @@
     "sentences": {
         "email": "Email from edu domain."
     },
-    "perPage": "Rows per page"
+    "perPage": "Rows per page",
+    "restTable": {
+        "create": "Add new",
+        "edit": "Edit item"
+    }
 }
