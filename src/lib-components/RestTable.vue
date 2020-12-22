@@ -23,10 +23,15 @@
         </v-icon>
       </template>
       <template v-if="useEdit || useDelete" v-slot:action="item">
-        <v-icon v-if="useEdit" class="mr-2" @click="editItem(item.id)">
+        <v-icon
+          v-if="useEdit"
+          color="orange"
+          class="mr-2"
+          @click="editItem(item.id)"
+        >
           mdi-pencil
         </v-icon>
-        <v-icon v-if="useDelete" @click="deleteItem(item.id)">
+        <v-icon v-if="useDelete" color="red" @click="deleteItem(item.id)">
           mdi-delete
         </v-icon>
       </template>
