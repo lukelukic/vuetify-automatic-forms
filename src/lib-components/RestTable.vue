@@ -25,7 +25,7 @@
       <template v-if="useEdit || useDelete" v-slot:action="item">
         <v-icon
           v-if="useEdit"
-          color="orange"
+          color="crud-edit"
           class="mr-2"
           @click="editItem(item.id)"
         >
@@ -39,18 +39,29 @@
     <slot name="page-bottom"></slot>
     <v-dialog v-model="dialogDelete" max-width="500px">
       <v-card>
+        <v-toolbar color="crud-header" dark>
+          <v-toolbar-title>{{
+            translate('$restTable.delete')
+          }}</v-toolbar-title>
+
+          <v-spacer></v-spacer>
+
+          <v-btn icon>
+            <v-icon @click="closeDelete">mdi-close</v-icon>
+          </v-btn>
+        </v-toolbar>
+
         <v-card-title class="headline">{{
           translate(messages.deleteConfirmMessage)
         }}</v-card-title>
         <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="closeDelete">{{
+          <v-spacer></v-spacer><v-spacer></v-spacer>
+          <v-btn :color="updateCancel.color" @click="closeDelete">{{
             translate(messages.deleteNo)
           }}</v-btn>
-          <v-btn color="blue darken-1" text @click="deleteItemConfirm">{{
+          <v-btn :color="updateSubmit.color" @click="deleteItemConfirm">{{
             translate(messages.deleteYes)
           }}</v-btn>
-          <v-spacer></v-spacer>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -61,7 +72,7 @@
       :fullscreen="fullscreen"
     >
       <v-card>
-        <v-toolbar color="primary" dark>
+        <v-toolbar color="crud-header" dark>
           <v-toolbar-title>{{ translate('$restTable.edit') }}</v-toolbar-title>
 
           <v-spacer></v-spacer>
@@ -92,7 +103,7 @@
       :fullscreen="fullscreen"
     >
       <v-card>
-        <v-toolbar color="primary" dark>
+        <v-toolbar color="crud-header" dark>
           <v-toolbar-title>{{
             translate('$restTable.create')
           }}</v-toolbar-title>

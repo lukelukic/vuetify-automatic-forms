@@ -119,6 +119,10 @@ let props = {
   useCustomDialog: {
     type: Boolean,
     default: false
+  },
+  itemsPerPageOptions: {
+    type: Array,
+    required: false
   }
 }
 

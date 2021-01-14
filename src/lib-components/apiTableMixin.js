@@ -8,6 +8,11 @@ export default {
     tableColOrder() {
       return Number(this.filterPosition == 'left') + 1
     },
+    itemsPerPageOptionsComp() {
+      return this.itemsPerPageOptions
+        ? this.itemsPerPageOptions
+        : [5, 10, 15, -1]
+    },
     tableHeaders() {
       let headers = []
 
@@ -127,6 +132,9 @@ export default {
       this.processData(data)
     },
     setHeaderWidth: function(header) {
+      if (header.width) {
+        return
+      }
       if (!isNaN(this.columnWidth)) {
         header.width = this.columnWidth
         return

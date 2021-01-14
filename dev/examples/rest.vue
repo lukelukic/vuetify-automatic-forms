@@ -34,7 +34,8 @@ export default {
       },
       specializedColumns: [{ property: 'picture', type: 'image' }],
       tableProps: {
-        dense: true
+        dense: true,
+        noDataText: '$noData'
       },
       insertOpts: {
         submitText: '$submit',

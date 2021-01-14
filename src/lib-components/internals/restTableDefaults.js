@@ -206,6 +206,10 @@ let props = {
   specializedColumns: {
     type: Array,
     required: false
+  },
+  itemsPerPageOptions: {
+    type: Array,
+    required: false
   }
 }
 

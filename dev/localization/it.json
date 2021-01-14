@@ -6,6 +6,7 @@
     "sentences": {
         "email": "Email da domain edu."
     },
+    "noData": "No data currently available.",
     "submit": "Invia",
     "cancel": "Annulla",
     "search": "ricerca",
@@ -15,5 +16,8 @@
     "image": "Immagine",
     "perPage": "Righe per pagina",
     "developer": "Sviluppatore",
-    "action": "Actione"
+    "action": "Actione",
+    "restTable": {
+        "delete": "Brisanje"
+    }
 }

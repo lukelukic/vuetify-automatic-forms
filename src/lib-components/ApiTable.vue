@@ -76,7 +76,9 @@
         :loading="loading"
         :server-items-length="totalItems"
         :footer-props="{
-          itemsPerPageText: translate(itemsPerPageText)
+          'items-per-page-text': translate('$restTable.perPage'),
+          'items-per-page-all-text': translate('$restTable.allRecords'),
+          'items-per-page-options': itemsPerPageOptionsComp
         }"
       >
         <template
