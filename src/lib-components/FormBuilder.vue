@@ -85,7 +85,7 @@
           >
           <v-btn
             id="formBuilderSubmit"
-            :disabled="loading"
+            :disabled="loading || !formIsValid"
             :loading="loading"
             small
             :color="submit.color"
@@ -124,6 +124,7 @@ export default {
   },
   data: function() {
     return {
+      formIsValid: true,
       date: '',
       formObject: {},
       dataSources: {},

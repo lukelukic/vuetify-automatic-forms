@@ -34,7 +34,9 @@ export default {
         this.$set(this.hidden, el.key, el.hidden)
       }
 
-      this.populateValuesBasedOnIncommingObject()
+      await this.populateValuesBasedOnIncommingObject()
+
+      this.formIsValid = await this.$refs.observer.validate()
     },
     populateValuesBasedOnIncommingObject() {
       if (!this.incommingObject) {
@@ -59,17 +61,23 @@ export default {
       return await dataSourceBuilder.buildDataSource(formElement)
     },
     handleChange(key, value, isDate) {
-      if (isDate) {
-        if (!value) {
-          this.$set(this.formObject, key, '')
+      this.$refs.observer.validate().then(() => {
+        this.$refs.observer.validate().then(x => {
+          this.formIsValid = x
+        })
+
+        if (isDate) {
+          if (!value) {
+            this.$set(this.formObject, key, '')
+          }
+          return
         }
-        return
-      }
 
-      let changeFunctions = this.changeFunctionChain()
+        let changeFunctions = this.changeFunctionChain()
 
-      changeFunctions.forEach(x => {
-        x(key, value)
+        changeFunctions.forEach(x => {
+          x(key, value)
+        })
       })
     },
     changeFunctionChain() {

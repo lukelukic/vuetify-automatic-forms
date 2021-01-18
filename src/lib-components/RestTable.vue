@@ -56,12 +56,20 @@
         }}</v-card-title>
         <v-card-actions>
           <v-spacer></v-spacer><v-spacer></v-spacer>
-          <v-btn :color="updateCancel.color" @click="closeDelete">{{
-            translate(messages.deleteNo)
-          }}</v-btn>
-          <v-btn :color="updateSubmit.color" @click="deleteItemConfirm">{{
-            translate(messages.deleteYes)
-          }}</v-btn>
+          <v-btn
+            small
+            id="restDeleteNo"
+            :color="updateCancel.color"
+            @click="closeDelete"
+            >{{ translate(messages.deleteNo) }}</v-btn
+          >
+          <v-btn
+            small
+            id="restDeleteYes"
+            :color="updateSubmit.color"
+            @click="deleteItemConfirm"
+            >{{ translate(messages.deleteYes) }}</v-btn
+          >
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -86,6 +94,7 @@
             :formElements="editFormElements"
             :resource="resource"
             :id="toUpdate"
+            :color="formFieldsColor"
             @success="updateSuccess"
             @error="updateError"
             :submit="updateSubmit"
@@ -123,6 +132,7 @@
             :errorFn="updateError"
             :submit="insertSubmit"
             :cancel="insertCancel"
+            :color="formFieldsColor"
             @formReset="dialogCreate = false"
             :extractErrorsFn="extractInsertErrors"
           />

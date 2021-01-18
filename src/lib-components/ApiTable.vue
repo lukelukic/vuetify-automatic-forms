@@ -14,6 +14,7 @@
         <v-card-text>
           <SearchForm
             class="mt-2"
+            :color="formFieldsColor"
             v-show="showSearchForm"
             ref="search"
             :formElements="filters"
@@ -56,6 +57,7 @@
           <SearchForm
             v-if="!isClientSide && filterPosition == 'top'"
             v-show="showSearchForm"
+            :color="formFieldsColor"
             ref="search"
             class="mr-4"
             :formElements="filters"

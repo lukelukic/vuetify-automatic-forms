@@ -104,6 +104,12 @@ let props = {
       return ['client', 'server', 'mixed'].includes(value)
     }
   },
+  formFieldsColor: {
+    type: String,
+    default() {
+      return 'primary'
+    }
+  },
   inlineSearch: {
     type: Boolean,
     default: false

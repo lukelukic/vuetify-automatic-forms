@@ -19,6 +19,7 @@
     :dataExtraction="dataExtraction"
     :customDialog="dialog"
     columnWidth="fit"
+    formFieldsColor="red"
     :searchSubmit="{ color: 'red', text: 'Search' }"
   />
 </template>

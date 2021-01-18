@@ -5,6 +5,12 @@ let props = {
       return {}
     }
   },
+  formFieldsColor: {
+    type: String,
+    default() {
+      return 'primary'
+    }
+  },
   addBtn: {
     type: Object,
     default() {
