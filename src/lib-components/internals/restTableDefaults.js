@@ -159,6 +159,10 @@ let props = {
       return defaultQueryStringBuilder(options)
     }
   },
+  showDeleteErrors:{
+    type: Function,
+    required: false
+  },
   dataExtraction: {
     type: Object | Function,
     default: function() {
