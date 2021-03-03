@@ -43,7 +43,7 @@ export default {
               change: {
                 type: 'dataSource',
                 api: {
-                  endpoint: '/api/products?&categoryId=',
+                  endpoint: '/api/products?test=true&categoryId=',
                   associateValue: true
                 }
               }

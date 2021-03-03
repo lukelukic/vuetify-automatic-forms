@@ -19,5 +19,6 @@
     "action": "Actione",
     "restTable": {
         "delete": "Brisanje"
-    }
+    },
+    "choose": "Seleziona un'opzione..."
 }

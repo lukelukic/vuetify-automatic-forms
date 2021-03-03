@@ -15,14 +15,6 @@ async function buildDataSource(formElement) {
   return Modifiers.modify(formElement, dataSource)
 }
 
-function addFirstOption(dataSource) {
-  dataSource.unshift({
-    text: 'Choose...',
-    value: ''
-  })
-  return dataSource
-}
-
 function shouldContainDataSource(formElement) {
   if (!formElement.component) {
     return false
@@ -37,7 +29,6 @@ function shouldContainDataSource(formElement) {
 export default {
   buildDataSource,
   shouldContainDataSource,
-  addFirstOption,
   setAxios: function(axiosInstance) {
     axios = axiosInstance
   },

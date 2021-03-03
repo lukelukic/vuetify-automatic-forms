@@ -342,7 +342,29 @@ export default {
         }
 
         if (toBeAffected.change.api.associateValue) {
-          dataSource.dataSource.endpoint += value
+          if (value === null || value === undefined) {
+            //clearing queryString since no item is selected/checked
+            dataSource.dataSource.endpoint = dataSource.dataSource.endpoint.split(
+              '&'
+            )[dataSource.dataSource.endpoint.split('&').length - 2]
+          } else {
+            if (Array.isArray(value)) {
+              var checkedItems = []
+              for (let item of value) {
+                if (item !== null && item !== undefined) {
+                  checkedItems.push(item)
+                }
+              }
+
+              if (checkedItems.length) {
+                dataSource.dataSource.endpoint += checkedItems
+              } else {
+                dataSource.dataSource.endpoint = dataSource.dataSource.endpoint.split(
+                  '&'
+                )[dataSource.dataSource.endpoint.split('&').length - 2]
+              }
+            }
+          }
         }
 
         this.$set(

@@ -28,6 +28,7 @@ export default {
         {
           key: 'categoryId',
           component: 'v-autocomplete',
+          firstOptionTxt: '$choose',
           dataSource: {
             endpoint: 'api/categories',
             dataProperty: 'data.items'

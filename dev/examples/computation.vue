@@ -68,6 +68,7 @@ export default {
         {
           label: '$profession',
           key: 'profession',
+          firstOptionTxt: '$choose',
           component: 'v-autocomplete',
           dataSource: [
             { text: 'Programmer', value: 1 },

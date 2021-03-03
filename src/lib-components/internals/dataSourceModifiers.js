@@ -3,7 +3,9 @@ var vueInstance = null
 function addFirstOption(formElement, dataSource) {
   if (!isMultiple(formElement) && !isRequired(formElement)) {
     dataSource.unshift({
-      text: 'Choose...',
+      text: formElement.firstOptionTxt
+        ? translate(formElement.firstOptionTxt)
+        : 'Choose...',
       value: ''
     })
   }
