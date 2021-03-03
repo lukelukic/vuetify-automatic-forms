@@ -244,9 +244,19 @@ export default {
     },
     deleteItemConfirm: async function() {
       await this.$formBuilderAxios.delete(this.resource + `/${this.toDelete}`)
-      this.toDelete = undefined
-      this.dialogDelete = false
-      this.$refs.table.refreshTable()
+      .then(response => {
+        this.toDelete = undefined
+        this.dialogDelete = false
+        this.$refs.table.refreshTable()
+      })
+      .catch(error => {
+        this.toDelete = undefined
+        this.dialogDelete = false
+        this.$refs.table.refreshTable()
+        if(this.showDeleteErrors){
+          this.showDeleteErrors(error.response.data)
+        }
+      })
     },
     updateSuccess: function() {
       this.dialogEdit = false
