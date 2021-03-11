@@ -348,7 +348,6 @@ export default {
               '&'
             )[dataSource.dataSource.endpoint.split('&').length - 2]
           } else {
-            console.log(dataSource)
             if (Array.isArray(value)) {
               var checkedItems = []
               for (let item of value) {
@@ -367,7 +366,6 @@ export default {
             }
             else{
               if(value != null && value != undefined){
-                console.log(value)
                 dataSource.dataSource.endpoint += value
               }
             }
