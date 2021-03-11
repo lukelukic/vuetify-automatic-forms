@@ -364,6 +364,11 @@ export default {
                 )[dataSource.dataSource.endpoint.split('&').length - 2]
               }
             }
+            else{
+              if(value != null && value != undefined){
+                dataSource.dataSource.endpoint += value
+              }
+            }
           }
         }
 
