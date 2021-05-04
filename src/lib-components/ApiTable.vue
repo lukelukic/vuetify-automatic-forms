@@ -1,5 +1,5 @@
 <template>
-  <v-row>
+  <v-row :style="style">
     <v-col
       v-show="!isClientSide && filterPosition != 'top'"
       cols="3"
@@ -149,6 +149,13 @@ export default {
       loading: true
     }
   },
+  computed: {
+    style() {
+      return {
+        '--header-color': this.headerColor
+      }
+    }
+  },
   methods: {
     localDateTime(dateTime) {
       var date = DateTime.fromISO(dateTime, { locale: Vue.prototype.locale })
@@ -195,4 +202,8 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.table-header {
+  background-color: var(--header-color);
+}
+</style>

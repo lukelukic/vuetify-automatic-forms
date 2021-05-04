@@ -55,6 +55,10 @@ export default {
         headers.forEach(x => this.setHeaderWidth(x))
       }
 
+      headers.forEach(x => {
+        x.class = 'table-header'
+      })
+
       return headers
     },
     isClientSide() {

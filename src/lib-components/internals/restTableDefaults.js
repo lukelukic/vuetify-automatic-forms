@@ -5,6 +5,10 @@ let props = {
       return {}
     }
   },
+  headerColor: {
+    type: String,
+    required: false
+  },
   formFieldsColor: {
     type: String,
     default() {
@@ -159,7 +163,7 @@ let props = {
       return defaultQueryStringBuilder(options)
     }
   },
-  showDeleteErrors:{
+  showDeleteErrors: {
     type: Function,
     required: false
   },

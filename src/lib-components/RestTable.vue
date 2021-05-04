@@ -243,20 +243,21 @@ export default {
       ;(this.toDelete = undefined), (this.dialogDelete = false)
     },
     deleteItemConfirm: async function() {
-      await this.$formBuilderAxios.delete(this.resource + `/${this.toDelete}`)
-      .then(response => {
-        this.toDelete = undefined
-        this.dialogDelete = false
-        this.$refs.table.refreshTable()
-      })
-      .catch(error => {
-        this.toDelete = undefined
-        this.dialogDelete = false
-        this.$refs.table.refreshTable()
-        if(this.showDeleteErrors){
-          this.showDeleteErrors(error.response.data)
-        }
-      })
+      await this.$formBuilderAxios
+        .delete(this.resource + `/${this.toDelete}`)
+        .then(() => {
+          this.toDelete = undefined
+          this.dialogDelete = false
+          this.$refs.table.refreshTable()
+        })
+        .catch(error => {
+          this.toDelete = undefined
+          this.dialogDelete = false
+          this.$refs.table.refreshTable()
+          if (this.showDeleteErrors) {
+            this.showDeleteErrors(error.response.data)
+          }
+        })
     },
     updateSuccess: function() {
       this.dialogEdit = false

@@ -18,6 +18,10 @@ let props = {
       }
     }
   },
+  headerColor: {
+    type: String,
+    required: false
+  },
   specializedColumns: {
     type: Array,
     required: false
