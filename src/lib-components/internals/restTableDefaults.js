@@ -9,6 +9,10 @@ let props = {
     type: String,
     required: false
   },
+  modalHeaderColor: {
+    type: String,
+    required: false
+  },
   formFieldsColor: {
     type: String,
     default() {

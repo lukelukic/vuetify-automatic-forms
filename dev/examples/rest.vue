@@ -20,7 +20,9 @@
     :customDialog="dialog"
     columnWidth="fit"
     formFieldsColor="red"
+    headerColor="aqua"
     :searchSubmit="{ color: 'red', text: 'Search' }"
+    modalHeaderColor="cyan"
   />
 </template>
 

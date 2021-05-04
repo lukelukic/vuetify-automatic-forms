@@ -39,7 +39,7 @@
     <slot name="page-bottom"></slot>
     <v-dialog v-model="dialogDelete" max-width="500px">
       <v-card>
-        <v-toolbar color="crud-header" dark>
+        <v-toolbar :color="modalHeaderColor">
           <v-toolbar-title>{{
             translate('$restTable.delete')
           }}</v-toolbar-title>
@@ -80,7 +80,7 @@
       :fullscreen="fullscreen"
     >
       <v-card>
-        <v-toolbar color="crud-header" dark>
+        <v-toolbar :color="modalHeaderColor">
           <v-toolbar-title>{{ translate('$restTable.edit') }}</v-toolbar-title>
 
           <v-spacer></v-spacer>
@@ -112,7 +112,7 @@
       :fullscreen="fullscreen"
     >
       <v-card>
-        <v-toolbar color="crud-header" dark>
+        <v-toolbar :color="modalHeaderColor">
           <v-toolbar-title>{{
             translate('$restTable.create')
           }}</v-toolbar-title>
@@ -146,7 +146,7 @@
       :fullscreen="fullscreen"
     >
       <v-card>
-        <v-toolbar color="primary" dark>
+        <v-toolbar :color="modalHeaderColor" dark>
           <v-toolbar-title>Custom</v-toolbar-title>
 
           <v-spacer></v-spacer>
