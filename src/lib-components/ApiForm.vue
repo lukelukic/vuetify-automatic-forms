@@ -150,6 +150,7 @@ export default {
       if (this.contentType == 'multipart/form-data') {
         formObject = this.getMultipartObject(formObject)
       }
+      console.log(formObject)
       let request = {
         method: this.method,
         url: this.endpoint,
@@ -168,13 +169,14 @@ export default {
               continue
             }
             if (Array.isArray(params[param])) {
-              for (let item in params[param]) {
+              for (let item of params[param]) {
                 qs += `${param}=${item}&`
               }
             } else {
               qs += `${param}=${params[param]}&`
             }
           }
+          console.log(qs)
           return qs
         }
       }
