@@ -57,6 +57,10 @@ let props = {
     type: Boolean,
     default: true
   },
+  persistentDialog:{
+    type: Boolean,
+    default: false
+  },
   insertOpts: {
     type: Object,
     default() {

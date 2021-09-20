@@ -18,6 +18,8 @@
     searchTitle="Available filters"
     :dataExtraction="dataExtraction"
     :customDialog="dialog"
+    :persistentDialog="true"
+    useEdit="false"
     columnWidth="fit"
     formFieldsColor="red"
     headerColor="aqua"
