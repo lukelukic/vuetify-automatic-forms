@@ -78,6 +78,7 @@
       v-if="dialogEdit"
       max-width="500px"
       :fullscreen="fullscreen"
+      :persistent="persistentDialog"
     >
       <v-card>
         <v-toolbar :color="modalHeaderColor">
@@ -110,6 +111,7 @@
       v-model="dialogCreate"
       max-width="500px"
       :fullscreen="fullscreen"
+      :persistent="persistentDialog"
     >
       <v-card>
         <v-toolbar :color="modalHeaderColor">
