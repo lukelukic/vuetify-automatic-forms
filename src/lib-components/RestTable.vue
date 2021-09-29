@@ -189,6 +189,12 @@ export default {
       customDialogData: {}
     }
   },
+  mounted() {
+    var that = this
+    this.eventBus.$on('resetTable', function() {
+      that.$refs.table.refreshTable()
+    })
+  },
   computed: {
     fullscreen() {
       return !['lg', 'xl'].includes(this.$vuetify.breakpoint.name)

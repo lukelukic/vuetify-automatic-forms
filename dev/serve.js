@@ -37,6 +37,7 @@ const i18n = new VueI18n({
 })
 
 Vue.prototype.$formBuilderAxios = api
+Vue.prototype.eventBus = new Vue()
 
 const router = new VueRouter({ routes })
 
