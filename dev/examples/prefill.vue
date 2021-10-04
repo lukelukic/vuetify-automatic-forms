@@ -69,6 +69,11 @@ export default {
       errors: {}
     }
   },
+  mounted() {
+    this.eventBus.$on('formObjectChanged', function(formObj) {
+      console.log(formObj.firstName)
+    })
+  },
   methods: {
     submit: function(obj) {
       console.log(obj)
