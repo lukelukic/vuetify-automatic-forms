@@ -134,7 +134,8 @@ class ApiBuilder extends FromArrayBuilder {
       return items.map(x => {
         return {
           text: x[api.textProperty],
-          value: x[api.valueProperty]
+          value: x[api.valueProperty],
+          entireObject: x
         }
       })
     } catch (error) {
